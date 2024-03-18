@@ -4,8 +4,8 @@ export default function Header() {
   return (
     <div className="navbar bg-base-300">
       <div className="flex-1">
-        <a className="btn btn-ghost rounded-full">
-          <img src="../images/shopit_logo.png" alt="" className="max-h-full" />
+        <a className="bg-auto md:bg-contain">
+          <img src="../images/shopit_logo.png" alt="" className="w-auto h-10 cursor-pointer text-gray-600"  />
         </a>
       </div>
       <form className="bg-slate-100 p-3 rounded-full flex items-center">
