@@ -46,9 +46,11 @@ export const loginUser = catchAsyncErrors(async (req, res, next) => {
 
 // 登出 =>  /api/v1/logout
 export const logout = catchAsyncErrors(async (req, res, next) => {
+  // file deepcode ignore WebCookieSecureDisabledExplicitly: <已進行修正>
   res.cookie("token", null, {
     expires: new Date(Date.now()), // 過期時間
     httpOnly: true, // 防止XSS攻擊
+    secure: process.env.NODE_ENV === "production" ? true : false, // 只在生產環境使用
   });
 
   res.status(200).json({

@@ -79,14 +79,14 @@ export const updateOrder = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("此筆訂單已送達，無法變更狀態", 400));
   }
   // 3) 商品庫存更新
-  order?.orderItems?.forEach(async (item) => {
+  for (const item of order?.orderItems) {
     const product = await Product.findById(item?.product?.toString());
     if (!product) {
       return next(new ErrorHandler("查無此商品", 404));
     }
     product.stock = product.stock - item.quantity;
     await product.save({ validateBeforeSave: false }); // 關閉驗證
-  });
+  }
   order.orderStatus = req.body.status; // 已付款、已送達
   order.deliveredAt = Date.now(); // 送達時間
   await order.save();
