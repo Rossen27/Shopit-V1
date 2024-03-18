@@ -3,6 +3,8 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
 
+
+
 const userSchema = new mongoose.Schema(
   {
     // 使用者名稱
@@ -63,11 +65,26 @@ const userSchema = new mongoose.Schema(
   { timestamps: true } // 記錄建立和更新的時間
 );
 // 加密密碼
+// userSchema.pre("save", async function (next) {
+//   if (!this.isModified("password")) {
+//     next();
+//   }
+//   this.password = await bcrypt.hash(this.password, 10); 
+// });
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();
   }
-  this.password = await bcrypt.hash(this.password, 10); // 加密密碼 (10 是 salt 值)
+
+  try {
+    // 生成鹽值(salt)亂數，原理是使用 bcrypt 中的 genSalt 產生10個字元的鹽值加強密碼的安全性
+    const salt = await bcrypt.genSalt(10);
+    // 使用生成的鹽值(salt)亂數來加密密碼
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  } catch (error) {
+    next(error);
+  }
 });
 // 設定 JWT token
 userSchema.methods.getJwtToken = function () {

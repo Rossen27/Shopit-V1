@@ -1,13 +1,20 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./components/Home.jsx";
+import Footer from "./components/layout/Footer.jsx";
+import Header from "./components/layout/Header.jsx";
+
 function App() {
-
-
   return (
     <>
-      <h1>SHOP IT</h1>
-      <div className="">Hello Word</div>
-      <button type="button" className="btn btn-light">Light</button>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
