@@ -5,5 +5,7 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [],
+  /*global require*/
+  /*eslint no-undef: "error"*/
+  plugins: [require("daisyui")],
 };
