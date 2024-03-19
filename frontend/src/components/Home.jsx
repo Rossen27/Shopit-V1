@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function Home() {
   return (
@@ -6,19 +6,18 @@ export default function Home() {
       <div
         className="hero min-h-screen"
         style={{
-          backgroundImage:
-            "url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)",
+          backgroundImage: 'url(https://picsum.photos/1920/1080)',
         }}
       >
         <div className="hero-overlay bg-opacity-60"></div>
         <div className="hero-content text-center text-neutral-content">
           <div className="max-w-md">
             <h1 className="mb-5 text-2xl font-bold">
-              {" "}
+              {' '}
               發現味蕾的自由之旅：
               <span className="sm:block">
-                {" "}
-                無麩美食地圖，為你引領無限可能。{" "}
+                {' '}
+                無麩美食地圖，為你引領無限可能。{' '}
               </span>
             </h1>
             <p className="mb-5">
@@ -55,7 +54,7 @@ export default function Home() {
         </div>
       </section> */}
       <section>
-        <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+        <div className="rounded-lg mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
           <header>
             <h2 className="text-xl font-bold text-gray-900 sm:text-3xl">
               無麩美食地圖
@@ -72,97 +71,130 @@ export default function Home() {
                 <img
                   src="https://picsum.photos/300"
                   alt=""
-                  className="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
+                  className="rounded-bl-3xl rounded-tr-3xl h-[350px] w-full object-cover shadow-xl transition group-hover:grayscale-[50%]"
                 />
 
-                <div className="relative bg-white pt-3">
+                <div className="relative bg-white pt-3 ">
                   <h3 className="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4">
-                    Basic Tee
+                    永和美食
                   </h3>
-
                   <p className="mt-2">
                     <span className="sr-only"> Regular Price </span>
 
-                    <span className="tracking-wider text-gray-900">
-                      {" "}
-                      £24.00 GBP{" "}
+                    <span className="tracking-wider text-gray-900 ">
+                      {' '}
+                      $ 124.00 TWD{' '}
                     </span>
                   </p>
+                  <div className="text-right">
+                    {' '}
+                    <button className="relative inline-block focus:outline-none focus:ring">
+                      <span className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-yellow-300 transition-transform group-hover:translate-x-0 group-hover:translate-y-0"></span>
+
+                      <span className="relative inline-block border-2 border-current px-8 py-3 text-sm font-bold uppercase tracking-widest text-black group-active:text-opacity-75">
+                        瞭解更多
+                      </span>
+                    </button>
+                  </div>
                 </div>
               </a>
             </li>
-
             <li>
               <a href="#" className="group block overflow-hidden">
                 <img
                   src="https://picsum.photos/300"
                   alt=""
-                  className="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
+                  className="rounded-bl-3xl rounded-tr-3xl h-[350px] w-full object-cover shadow-xl transition group-hover:grayscale-[50%]"
                 />
 
-                <div className="relative bg-white pt-3">
+                <div className="relative bg-white pt-3 ">
                   <h3 className="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4">
-                    Basic Tee
+                    永和美食
                   </h3>
-
                   <p className="mt-2">
                     <span className="sr-only"> Regular Price </span>
 
-                    <span className="tracking-wider text-gray-900">
-                      {" "}
-                      £24.00 GBP{" "}
+                    <span className="tracking-wider text-gray-900 ">
+                      {' '}
+                      $ 124.00 TWD{' '}
                     </span>
                   </p>
+                  <div className="text-right">
+                    {' '}
+                    <button className="relative inline-block focus:outline-none focus:ring">
+                      <span className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-yellow-300 transition-transform group-hover:translate-x-0 group-hover:translate-y-0"></span>
+
+                      <span className="relative inline-block border-2 border-current px-8 py-3 text-sm font-bold uppercase tracking-widest text-black group-active:text-opacity-75">
+                        瞭解更多
+                      </span>
+                    </button>
+                  </div>
                 </div>
               </a>
             </li>
-
             <li>
               <a href="#" className="group block overflow-hidden">
                 <img
                   src="https://picsum.photos/300"
                   alt=""
-                  className="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
+                  className="rounded-bl-3xl rounded-tr-3xl h-[350px] w-full object-cover shadow-xl transition group-hover:grayscale-[50%]"
                 />
 
-                <div className="relative bg-white pt-3">
+                <div className="relative bg-white pt-3 ">
                   <h3 className="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4">
-                    Basic Tee
+                    永和美食
                   </h3>
-
                   <p className="mt-2">
                     <span className="sr-only"> Regular Price </span>
 
-                    <span className="tracking-wider text-gray-900">
-                      {" "}
-                      £24.00 GBP{" "}
+                    <span className="tracking-wider text-gray-900 ">
+                      {' '}
+                      $ 124.00 TWD{' '}
                     </span>
                   </p>
+                  <div className="text-right">
+                    {' '}
+                    <button className="relative inline-block focus:outline-none focus:ring">
+                      <span className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-yellow-300 transition-transform group-hover:translate-x-0 group-hover:translate-y-0"></span>
+
+                      <span className="relative inline-block border-2 border-current px-8 py-3 text-sm font-bold uppercase tracking-widest text-black group-active:text-opacity-75">
+                        瞭解更多
+                      </span>
+                    </button>
+                  </div>
                 </div>
               </a>
             </li>
-
             <li>
               <a href="#" className="group block overflow-hidden">
                 <img
                   src="https://picsum.photos/300"
                   alt=""
-                  className="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
+                  className="rounded-bl-3xl rounded-tr-3xl h-[350px] w-full object-cover shadow-xl transition group-hover:grayscale-[50%]"
                 />
 
-                <div className="relative bg-white pt-3">
+                <div className="relative bg-white pt-3 ">
                   <h3 className="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4">
-                    Basic Tee
+                    永和美食
                   </h3>
-
                   <p className="mt-2">
                     <span className="sr-only"> Regular Price </span>
 
-                    <span className="tracking-wider text-gray-900">
-                      {" "}
-                      £24.00 GBP{" "}
+                    <span className="tracking-wider text-gray-900 ">
+                      {' '}
+                      $ 124.00 TWD{' '}
                     </span>
                   </p>
+                  <div className="text-right">
+                    {' '}
+                    <button className="relative inline-block focus:outline-none focus:ring">
+                      <span className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-yellow-300 transition-transform group-hover:translate-x-0 group-hover:translate-y-0"></span>
+
+                      <span className="relative inline-block border-2 border-current px-8 py-3 text-sm font-bold uppercase tracking-widest text-black group-active:text-opacity-75">
+                        瞭解更多
+                      </span>
+                    </button>
+                  </div>
                 </div>
               </a>
             </li>
