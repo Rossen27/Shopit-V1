@@ -1,14 +1,20 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react-swc";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 8080
+    port: 8080,
+    proxy: {
+      "/api": {
+        target: "http://localhost:4000", // 這裡是後端的 port
+        secure: false, // 若後端是 https 則設為 true
+      },
+    },
   },
-  extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx'],
+  extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx"],
   resolve: {
     mainFields: [],
   },
-})
+});
