@@ -1,11 +1,9 @@
-import { FaSearch } from 'react-icons/fa';
-import MetaData from './MetaData';
+import { FaSearch } from "react-icons/fa";
 
 export default function Header() {
   return (
     <>
-      <MetaData title={'首頁'} />
-      <div className="navbar bg-base-300">
+      <header className="navbar bg-white">
         <div className="flex-1">
           <a className="bg-auto md:bg-contain">
             <img
@@ -15,7 +13,7 @@ export default function Header() {
             />
           </a>
         </div>
-        <form className="bg-slate-100 p-3 rounded-full flex items-center">
+        <div className="bg-slate-100 p-3 rounded-full">
           <input
             type="text"
             placeholder="搜尋"
@@ -24,7 +22,7 @@ export default function Header() {
           <button type="submit">
             <FaSearch className="text-slate-600" />
           </button>
-        </form>
+        </div>
         <div className="flex-none">
           <div className="dropdown dropdown-end">
             <div
@@ -97,7 +95,7 @@ export default function Header() {
             </ul>
           </div>
         </div>
-      </div>
+      </header>
     </>
   );
 }
