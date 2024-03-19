@@ -1,10 +1,19 @@
 import MetaData from "./layout/MetaData";
 import { useGetProductsQuery } from "../redux/api/productsApi";
 import ProductItem from "./product/ProductItem";
+import Loader from "./layout/Loader";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 /* eslint-disable react/prop-types */
 export default function Home() {
-  const { data, isLoading } = useGetProductsQuery(); // 使用 getProducts endpoint 的 hook
-  console.log(data, isLoading);
+  const { data, isLoading, error, isError } = useGetProductsQuery(); // 使用 getProducts endpoint 的 hook
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(error?.data?.message || "無法取得產品資料");
+    }
+  }, [isError]);
+  if (isLoading) return <Loader />;
   return (
     <>
       <MetaData title={"首頁"} />
