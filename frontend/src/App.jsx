@@ -3,6 +3,7 @@ import Home from "./components/Home.jsx";
 import Footer from "./components/layout/Footer.jsx";
 import Header from "./components/layout/Header.jsx";
 import { Toaster } from "react-hot-toast";
+import ProductDetails from "./components/product/ProductDetails";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
         </Routes>
         <Footer />
       </BrowserRouter>

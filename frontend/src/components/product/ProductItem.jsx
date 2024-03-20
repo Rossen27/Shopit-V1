@@ -14,17 +14,17 @@ const ProductItem = ({ product }) => {
           <img
             src={product?.images[0]?.url}
             alt={product?.name}
-            className="absolute inset-0 h-full w-full object-cover opacity-100 group-hover:opacity-0"
+            className="absolute inset-0 h-full w-auto object-cover opacity-100 group-hover:opacity-0 rounded-t-lg"
           />
 
           <img
             src={product?.images[1]?.url}
             alt={product?.name}
-            className="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100"
+            className="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 rounded-t-lg"
           />
         </div>
 
-        <div className="relative bg-white pt-3 ">
+        <div className="relative bg-white pt-3 rounded-b-lg">
           <h3 className="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4">
             <Link to={`/product/${product?._id}`}>{product?.name}</Link>
           </h3>

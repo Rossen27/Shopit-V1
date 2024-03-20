@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const productApi = createApi({
@@ -8,7 +9,10 @@ export const productApi = createApi({
     getProducts: builder.query({
       query: (params) => "/products", // 設定 API 的路徑
     }),
+    getProductDetails: builder.query({
+      query: (id) => `/products/${id}`,
+    }),
   }),
 });
 
-export const { useGetProductsQuery } = productApi; // 2) 將 getProducts endpoint 的 hook 匯出
+export const { useGetProductsQuery, useGetProductDetailsQuery } = productApi; // 2) 將 getProducts endpoint 的 hook 匯出

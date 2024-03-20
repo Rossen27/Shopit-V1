@@ -10,5 +10,7 @@ export default {
   },
   /*global require*/
   /*eslint no-undef: "error"*/
-  plugins: [require("daisyui")],
+  plugins: [
+    require("daisyui"), 
+  ],
 };
