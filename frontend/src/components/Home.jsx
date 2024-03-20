@@ -43,7 +43,7 @@ export default function Home() {
         <div className="p-8 md:p-12 lg:px-16 lg:py-24">
           <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
             <h2 className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-4xl">
-              發現味蕾的自由之旅：無麩美食地圖，為你引領無限可能。
+              發現味蕾的自由之旅：<br/>無麩美食地圖，為你引領無限可能。
             </h2>
 
             <p className="hidden text-gray-500 md:mt-4 md:block">
@@ -51,7 +51,7 @@ export default function Home() {
               <br />
               從精緻的餐廳到溫馨的咖啡館，我們精心挑選了各種無麩料理，讓您輕鬆尋找到心儀的美食之地。
               <br />
-              立即加入我們，探索一場無麩的美食冒！
+              立即加入我們，探索一場無麩的美食冒險！
             </p>
 
             <div className="mt-4 md:mt-8">
