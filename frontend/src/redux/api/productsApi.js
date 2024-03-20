@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const productApi = createApi({
@@ -7,7 +6,17 @@ export const productApi = createApi({
   endpoints: (builder) => ({
     // 1) 定義一個名為 getProducts 的 endpoint
     getProducts: builder.query({
-      query: (params) => "/products", // 設定 API 的路徑
+      query: (params) => ({
+        url: "/products",
+        params: {
+          page: params?.page,
+          keyword: params?.keyword,
+          category: params?.category,
+          "price[gte]": params.min,
+          "price[lte]": params.max,
+          "ratings[gte]": params?.ratings,
+        },
+      }),
     }),
     getProductDetails: builder.query({
       query: (id) => `/products/${id}`,

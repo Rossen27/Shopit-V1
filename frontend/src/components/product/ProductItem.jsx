@@ -29,7 +29,6 @@ const ProductItem = ({ product }) => {
             <Link to={`/product/${product?._id}`}>{product?.name}</Link>
           </h3>
           <p className="mt-2">
-            <span className="sr-only"> Regular Price </span>
             <span className="tracking-wider text-gray-900 ">
               {" "}
               $ {product.price} TWD{" "}

@@ -3,8 +3,7 @@
 @tailwind utilities;
 
 body {
-    font-family: 'Nunito', sans-serif;
-    background-color: #f9fafb;
-    color: #1e293b;
+  font-family: "Nunito", sans-serif;
+  background-color: #f9fafb;
+  color: #1e293b;
 }
-

@@ -4,15 +4,36 @@ import ProductItem from "./product/ProductItem";
 import Loader from "./layout/Loader";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
+import CustomPagination from "./layout/CustomPagination";
+import { useSearchParams } from "react-router-dom";
+
 /* eslint-disable react/prop-types */
 export default function Home() {
-  const { data, isLoading, error, isError } = useGetProductsQuery(); // 使用 getProducts endpoint 的 hook
+  let [searchParams] = useSearchParams();
+  const page = searchParams.get("page") || 1;
+  const keyword = searchParams.get("keyword") || "";
+  const min = searchParams.get("min");
+  const max = searchParams.get("max");
+  const category = searchParams.get("category");
+  const ratings = searchParams.get("ratings");
+
+  const params = { page, keyword };
+
+  min !== null && (params.min = min);
+  max !== null && (params.max = max);
+  category !== null && (params.category = category);
+  ratings !== null && (params.ratings = ratings);
+
+  const { data, isLoading, error, isError } = useGetProductsQuery(params);
 
   useEffect(() => {
     if (isError) {
-      toast.error(error?.data?.message || "無法取得產品資料");
+      toast.error(error?.data?.message);
     }
-  }, [error?.data?.message, isError]);
+  }, [isError]);
+
+  // const columnSize = keyword ? 4 : 3;
+
   if (isLoading) return <Loader />;
   return (
     <>
@@ -70,6 +91,10 @@ export default function Home() {
               <ProductItem key={product.id} product={product} />
             ))}
           </ul>
+          <CustomPagination
+            resPerPage={data?.resPerPage}
+            filteredProductsCount={data?.filteredProductsCount}
+          />
         </div>
       </section>
     </>

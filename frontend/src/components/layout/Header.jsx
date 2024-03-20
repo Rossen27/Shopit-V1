@@ -1,17 +1,18 @@
 import { FaSearch } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
     <>
       <header className="navbar bg-white">
         <div className="flex-1">
-          <a className="bg-auto md:bg-contain">
+          <Link to="/" className="bg-auto md:bg-contain">
             <img
               src="../images/shopit_logo.png"
               alt=""
               className="w-auto h-10 cursor-pointer text-gray-600"
             />
-          </a>
+          </Link>
         </div>
         <div className="bg-slate-100 p-3 rounded-full">
           <input
