@@ -5,7 +5,7 @@ import APIFilters from "../utils/apiFilters.js";
 
 // 獲取產品 -> POST /api/v1/products
 export const getProducts = catchAsyncErrors(async (req, res) => {
-  const resPerPage = 8; // 每頁顯示 5 筆資料
+  const resPerPage = 4; // 每頁顯示 5 筆資料
   const apiFilters = new APIFilters(Product, req.query).search().filters(); // 過濾特定欄位
   let products = await apiFilters.query; // 獲取產品
   let filteredProductsCount = products.length; // 過濾產品數量

@@ -44,6 +44,50 @@ export const loginUser = catchAsyncErrors(async (req, res, next) => {
   sendToken(user, 200, res);
 });
 
+// Google 登入
+export const google = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ email: req.body.email }); // 比對使用者是否相符
+    if (user) {
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET); // 根據 MongoDB 的 ID 產生 token
+      const { password: pass, ...rest } = user._doc; // 將密碼從資料庫中移除
+      res
+        .cookie("access_token", token, {
+          httpOnly: true,
+          expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24小時 * 1小時 * 1分鐘 * 1000天 1 天後過期
+        }) // 將 token 存入 cookie
+        .status(200)
+        .json(rest);
+    } else {
+      const generatedPassword =
+        Math.random().toString(36).slice(-8) +
+        Math.random().toString(36).slice(-8); // 產生16位元亂數密碼
+      const hashedPassword = bcryptjs.hashSync(generatedPassword, 10); // 設定密碼加密
+      const newUser = new User({
+        username:
+          req.body.name.split(' ').join('').toLowerCase() +
+          Math.random().toString(36).slice(-4),
+        email: req.body.email,
+        password: hashedPassword,
+        avatar: req.body.photo,
+      }); // 紀錄新的使用者
+      await newUser.save(); // 保存新使用者紀錄
+      const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET); // 根據 MongoDB 的 ID 產生 token
+      const { password: pass, ...rest } = newUser._doc; // 將密碼從資料庫中移除
+      res
+        .cookie('access_token', token, {
+          httpOnly: true,
+          expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24小時 * 1小時 * 1分鐘 * 1000天 1 天後過期
+        }) // 將 token 存入 cookie
+        .status(200)
+        .json(rest);
+    }
+  } catch (error) {
+    return next(new ErrorHandler(`此 Google 帳戶無法使用`, 400));
+  }
+};
+
+
 // 登出 =>  /api/v1/logout
 export const logout = catchAsyncErrors(async (req, res, next) => {
   // file deepcode ignore WebCookieSecureDisabledExplicitly: <已進行修正>

@@ -6,9 +6,22 @@ export const productApi = createApi({
   endpoints: (builder) => ({
     // 1) 定義一個名為 getProducts 的 endpoint
     getProducts: builder.query({
-      query: (params) => "/products", // 設定 API 的路徑
+      query: (params) => ({
+        url: "/products",
+        params: {
+          page: params?.page,
+          keyword: params?.keyword,
+          category: params?.category,
+          "price[gte]": params.min,
+          "price[lte]": params.max,
+          "ratings[gte]": params?.ratings,
+        },
+      }),
+    }),
+    getProductDetails: builder.query({
+      query: (id) => `/products/${id}`,
     }),
   }),
 });
 
-export const { useGetProductsQuery } = productApi; // 2) 將 getProducts endpoint 的 hook 匯出
+export const { useGetProductsQuery, useGetProductDetailsQuery } = productApi; // 2) 將 getProducts endpoint 的 hook 匯出
