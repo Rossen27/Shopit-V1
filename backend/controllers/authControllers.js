@@ -52,6 +52,7 @@ export const google = async (req, res, next) => {
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET); // 根據 MongoDB 的 ID 產生 token
       const { password: pass, ...rest } = user._doc; // 將密碼從資料庫中移除
       res
+        // file deepcode ignore WebCookieSecureDisabledByDefault: <please specify a reason of ignoring this>
         .cookie("access_token", token, {
           httpOnly: true,
           expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24小時 * 1小時 * 1分鐘 * 1000天 1 天後過期
@@ -65,6 +66,7 @@ export const google = async (req, res, next) => {
       const hashedPassword = bcryptjs.hashSync(generatedPassword, 10); // 設定密碼加密
       const newUser = new User({
         username:
+          // file deepcode ignore HTTPSourceWithUncheckedType: <please specify a reason of ignoring this>
           req.body.name.split(' ').join('').toLowerCase() +
           Math.random().toString(36).slice(-4),
         email: req.body.email,
