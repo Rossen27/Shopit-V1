@@ -59,7 +59,7 @@ const CustomPagination = ({ resPerPage, filteredProductsCount }) => {
         <li key={index}>
           <a
             href="#"
-            className={`block size-8 rounded border ${currentPage === index + 1 ? "border-blue-600 bg-blue-600 text-white" : "border-gray-100 bg-white"} text-center leading-8 text-gray-900`}
+            className={`block size-8 rounded border ${currentPage === index + 1 ? "border-gray-600 bg-gray-600 text-white" : "border-gray-100 bg-white"} text-center leading-8 text-gray-900`}
             onClick={() => setCurrentPageNo(index + 1)}
           >
             {index + 1}

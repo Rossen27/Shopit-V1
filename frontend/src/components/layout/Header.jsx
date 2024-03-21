@@ -1,5 +1,5 @@
-import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Search from "./Search";
 
 export default function Header() {
   return (
@@ -14,16 +14,7 @@ export default function Header() {
             />
           </Link>
         </div>
-        <div className="bg-slate-100 p-3 rounded-full">
-          <input
-            type="text"
-            placeholder="搜尋"
-            className="bg-transparent focus:outline-none w-24 sm:w-64"
-          />
-          <button type="submit">
-            <FaSearch className="text-slate-600" />
-          </button>
-        </div>
+        <Search />
         <div className="flex-none">
           <div className="dropdown dropdown-end">
             <div
