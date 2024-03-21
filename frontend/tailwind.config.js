@@ -12,5 +12,6 @@ export default {
   /*eslint no-undef: "error"*/
   plugins: [
     require("daisyui"), 
+    require('@tailwindcss/forms')
   ],
 };

@@ -5,6 +5,8 @@ import Header from "./components/layout/Header.jsx";
 import { Toaster } from "react-hot-toast";
 import ProductDetails from "./components/product/ProductDetails";
 import Filters from "./components/Filters.jsx";
+import Login from "./components/auth/Login.jsx";
+
 
 function App() {
   return (
@@ -15,7 +17,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/product/:id" element={<ProductDetails />} />
-          <Route path="filters" element={<Filters />} />
+          <Route path="/filters" element={<Filters />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
         <Footer />
       </BrowserRouter>
