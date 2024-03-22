@@ -1,4 +1,35 @@
+import { Navigate } from "react-router-dom";
+import OAuth from "../layout/OAuth";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
+import { useLoginMutation } from "../../redux/api/authApi";
+
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [login, { isLoading, error, data }] = useLoginMutation();
+  const { isAuthenticated } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      Navigate("/");
+    }
+    if (error) {
+      toast.error(error?.data?.message);
+    }
+  }, [error, isAuthenticated]);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const loginData = {
+      email,
+      password,
+    };
+    login(loginData);
+  };
+
   return (
     <>
       <section className="relative flex flex-wrap lg:h-screen lg:items-center">
@@ -9,7 +40,10 @@ const Login = () => {
             </h1>
           </div>
 
-          <form action="#" className="mx-auto mb-0 mt-8 max-w-md space-y-4">
+          <form
+            onSubmit={submitHandler}
+            className="mx-auto mb-0 mt-8 max-w-md space-y-4"
+          >
             <div>
               <label htmlFor="email" className="sr-only">
                 Email
@@ -20,6 +54,10 @@ const Login = () => {
                   type="email"
                   className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                   placeholder="電子郵件"
+                  name="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
 
                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -51,6 +89,10 @@ const Login = () => {
                   type="password"
                   className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                   placeholder="密碼"
+                  name="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
 
                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -89,8 +131,9 @@ const Login = () => {
               <button
                 type="submit"
                 className="btn btn-outline rounded-full btn-sm"
-              >
-                登入
+                disabled={isLoading}
+                >
+                  {isLoading ? "登入中..." : "登入"}
               </button>
             </div>
             <span className="flex items-center">
@@ -98,6 +141,8 @@ const Login = () => {
               <span className="shrink-0 px-6">OR</span>
               <span className="h-px flex-1 bg-black"></span>
             </span>
+            <div className="relative w-full lg:w-1/2"></div>
+            <OAuth />
           </form>
         </div>
 
