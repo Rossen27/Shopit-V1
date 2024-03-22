@@ -1,10 +1,22 @@
 import { configureStore } from "@reduxjs/toolkit";
+
+import userReducer from "./features/userSlice";
+
 import { productApi } from "./api/productsApi";
+import { authApi } from "./api/authApi";
+import { userApi } from "./api/userApi";
 
 export const store = configureStore({
   reducer: {
-    [productApi.reducerPath]: productApi.reducer, // 將 productsApi 的 reducer 加入 store
+    auth: userReducer, // userReducer 是我們自己寫的 reducer
+    [productApi.reducerPath]: productApi.reducer, // productApi.reducer 是由 createApi 產生的 reducer
+    [authApi.reducerPath]: authApi.reducer, // authApi.reducer 是由 createApi 產生的 reducer
+    [userApi.reducerPath]: userApi.reducer, // userApi.reducer 是由 createApi 產生的 reducer
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat([productApi.middleware]), // 將 productsApi 的 middleware 加入 store
+    getDefaultMiddleware().concat([
+      productApi.middleware, // productApi.middleware 是由 createApi 產生的 middleware
+      authApi.middleware,
+      userApi.middleware,
+    ]),
 });

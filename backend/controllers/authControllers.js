@@ -44,51 +44,43 @@ export const loginUser = catchAsyncErrors(async (req, res, next) => {
   sendToken(user, 200, res);
 });
 
-// Google 登入
-export const google = async (req, res, next) => {
+// Google 登录 =>  /api/v1/googleLogin
+export const googleLogin = catchAsyncErrors(async (req, res, next) => {
   try {
-    const user = await User.findOne({ email: req.body.email }); // 比對使用者是否相符
-    if (user) {
-      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET); // 根據 MongoDB 的 ID 產生 token
-      const { password: pass, ...rest } = user._doc; // 將密碼從資料庫中移除
-      res
-        // file deepcode ignore WebCookieSecureDisabledByDefault: <please specify a reason of ignoring this>
-        .cookie("access_token", token, {
-          httpOnly: true,
-          expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24小時 * 1小時 * 1分鐘 * 1000天 1 天後過期
-        }) // 將 token 存入 cookie
-        .status(200)
-        .json(rest);
-    } else {
+    const { email } = req.body;
+    let user = await User.findOne({ email });
+
+    if (!user) {
+      // 如果用户不存在，創建新用户
       const generatedPassword =
         Math.random().toString(36).slice(-8) +
-        Math.random().toString(36).slice(-8); // 產生16位元亂數密碼
-      const hashedPassword = bcryptjs.hashSync(generatedPassword, 10); // 設定密碼加密
+        Math.random().toString(36).slice(-8); // 生成16位隨機密碼
+      const hashedPassword = bcryptjs.hashSync(generatedPassword, 10); // 加密密碼
+      const username =
+        req.body.name.split(" ").join("").toLowerCase() +
+        Math.random().toString(36).slice(-4);
       const newUser = new User({
-        username:
-          // file deepcode ignore HTTPSourceWithUncheckedType: <please specify a reason of ignoring this>
-          req.body.name.split(' ').join('').toLowerCase() +
-          Math.random().toString(36).slice(-4),
+        username,
         email: req.body.email,
         password: hashedPassword,
         avatar: req.body.photo,
       }); // 紀錄新的使用者
-      await newUser.save(); // 保存新使用者紀錄
-      const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET); // 根據 MongoDB 的 ID 產生 token
-      const { password: pass, ...rest } = newUser._doc; // 將密碼從資料庫中移除
-      res
-        .cookie('access_token', token, {
-          httpOnly: true,
-          expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24小時 * 1小時 * 1分鐘 * 1000天 1 天後過期
-        }) // 將 token 存入 cookie
-        .status(200)
-        .json(rest);
+      user = await newUser.save(); // 紀錄新的使用者
     }
-  } catch (error) {
-    return next(new ErrorHandler(`此 Google 帳戶無法使用`, 400));
-  }
-};
 
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET); // 根據 MongoDB 的 ID 產生 token
+    const { password: pass, ...rest } = user._doc; // 將密碼從資料庫中移除
+    res
+      .cookie("access_token", token, {
+        httpOnly: true,
+        expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24小時後過期
+      })
+      .status(200)
+      .json(rest);
+  } catch (error) {
+    return next(new ErrorHandler(`無法使用此 Google 帳號登入`, 401));
+  }
+});
 
 // 登出 =>  /api/v1/logout
 export const logout = catchAsyncErrors(async (req, res, next) => {
@@ -183,7 +175,7 @@ export const getUserProfile = catchAsyncErrors(async (req, res, next) => {
 // 更新密碼 =>  /api/v1/password/update
 export const updatePassword = catchAsyncErrors(async (req, res, next) => {
   // 1) 從資料庫中找尋用戶
-  const user = await User.findById(req?.user?._id).select("+password"); 
+  const user = await User.findById(req?.user?._id).select("+password");
 
   // 2) 確認舊密碼是否正確
   const isPasswordMatched = await user.comparePassword(req.body.oldPassword);
