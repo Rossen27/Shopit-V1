@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { Link } from "react-router-dom";
 import StarRatings from "react-star-ratings";
 /* eslint-disable react/prop-types */
-const ProductItem = ({ product }) => {
+const ProductItem = ({ product, columnSize }) => {
   return (
     <li>
       <a href={`/product/${product?._id}`} className="group block overflow-hidden">
@@ -14,13 +15,13 @@ const ProductItem = ({ product }) => {
           <img
             src={product?.images[0]?.url}
             alt={product?.name}
-            className="absolute inset-0 h-full w-auto object-cover opacity-100 group-hover:opacity-0 rounded-t-lg"
+            className="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:opacity-0 rounded-t-lg"
           />
 
           <img
             src={product?.images[1]?.url}
             alt={product?.name}
-            className="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 rounded-t-lg"
+            className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 rounded-t-lg"
           />
         </div>
 

@@ -1,11 +1,11 @@
-import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Search from "./Search";
 
 export default function Header() {
   return (
     <>
-      <header className="navbar bg-white">
-        <div className="flex-1">
+      <header className="navbar bg-white flex justify-between">
+        <div className="flex">
           <Link to="/" className="bg-auto md:bg-contain">
             <img
               src="../images/shopit_logo.png"
@@ -14,17 +14,10 @@ export default function Header() {
             />
           </Link>
         </div>
-        <div className="bg-slate-100 p-3 rounded-full">
-          <input
-            type="text"
-            placeholder="搜尋"
-            className="bg-transparent focus:outline-none w-24 sm:w-64"
-          />
-          <button type="submit">
-            <FaSearch className="text-slate-600" />
-          </button>
+        <div className="">
+          <Search />
         </div>
-        <div className="flex-none">
+        <div className="flex">
           <div className="dropdown dropdown-end">
             <div
               tabIndex={0}
@@ -91,7 +84,7 @@ export default function Header() {
                 <a>Settings</a>
               </li>
               <li>
-                <a>Logout</a>
+                <Link to="/login">Logout</Link>
               </li>
             </ul>
           </div>
