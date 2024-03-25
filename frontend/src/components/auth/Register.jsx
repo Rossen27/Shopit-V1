@@ -193,9 +193,9 @@ function Register() {
 
                   <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                     已有帳戶 ?
-                    <a href="#" className="text-gray-700 underline">
+                    <Link to="/login" className="text-gray-700 underline">
                       登 入
-                    </a>
+                    </Link>
                     .
                   </p>
                 </div>
