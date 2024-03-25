@@ -1,4 +1,6 @@
-import { Navigate } from "react-router-dom";
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useNavigate } from "react-router-dom";
 import OAuth from "../layout/OAuth";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -8,13 +10,13 @@ import { useLoginMutation } from "../../redux/api/authApi";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
   const [login, { isLoading, error, data }] = useLoginMutation();
-  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { isAuthenticated } = useSelector((state) => state.auth); // 從 Redux store 中取得 isAuthenticated 狀態
 
   useEffect(() => {
     if (isAuthenticated) {
-      Navigate("/");
+      navigate("/");
     }
     if (error) {
       toast.error(error?.data?.message);
@@ -58,6 +60,7 @@ const Login = () => {
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  autoComplete="user-email"
                 />
 
                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -93,6 +96,7 @@ const Login = () => {
                   id="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="current-password"
                 />
 
                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -132,8 +136,8 @@ const Login = () => {
                 type="submit"
                 className="btn btn-outline rounded-full btn-sm"
                 disabled={isLoading}
-                >
-                  {isLoading ? "登入中..." : "登入"}
+              >
+                {isLoading ? "登入中..." : "登入"}
               </button>
             </div>
             <span className="flex items-center">
@@ -142,8 +146,8 @@ const Login = () => {
               <span className="h-px flex-1 bg-black"></span>
             </span>
             <div className="relative w-full lg:w-1/2"></div>
-            <OAuth />
           </form>
+          <OAuth />
         </div>
 
         <div className="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">
