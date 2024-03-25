@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 function Register() {
   return (
@@ -14,7 +14,7 @@ function Register() {
             />
 
             <div className="hidden lg:relative lg:block lg:p-12">
-              <a className="block text-white" href="#">
+              <Link to="/" className="block text-white">
                 <span className="sr-only">Home</span>
                 <svg
                   className="h-8 sm:h-10"
@@ -27,7 +27,7 @@ function Register() {
                     fill="currentColor"
                   />
                 </svg>
-              </a>
+              </Link>
 
               <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
                 Welcome to Squid 🦑
@@ -43,9 +43,9 @@ function Register() {
           <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
             <div className="max-w-xl lg:max-w-3xl">
               <div className="relative -mt-16 block lg:hidden">
-                <a
+                <Link
+                  to="/"
                   className="inline-flex size-16 items-center justify-center rounded-full bg-white text-blue-600 sm:size-20"
-                  href="#"
                 >
                   <span className="sr-only">Home</span>
                   <svg
@@ -59,7 +59,7 @@ function Register() {
                       fill="currentColor"
                     />
                   </svg>
-                </a>
+                </Link>
 
                 <h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
                   Welcome to Squid 🦑
@@ -173,14 +173,14 @@ function Register() {
 
                 <div className="col-span-6">
                   <p className="text-sm text-gray-500">
-                  建立帳戶即表示您同意我們的
+                    建立帳戶即表示您同意我們的
                     <a href="#" className="text-gray-700 underline">
                       {" "}
                       條款與條件{" "}
                     </a>
                     以及
                     <a href="#" className="text-gray-700 underline">
-                    隱私權政策
+                      隱私權政策
                     </a>
                     。
                   </p>

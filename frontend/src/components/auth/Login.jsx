@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { useLoginMutation } from "../../redux/api/authApi";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -127,9 +128,9 @@ const Login = () => {
             <div className="flex items-center justify-between">
               <p className="text-sm text-gray-500">
                 沒有帳號? &nbsp;
-                <a className="underline" href="#">
+                <Link to="/register" className="underline" href="#">
                   快速註冊
-                </a>
+                </Link>
               </p>
 
               <button
