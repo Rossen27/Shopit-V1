@@ -1,7 +1,21 @@
-import { Link } from "react-router-dom";
 import Search from "./Search";
+import { useGetMeQuery } from "../../redux/api/userApi";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useLazyLogoutQuery } from "../../redux/api/authApi";
 
 export default function Header() {
+  const navigate = useNavigate();
+
+  const { isLoading } = useGetMeQuery();
+  const [logout] = useLazyLogoutQuery();
+
+  const { user } = useSelector((state) => state.auth);
+
+  const logoutHandler = () => {
+    logout();
+    navigate(0);
+  };
   return (
     <>
       <header className="navbar bg-white flex justify-between">
@@ -57,6 +71,7 @@ export default function Header() {
               </div>
             </div>
           </div>
+          
           <div className="dropdown dropdown-end">
             <div
               tabIndex={0}
@@ -65,8 +80,11 @@ export default function Header() {
             >
               <div className="w-10 rounded-full">
                 <img
-                  alt="Tailwind CSS Navbar component"
-                  src="../images/default_avatar.png"
+                  src={
+                    user?.avatar
+                      ? user?.avatar?.url
+                      : "/images/default_avatar.jpg"
+                  }
                 />
               </div>
             </div>
@@ -83,9 +101,12 @@ export default function Header() {
               <li>
                 <a>Settings</a>
               </li>
-              <li>
-                <Link to="/login">Logout</Link>
-              </li>
+              {user ? (              <li>
+                <Link to="/login">登出</Link>
+              </li>):(              <li>
+                <Link to="/login">登入</Link>
+              </li>)}
+
             </ul>
           </div>
         </div>
