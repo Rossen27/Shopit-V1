@@ -55,7 +55,7 @@ export const googleLogin = catchAsyncErrors(async (req, res, next) => {
         // deepcode ignore WebCookieSecureDisabledByDefault: <please specify a reason of ignoring this>
         .cookie("access_token", token, {
           httpOnly: true,
-          // expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24小時 * 1小時 * 1分鐘 * 1000天 1 天後過期
+          expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24小時 * 1小時 * 1分鐘 * 1000天 1 天後過期
         }) // 將 token 存入 cookie
         .status(200)
         .json(rest);
@@ -78,10 +78,10 @@ export const googleLogin = catchAsyncErrors(async (req, res, next) => {
       res
         .cookie("access_token", token, {
           httpOnly: true,
-          // expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24小時 * 1小時 * 1分鐘 * 1000天 1 天後過期
+          expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24小時 * 1小時 * 1分鐘 * 1000天 1 天後過期
         }) // 將 token 存入 cookie
         .status(200)
-        .json(rest);
+        .json(rest); 
     }
   } catch (error) {
     return next(new ErrorHandler("無法使用此 Google 帳戶登入", 400));
