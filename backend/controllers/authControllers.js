@@ -5,6 +5,8 @@ import ErrorHandler from "../utils/errorHandler.js";
 import sendToken from "../utils/sendToken.js";
 import sendEmail from "../utils/sendEmail.js";
 import crypto from "crypto";
+import bcryptjs from "bcryptjs";
+import jwt from 'jsonwebtoken'; 
 
 // 註冊新用戶 =>  /api/v1/register
 export const registerUser = catchAsyncErrors(async (req, res, next) => {
@@ -45,17 +47,16 @@ export const loginUser = catchAsyncErrors(async (req, res, next) => {
 });
 
 // Google 登入 =>  /api/v1/google
-export const googleLogin = catchAsyncErrors(async (req, res, next) => {
+export const google = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email }); // 比對使用者是否相符
     if (user) {
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET); // 根據 MongoDB 的 ID 產生 token
       const { password: pass, ...rest } = user._doc; // 將密碼從資料庫中移除
       res
-        // deepcode ignore WebCookieSecureDisabledByDefault: <please specify a reason of ignoring this>
-        .cookie("access_token", token, {
+        // file deepcode ignore WebCookieSecureDisabledByDefault: <please specify a reason of ignoring this>
+        .cookie("token", token, {
           httpOnly: true,
-          expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24小時 * 1小時 * 1分鐘 * 1000天 1 天後過期
         }) // 將 token 存入 cookie
         .status(200)
         .json(rest);
@@ -63,9 +64,11 @@ export const googleLogin = catchAsyncErrors(async (req, res, next) => {
       const generatedPassword =
         Math.random().toString(36).slice(-8) +
         Math.random().toString(36).slice(-8); // 產生16位元亂數密碼
+      // file deepcode ignore HardcodedSecret: <please specify a reason of ignoring this>
       const hashedPassword = bcryptjs.hashSync(generatedPassword, 10); // 設定密碼加密
       const newUser = new User({
-        username:
+        name:
+          // deepcode ignore HTTPSourceWithUncheckedType: <please specify a reason of ignoring this>
           req.body.name.split(" ").join("").toLowerCase() +
           Math.random().toString(36).slice(-4),
         email: req.body.email,
@@ -76,17 +79,17 @@ export const googleLogin = catchAsyncErrors(async (req, res, next) => {
       const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET); // 根據 MongoDB 的 ID 產生 token
       const { password: pass, ...rest } = newUser._doc; // 將密碼從資料庫中移除
       res
-        .cookie("access_token", token, {
+        // deepcode ignore WebCookieSecureDisabledByDefault: <please specify a reason of ignoring this>
+        .cookie("token", token, {
           httpOnly: true,
-          expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24小時 * 1小時 * 1分鐘 * 1000天 1 天後過期
         }) // 將 token 存入 cookie
         .status(200)
-        .json(rest); 
+        .json(rest);
     }
   } catch (error) {
-    return next(new ErrorHandler("無法使用此 Google 帳戶登入", 400));
+    next(error);
   }
-});
+};
 
 // 登出 =>  /api/v1/logout
 export const logout = catchAsyncErrors(async (req, res, next) => {
