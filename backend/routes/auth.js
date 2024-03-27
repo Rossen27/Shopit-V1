@@ -12,7 +12,7 @@ import {
   getUserDetails,
   updateUser,
   deleteUser,
-  googleLogin,
+  google,
 } from "../controllers/authControllers.js";
 import { isAuthenticatedUser, authorizeRoles } from "../middlewares/auth.js";
 
@@ -20,7 +20,7 @@ const router = express.Router(); // 創建一個 router 實例
 
 router.route("/register").post(registerUser);
 router.route("/login").post(loginUser);
-router.route("/google").post(googleLogin);
+router.route("/google").post(google);
 router.route("/logout").get(logout);
 
 router.route("/password/forgot").post(forgotPassword);
