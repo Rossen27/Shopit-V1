@@ -6,8 +6,10 @@ import { useRegisterMutation } from "../../redux/api/authApi";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { LuEye, LuEyeOff } from "react-icons/lu";
 
 function Register() {
+  const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -176,7 +178,7 @@ function Register() {
                     className="relative block overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-gray-600"
                   >
                     <input
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       id="password_field"
                       placeholder="password"
                       className="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
@@ -184,7 +186,6 @@ function Register() {
                       value={password}
                       onChange={onChange}
                     />
-
                     <span className="absolute start-0 top-2 -translate-y-1/2 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs">
                       Password
                     </span>
@@ -197,7 +198,7 @@ function Register() {
                     className="relative block overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-gray-600"
                   >
                     <input
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       id="passwordConfirmation_field"
                       name="confirmPassword"
                       placeholder="password"
@@ -205,7 +206,23 @@ function Register() {
                       value={confirmPassword}
                       onChange={onChange}
                     />
-
+                    <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
+                      {showPassword ? (
+                        <LuEyeOff
+                          className="text-gray-400"
+                          onClick={() =>
+                            setShowPassword((prevState) => !prevState)
+                          }
+                        />
+                      ) : (
+                        <LuEye
+                          className="text-gray-400"
+                          onClick={() =>
+                            setShowPassword((prevState) => !prevState)
+                          }
+                        />
+                      )}
+                    </span>
                     <span className="absolute start-0 top-2 -translate-y-1/2 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs">
                       PasswordConfirmation
                     </span>
@@ -243,15 +260,25 @@ function Register() {
                 </div>
 
                 <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
-                  <button
+                  {/* <button
                     className="inline-block shrink-0 rounded-xl border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
                     id="register_button"
                     type="submit"
                     disabled={isLoading}
                   >
                     {isLoading ? "註冊中..." : "立即註冊"}
+                  </button> */}
+                  <button
+                    className="group relative inline-block focus:outline-none focus:ring"
+                    id="register_button"
+                    type="submit"
+                    disabled={isLoading}
+                  >
+                    <span className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-yellow-300 transition-transform group-hover:translate-x-0 group-hover:translate-y-0"></span>
+                    <span className="relative inline-block border-2 border-current px-8 py-3 text-sm font-bold uppercase tracking-widest text-black group-active:text-opacity-75">
+                    {isLoading ? "註冊中..." : "立即註冊"}
+                    </span>
                   </button>
-
                   <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                     已有帳戶 ? <span> </span>
                     <Link to="/login" className="text-gray-700 underline">
