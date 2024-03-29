@@ -61,7 +61,7 @@ const SideMenu = ({ menuItems }) => {
                     <Link
                       key={index}
                       to={menuItem.url}
-                      className={`group relative flex justify-center rounded px-2 py-2 text-gray-500 hover:bg-gray-50 hover:text-gray-700 ${
+                      className={`group relative flex justify-center rounded px-3 py-3 text-gray-500 hover:bg-gray-50 hover:text-gray-700 ${
                         activeMenuItem.includes(menuItem.url) ? "active" : ""
                       }`}
                       onClick={() => handleMenuItemClick(menuItem.url)}

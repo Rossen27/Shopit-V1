@@ -5,22 +5,22 @@ import { FaUserGear, FaFileImage, FaKey, FaAddressBook } from "react-icons/fa6";
 const UserLayout = ({ children }) => {
   const menuItems = [
     {
-      icon: <FaAddressBook />,
+      icon: <FaAddressBook className="text-2xl" />,
       name: "個人資料",
       url: "/me/profile",
     },
     {
-      icon: <FaUserGear />,
+      icon: <FaUserGear className="text-2xl" />,
       name: "更新個人資料",
       url: "/me/update_profile",
     },
     {
-      icon: <FaKey />,
+      icon: <FaKey className="text-2xl" />,
       name: "更改密碼",
       url: "/me/upload_avatar",
     },
     {
-      icon: <FaFileImage />,
+      icon: <FaFileImage className="text-2xl" />,
       name: "更改頭像",
       url: "/me/update_password",
     },
