@@ -29,11 +29,11 @@ export default function Header() {
             />
           </Link>
         </div>
-        <div className="">
+        <div className="flex">
           <Search />
         </div>
         <div className="flex">
-          <div className="dropdown dropdown-end">
+          <div className="dropdown dropdown-end px-5">
             <div
               tabIndex={0}
               role="button"
@@ -52,7 +52,7 @@ export default function Header() {
                 <span className="font-bold text-lg">7 Items</span>
                 <span className="text-slate-500">總金額: $ 999</span>
                 <div className="card-actions">
-                  <button className="btn btn-glass btn-block">
+                  <button className="btn btn-glass btn-block rounded-full btn-sm">
                     查看購物車
                   </button>
                 </div>
@@ -75,14 +75,6 @@ export default function Header() {
                     className="rounded-circle"
                   />
                 )}
-                {/* <img
-                  src={
-                    user?.avatar
-                      ? user?.avatar?.url
-                      : "/images/default_avatar.jpg"
-                  }
-                  className="rounded-circle"
-                /> */}
               </div>
             </div>
             <ul
@@ -91,7 +83,7 @@ export default function Header() {
             >
               <li>
                 <Link to="/me/profile" className="justify-between">
-                  產品
+                  個人資料管理
                   <span className="badge">New</span>
                 </Link>
               </li>

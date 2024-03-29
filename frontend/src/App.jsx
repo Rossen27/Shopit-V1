@@ -8,6 +8,7 @@ import Filters from "./components/Filters.jsx";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register.jsx";
 import Profile from "./components/user/Profile.jsx";
+import UpdateProfile from "./components/user/UpdateProfile.jsx";
 
 
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/me/profile" element={<Profile/>} />
+          <Route path="/me/update_profile" element={<UpdateProfile/>} />
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -2,8 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+html, body {
   font-family: "Nunito", sans-serif;
   background-color: #f9fafb;
   color: #1e293b;
+  height: 100%;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
 }
