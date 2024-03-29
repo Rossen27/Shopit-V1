@@ -83,7 +83,7 @@ export default function Header() {
             >
               <li>
                 <Link to="/me/profile" className="justify-between">
-                  產品
+                  個人資料管理
                   <span className="badge">New</span>
                 </Link>
               </li>
