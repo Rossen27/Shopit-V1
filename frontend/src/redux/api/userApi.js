@@ -18,7 +18,16 @@ export const userApi = createApi({
         }
       },
     }),
+    updateProfile: builder.mutation({
+      query: (body) => {
+        return {
+          url: `/me/update`,
+          method: "PUT",
+          body,
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetMeQuery } = userApi;
+export const { useGetMeQuery, useUpdateProfileMutation } = userApi;
