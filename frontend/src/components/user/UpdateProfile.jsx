@@ -72,6 +72,7 @@ const UpdateProfile = () => {
                   id="name_field"
                   className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                   value={name}
+                  name="name"
                   onChange={(e) => setName(e.target.value)}
                 />
 
