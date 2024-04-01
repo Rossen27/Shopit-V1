@@ -9,8 +9,7 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register.jsx";
 import Profile from "./components/user/Profile.jsx";
 import UpdateProfile from "./components/user/UpdateProfile.jsx";
-
-
+import ProtectedRoute from "./components/auth/ProtectedRoute.jsx";
 
 function App() {
   return (
@@ -24,8 +23,24 @@ function App() {
           <Route path="/filters" element={<Filters />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/me/profile" element={<Profile/>} />
-          <Route path="/me/update_profile" element={<UpdateProfile/>} />
+
+          <Route
+            path="/me/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/me/update_profile"
+            element={
+              <ProtectedRoute>
+                <UpdateProfile />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
         <Footer />
       </BrowserRouter>

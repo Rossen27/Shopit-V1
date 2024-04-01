@@ -18,6 +18,9 @@ export const userSlice = createSlice({
     setIsAuthenticated(state, action) {
       state.isAuthenticated = action.payload;
     },
+    setLoading(state, action) {
+      state.loading = action.payload;
+    },
     signInStart: (state) => {
       state.loading = true;
     },
@@ -73,6 +76,7 @@ export const userSlice = createSlice({
 export const {
   setIsAuthenticated,
   setUser,
+  setLoading,
   signInStart,
   signInSuccess,
   signInFailure,

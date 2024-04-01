@@ -10,7 +10,13 @@ export default function Profile() {
       <div className="h-auto bg-white shadow-md rounded-lg hover:shadow-xl">
         <dl className="mt-4 mx-4 -my-3 divide-y divide-gray-100 text-sm ">
           <div className="p-4 flex justify-center">
-            <img src={user.avatar} className="rounded-full w-32 h-32" />
+            <img
+              src={
+                user?.avatar ? user?.avatar?.url : "/images/default_avatar.jpg"
+              }
+              alt={user?.name}
+              className="rounded-full w-32 h-32"
+            />
           </div>
           <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
             <dt className="font-medium text-gray-900">使用者名稱</dt>
