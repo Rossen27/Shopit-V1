@@ -6,7 +6,8 @@ import sendToken from "../utils/sendToken.js";
 import sendEmail from "../utils/sendEmail.js";
 import crypto from "crypto";
 import bcryptjs from "bcryptjs";
-import jwt from 'jsonwebtoken'; 
+import jwt from "jsonwebtoken";
+import { upload_file } from "../utils/cloudinary.js";
 
 // 註冊新用戶 =>  /api/v1/register
 export const registerUser = catchAsyncErrors(async (req, res, next) => {
@@ -102,6 +103,24 @@ export const logout = catchAsyncErrors(async (req, res, next) => {
 
   res.status(200).json({
     message: "登出成功",
+  });
+});
+
+// 更新使用者照片 =>  /api/v1/me/upload_avatar
+export const uploadAvatar = catchAsyncErrors(async (req, res, next) => {
+  const avatarResponse = await upload_file(req.body.avatar, "shopit/avatars"); // 上傳圖片到 cloudinary
+
+  // 如果用戶已有大頭照，則刪除舊的大頭照
+  if (req?.user?.avatar?.url) {
+    await delete_file(req?.user?.avatar?.public_id);
+  }
+
+  const user = await User.findByIdAndUpdate(req?.user?._id, {
+    avatar: avatarResponse.url,
+  }); // 更新用戶資料
+
+  res.status(200).json({
+    user,
   });
 });
 

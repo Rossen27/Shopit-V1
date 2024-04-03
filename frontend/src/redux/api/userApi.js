@@ -32,7 +32,21 @@ export const userApi = createApi({
       },
       invalidatesTags: ["User"], // 更新 user 資料時，清除快取
     }),
+    uploadAvatar: builder.mutation({
+      query(body) {
+        return {
+          url: "/me/upload_avatar",
+          method: "PUT",
+          body,
+        };
+      },
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
-export const { useGetMeQuery, useUpdateProfileMutation } = userApi;
+export const {
+  useGetMeQuery,
+  useUpdateProfileMutation,
+  useUploadAvatarMutation,
+} = userApi;

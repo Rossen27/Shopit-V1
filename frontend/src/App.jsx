@@ -23,7 +23,6 @@ function App() {
           <Route path="/filters" element={<Filters />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-
           <Route
             path="/me/profile"
             element={
@@ -32,7 +31,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-
           <Route
             path="/me/update_profile"
             element={
@@ -41,6 +39,14 @@ function App() {
               </ProtectedRoute>
             }
           />
+          {/* <Route
+            path="/me/upload_avatar"
+            element={
+              <ProtectedRoute>
+                <UploadAvatar/>
+              </ProtectedRoute>
+            }
+          /> */}
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -5,7 +5,6 @@ import cookieParser from "cookie-parser";
 import { connectDatabase } from "./config/dbConnect.js"; // 引入資料庫連接模組
 import errorMiddleware from "./middlewares/errors.js"; // 引入錯誤處理中介軟體
 
-
 // 處理未處理的拒絕
 process.on("uncaughtException", (err) => {
   console.log(`錯誤： ${err}`);
@@ -18,16 +17,17 @@ dotenv.config({ path: "backend/config/config.env" }); // 使用 dotenv.config() 
 // 引入資料庫連接模組
 connectDatabase();
 
-app.use(express.json()); // 使用 express.json() 中介軟體，以解析請求主體中的 JSON 資料  (這裡是解析 req.body)
+app.use(express.json({ limit: "10mb" })); // 使用 express.json() 中介軟體，以解析請求主體中的 JSON 資料  (這裡是解析 req.body) 並設定限制大小為 10mb
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use(cookieParser()); // 使用 cookieParser() 中介軟體，以解析請求中的 cookie
 
 // 設定路由
 import productRoutes from "./routes/products.js"; // 引入產品路由
-import authRoutes from './routes/auth.js'; // 引入 authRoutes 模組
-import orderRoutes from './routes/order.js'; // 引入 orderRoutes 模組
+import authRoutes from "./routes/auth.js"; // 引入 authRoutes 模組
+import orderRoutes from "./routes/order.js"; // 引入 orderRoutes 模組
 app.use("/api/v1", productRoutes); // 使用產品路由
-app.use('/api/v1', authRoutes); // 使用使用者路由
-app.use('/api/v1', orderRoutes); // 使用訂單路由
+app.use("/api/v1", authRoutes); // 使用使用者路由
+app.use("/api/v1", orderRoutes); // 使用訂單路由
 
 // 使用錯誤處理中介軟體
 app.use(errorMiddleware);
