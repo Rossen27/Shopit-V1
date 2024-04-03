@@ -1,16 +1,85 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import UserLayout from "../layout/UserLayout";
 import { useSelector } from "react-redux";
 import MetaData from "../layout/MetaData";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUploadAvatarMutation } from "../../redux/api/userApi";
+import toast from "react-hot-toast";
 
 export default function Profile() {
   const { user } = useSelector((state) => state.auth);
+  const [avatar, setAvatar] = useState(""); // 將大頭照的狀態設為空字串
+  const [avatarPreview, setAvatarPreview] = useState(
+    user?.avatar ? user?.avatar?.url : "/images/default_avatar.jpg"
+  );
+  const navigate = useNavigate();
+  const [uploadAvatar, { isLoading, error, isSuccess }] =
+    useUploadAvatarMutation();
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error?.data);
+    }
+    if (isSuccess) {
+      toast.success("用戶頭像更新成功");
+      navigate("/me/profile");
+    }
+  }, [error, isSuccess]);
+
+  const submitHandler = (e) => {
+    e.preventDefault(); // 防止表單提交
+    const userData = {
+      avatar,
+    };
+    uploadAvatar(userData);
+  };
+
+  const onChange = (e) => {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setAvatarPreview(reader.result);
+        setAvatar(reader.result);
+      }
+    };
+
+    reader.readAsDataURL(e.target.files[0]);
+  };
+
   return (
     <UserLayout>
       <MetaData title="個人資料管理" />
       <div className="h-auto bg-white shadow-md rounded-lg hover:shadow-xl">
         <dl className="mt-4 mx-4 -my-3 divide-y divide-gray-100 text-sm ">
           <div className="p-4 flex justify-center">
-            <img src={user.avatar} className="rounded-full w-32 h-32" />
+            <form className="flex flex-col" onSubmit={submitHandler}>
+                <input
+                className="rounded-full w-32 h-32"
+                type="file"
+                name="avatar"
+                hidden
+                id="customFile"
+                accept="images/*"
+                onChange={onChange}
+              />
+              {/* 大頭照 */}
+              <img
+                onClick={() => document.getElementById("customFile").click()}
+                className="rounded-full w-32 h-32"
+                alt="avatar"
+                src={avatarPreview}
+              />
+              <button
+                className="mt-2 btn glass btn-sm text-slate-600 hover:text-slate-800"
+                id="register_button"
+                type="submit"
+                disabled={isLoading}
+              >
+                {isLoading ? "更新中..." : "更 新 頭 像"}
+              </button>
+            </form>
           </div>
           <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
             <dt className="font-medium text-gray-900">使用者名稱</dt>
@@ -48,10 +117,7 @@ export default function Profile() {
           <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
             <dt className="font-medium text-gray-900">Bio</dt>
             <dd className="text-gray-700 sm:col-span-2">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et
-              facilis debitis explicabo doloremque impedit nesciunt dolorem
-              facere, dolor quasi veritatis quia fugit aperiam aspernatur neque
-              molestiae labore aliquam soluta architecto?
+              Lorem 
             </dd>
           </div> */}
         </dl>
