@@ -17,8 +17,8 @@ dotenv.config({ path: "backend/config/config.env" }); // 使用 dotenv.config() 
 // 引入資料庫連接模組
 connectDatabase();
 
-app.use(express.json({ limit: "10mb" })); // 使用 express.json() 中介軟體，以解析請求主體中的 JSON 資料  (這裡是解析 req.body) 並設定限制大小為 10mb
-app.use(express.urlencoded({ limit: '10mb', extended: true }));
+app.use(express.json({ limit: "5mb" })); // 使用 express.json() 中介軟體，以解析請求主體中的 JSON 資料  (這裡是解析 req.body) 並設定限制大小為 10mb
+app.use(express.urlencoded({ limit: '5mb', extended: true }));
 app.use(cookieParser()); // 使用 cookieParser() 中介軟體，以解析請求中的 cookie
 
 // 設定路由
