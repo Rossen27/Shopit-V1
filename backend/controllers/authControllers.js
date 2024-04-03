@@ -7,7 +7,7 @@ import sendEmail from "../utils/sendEmail.js";
 import crypto from "crypto";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { upload_file } from "../utils/cloudinary.js"; // 引入 Cloudinary 上傳圖片的方法
+import { delete_file, upload_file } from "../utils/cloudinary.js";
 // import { uploadFile, deleteFile } from "../utils/firebase.js"; // 引入 Firebase 上傳圖片的方法
 
 // 註冊新用戶 =>  /api/v1/register
@@ -131,13 +131,13 @@ export const uploadAvatar = catchAsyncErrors(async (req, res, next) => {
 //   const avatarResponse = await uploadFile(req.body.avatar, "avatars");
 
 //   // 如果用戶已有大頭照，則刪除舊的大頭照
-//   if (req?.user?.avatar?.url) {
-//     await deleteFile(req?.user?.avatar?.url);
-//   }
+//   // if (req?.user?.avatar?.url) {
+//   //   await deleteFile(req?.user?.avatar?.url);
+//   // }
 
 //   // 更新用戶資料
 //   const user = await User.findByIdAndUpdate(req?.user?._id, {
-//     avatar: avatarResponse.url,
+//     avatar: avatarResponse,
 //   });
 
 //   res.status(200).json({
