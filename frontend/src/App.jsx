@@ -10,6 +10,7 @@ import Register from "./components/auth/Register.jsx";
 import Profile from "./components/user/Profile.jsx";
 import UpdateProfile from "./components/user/UpdateProfile.jsx";
 import ProtectedRoute from "./components/auth/ProtectedRoute.jsx";
+import UpdatePassword from "./components/user/UpdatePassword.jsx";
 
 function App() {
   return (
@@ -36,6 +37,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <UpdateProfile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/me/update_password"
+            element={
+              <ProtectedRoute>
+                <UpdatePassword />
               </ProtectedRoute>
             }
           />

@@ -7,7 +7,8 @@ import sendEmail from "../utils/sendEmail.js";
 import crypto from "crypto";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { upload_file } from "../utils/cloudinary.js";
+import { delete_file, upload_file } from "../utils/cloudinary.js";
+// import { uploadFile, deleteFile } from "../utils/firebase.js"; // 引入 Firebase 上傳圖片的方法
 
 // 註冊新用戶 =>  /api/v1/register
 export const registerUser = catchAsyncErrors(async (req, res, next) => {
@@ -123,6 +124,26 @@ export const uploadAvatar = catchAsyncErrors(async (req, res, next) => {
     user,
   });
 });
+
+// // FireBase 更新使用者照片 =>  /api/v1/me/upload_avatar
+// export const uploadAvatar = catchAsyncErrors(async (req, res, next) => {
+//   // 上傳圖片到 Firebase
+//   const avatarResponse = await uploadFile(req.body.avatar, "avatars");
+
+//   // 如果用戶已有大頭照，則刪除舊的大頭照
+//   // if (req?.user?.avatar?.url) {
+//   //   await deleteFile(req?.user?.avatar?.url);
+//   // }
+
+//   // 更新用戶資料
+//   const user = await User.findByIdAndUpdate(req?.user?._id, {
+//     avatar: avatarResponse,
+//   });
+
+//   res.status(200).json({
+//     user,
+//   });
+// });
 
 // 忘記密碼 =>  /api/v1/password/forgot
 export const forgotPassword = catchAsyncErrors(async (req, res, next) => {

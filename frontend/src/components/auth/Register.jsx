@@ -37,7 +37,7 @@ function Register() {
   const submitHandler = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      toast.error("密碼與確認密碼不匹配");
+      toast.error("密碼確認不匹配");
       return;
     }
     const signUpData = {
@@ -68,7 +68,7 @@ function Register() {
                 <span className="sr-only">Home</span>
                 <img
                   className="h-12"
-                  src="../public/images/shopit_logo_white.png"
+                  src="../images/shopit_logo_white.png"
                 />
               </Link>
 
@@ -94,7 +94,7 @@ function Register() {
                   className="inline-flex size-16 items-center justify-center rounded-full bg-white text-blue-600 sm:size-20"
                 >
                   <span className="sr-only">Home</span>
-                  <img className="h-10 w-10" src="../public/vite.svg" />
+                  <img className="h-10 w-10" src="../vite.svg" />
                 </Link>
 
                 <h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">

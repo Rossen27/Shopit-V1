@@ -55,7 +55,7 @@ export default function Profile() {
         <dl className="mt-4 mx-4 -my-3 divide-y divide-gray-100 text-sm ">
           <div className="p-4 flex justify-center">
             <form className="flex flex-col" onSubmit={submitHandler}>
-                <input
+              <input
                 className="rounded-full w-32 h-32"
                 type="file"
                 name="avatar"
@@ -69,7 +69,7 @@ export default function Profile() {
                 onClick={() => document.getElementById("customFile").click()}
                 className="rounded-full w-32 h-32"
                 alt="avatar"
-                src={avatarPreview}
+                src={avatarPreview || user.avatar}
               />
               <button
                 className="mt-2 btn glass btn-sm text-slate-600 hover:text-slate-800"
