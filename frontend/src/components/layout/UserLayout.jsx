@@ -17,13 +17,13 @@ const UserLayout = ({ children }) => {
     {
       icon: <FaKey className="text-2xl" />,
       name: "更改密碼",
-      url: "/me/upload_avatar",
-    },
-    {
-      icon: <FaFileImage className="text-2xl" />,
-      name: "更改頭像",
       url: "/me/update_password",
     },
+    // {
+    //   icon: <FaFileImage className="text-2xl" />,
+    //   name: "更改頭像",
+    //   url: "/me/upload_avatar",
+    // },
   ];
 
   return (

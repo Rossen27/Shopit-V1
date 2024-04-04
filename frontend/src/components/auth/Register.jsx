@@ -37,7 +37,7 @@ function Register() {
   const submitHandler = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      toast.error("密碼與確認密碼不匹配");
+      toast.error("密碼確認不匹配");
       return;
     }
     const signUpData = {
