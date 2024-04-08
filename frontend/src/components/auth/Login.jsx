@@ -103,33 +103,28 @@ const Login = () => {
                 />
 
                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
-                {showPassword ? (
-                      <LuEyeOff
-                        className="text-gray-400"
-                        onClick={() =>
-                          setShowPassword((prevState) => !prevState)
-                        }
-                      />
-                    ) : (
-                      <LuEye
-                        className="text-gray-400"
-                        onClick={() =>
-                          setShowPassword((prevState) => !prevState)
-                        }
-                      />
-                    )}
+                  {showPassword ? (
+                    <LuEyeOff
+                      className="text-gray-400"
+                      onClick={() => setShowPassword((prevState) => !prevState)}
+                    />
+                  ) : (
+                    <LuEye
+                      className="text-gray-400"
+                      onClick={() => setShowPassword((prevState) => !prevState)}
+                    />
+                  )}
                 </span>
               </div>
             </div>
 
             <div className="flex items-center justify-between">
               <p className="text-sm text-gray-500">
-                沒有帳號? &nbsp;
+                沒有帳號？ &nbsp;
                 <Link to="/register" className="underline" href="#">
                   快速註冊
                 </Link>
               </p>
-
               <button
                 type="submit"
                 className="btn btn-outline rounded-full btn-sm"
@@ -138,20 +133,26 @@ const Login = () => {
                 {isLoading ? "登入中..." : "登入"}
               </button>
             </div>
+            <p className="text-sm text-gray-500">
+              <Link to="/password/forgot" className="underline" href="#">
+                忘記密碼
+              </Link>
+            </p>
             <span className="flex items-center">
               <span className="h-px flex-1 bg-black"></span>
               <span className="shrink-0 px-6">OR</span>
               <span className="h-px flex-1 bg-black"></span>
             </span>
-            <div className="relative w-full lg:w-1/2"></div>
+            <div className="relative w-full">
+              <OAuth />
+            </div>
           </form>
-          <OAuth />
         </div>
 
         <div className="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">
           <img
             alt=""
-            src="https://images.unsplash.com/photo-1630450202872-e0829c9d6172?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+            src="https://picsum.photos/500/600"
             className="absolute inset-0 h-full w-full object-cover"
           />
         </div>

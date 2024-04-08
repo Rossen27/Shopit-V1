@@ -3,9 +3,6 @@
 @tailwind utilities;
 
 html, body {
-  font-family: "Nunito", sans-serif;
-  background-color: #f9fafb;
-  color: #1e293b;
   height: 100%;
 }
 

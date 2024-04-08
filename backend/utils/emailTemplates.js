@@ -452,7 +452,7 @@ export const getResetPasswordTemplate = (
                   href="https://shopit.com"
                   class="f-fallback email-masthead_name"
                 >
-                  ShopIT
+                  RossenHua
                 </a>
               </td>
             </tr>
@@ -477,7 +477,7 @@ export const getResetPasswordTemplate = (
                       <div class="f-fallback">
                         <h1>您好, ${username},</h1>
                         <p>
-                          您最近請求重設您的 ShopIT 帳戶密碼。請點選下面的按鈕將其重設。
+                          您最近請求重設您的 Rossen Hua 帳戶密碼。請點選下面的按鈕將其重設。
                           <strong
                             >本次密碼重設僅在接下來的 30 分鐘內有效</strong
                           >
@@ -518,7 +518,7 @@ export const getResetPasswordTemplate = (
                         如果您沒有要求重設密碼，請忽略這封電子郵件或聯繫
                           <a href="{{support_url}}">技術人員</a> 
                         </p>
-                        <p>謝謝您, <br />ShopIT團隊敬上</p>
+                        <p>謝謝您,RossenHua團隊敬上</p>
                         <table class="body-sub" role="presentation">
                           <tr>
                             <td>
@@ -550,7 +550,7 @@ export const getResetPasswordTemplate = (
                   <tr>
                     <td class="content-cell" align="center">
                       <p class="f-fallback sub align-center">
-                        ShopIT
+                        RossenHua<br />
                         <br />1234 Street Rd. <br />Suite 1234
                       </p>
                     </td>
