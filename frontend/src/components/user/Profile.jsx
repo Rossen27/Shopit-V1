@@ -51,7 +51,7 @@ export default function Profile() {
   return (
     <UserLayout>
       <MetaData title="個人資料管理" />
-      <div className="h-auto bg-white shadow-md rounded-lg hover:shadow-xl">
+      <div className="mx-auto max-w-screen-md px-4 py-16 mt-6 rounded-lg  shadow-lg bg-white">
         <dl className="mt-4 mx-4 -my-3 divide-y divide-gray-100 text-sm ">
           <div className="p-4 flex justify-center">
             <form className="flex flex-col" onSubmit={submitHandler}>

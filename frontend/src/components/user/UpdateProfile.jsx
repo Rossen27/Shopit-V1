@@ -44,7 +44,7 @@ const UpdateProfile = () => {
   return (
     <UserLayout>
       <div className="mx-auto max-w-screen-xl max-h-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-lg">
+        <div className="mx-auto max-w-lg rounded-lg p-4 shadow-lg sm:p-6 lg:p-8 bg-white">
           <h1 className="text-center text-2xl font-bold text-gray-600 sm:text-3xl">
             變更個人資料
           </h1>
@@ -54,7 +54,7 @@ const UpdateProfile = () => {
           </p>
 
           <form
-            className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
+            className="mb-0 mt-6 space-y-4 p-4 sm:p-6 lg:p-8"
             onSubmit={submitHandler}
           >
             {/* <p className="text-center text-lg font-medium">

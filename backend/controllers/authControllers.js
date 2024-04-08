@@ -157,8 +157,8 @@ export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
   const resetToken = user.getResetPasswordToken(); // 取得重新設定密碼的 token
   await user.save(); // 保存到資料庫
 
-  // 3) 重新設定密碼的 URL，若有前端畫面/api/v1需刪除
-  const resetUrl = `${process.env.FRONTEND_URL}/api/v1/password/reset/${resetToken}`; // 重新設定密碼的 URL
+  // 3) 重新設定密碼的 URL，若無前端畫面改成`${process.env.FRONTEND_URL}/api/v1/password/reset/${resetToken}`
+  const resetUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`; // 重新設定密碼的 URL
 
   // 4) 重新設定密碼的訊息
   const message = getResetPasswordTemplate(user?.name, resetUrl); // 取得重新設定密碼的訊息
