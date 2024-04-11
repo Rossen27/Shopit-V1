@@ -13,6 +13,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute.jsx";
 import UpdatePassword from "./components/user/UpdatePassword.jsx";
 import ForgotPassword from "./components/auth/ForgotPassword.jsx";
 import ResetPassword from "./components/auth/ResetPassword.jsx";
+import Cart from "./components/cart/Cart.jsx";
 
 function App() {
   return (
@@ -61,6 +62,7 @@ function App() {
               </ProtectedRoute>
             }
           /> */}
+          <Route path="/cart" element={<Cart />} />
         </Routes>
         <Footer />
       </BrowserRouter>
