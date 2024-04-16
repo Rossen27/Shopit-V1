@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { LuEye, LuEyeOff } from "react-icons/lu";
+import MetaData from "../layout/MetaData";
 
 function Register() {
   const [showPassword, setShowPassword] = useState(false);
@@ -54,6 +55,7 @@ function Register() {
   };
   return (
     <>
+      <MetaData title={"註冊"} />
       <section className="bg-white">
         <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
           <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">

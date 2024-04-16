@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useLazyLogoutQuery } from "../../redux/api/authApi";
 import { FiShoppingCart } from "react-icons/fi";
+import HeaderCart from "../cart/HeaderCart";
+
 
 export default function Header() {
   const navigate = useNavigate();
@@ -12,6 +14,7 @@ export default function Header() {
   const [logout] = useLazyLogoutQuery();
 
   const { user } = useSelector((state) => state.auth);
+  const { cartItems } = useSelector((state) => state.cart);
 
   const logoutHandler = () => {
     logout();
@@ -41,22 +44,16 @@ export default function Header() {
             >
               <div className="indicator">
                 <FiShoppingCart className="h-7 w-7" />
-                <span className="badge badge-sm indicator-item">7</span>
+                <span className="badge badge-sm indicator-item">
+                  {cartItems?.length}
+                </span>
               </div>
             </div>
             <div
               tabIndex={0}
-              className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
+              className="mt-3 z-[1] card card-compact dropdown-content"
             >
-              <div className="card-body">
-                <span className="font-bold text-lg">7 Items</span>
-                <span className="text-slate-500">總金額: $ 999</span>
-                <div className="card-actions">
-                  <button className="btn btn-glass btn-block rounded-full btn-sm">
-                    查看購物車
-                  </button>
-                </div>
-              </div>
+              <HeaderCart />
             </div>
           </div>
 

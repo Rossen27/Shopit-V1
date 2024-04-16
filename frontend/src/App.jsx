@@ -13,6 +13,10 @@ import ProtectedRoute from "./components/auth/ProtectedRoute.jsx";
 import UpdatePassword from "./components/user/UpdatePassword.jsx";
 import ForgotPassword from "./components/auth/ForgotPassword.jsx";
 import ResetPassword from "./components/auth/ResetPassword.jsx";
+import Cart from "./components/cart/Cart.jsx";
+import Shipping from "./components/cart/Shipping.jsx";
+import ConfirmOrder from "./components/cart/ConfirmOrder.jsx";
+import PaymentMethod from "./components/cart/PaymentMethod.jsx";
 
 function App() {
   return (
@@ -61,6 +65,31 @@ function App() {
               </ProtectedRoute>
             }
           /> */}
+          <Route path="/cart" element={<Cart />} />
+          <Route
+            path="/shipping"
+            element={
+              <ProtectedRoute>
+                <Shipping />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/confirm_order"
+            element={
+              <ProtectedRoute>
+                <ConfirmOrder />
+              </ProtectedRoute>
+            }
+          />
+                    <Route
+            path="/payment_method"
+            element={
+              <ProtectedRoute>
+                <PaymentMethod />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { useLoginMutation } from "../../redux/api/authApi";
 import { Link } from "react-router-dom";
 import { LuEye, LuEyeOff } from "react-icons/lu";
-
+import MetaData from "../layout/MetaData";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -37,6 +37,7 @@ const Login = () => {
 
   return (
     <>
+      <MetaData title={"登入"} />
       <section className="relative flex flex-wrap lg:h-screen lg:items-center">
         <div className="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
           <div className="mx-auto max-w-lg text-center">
