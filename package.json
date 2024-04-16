@@ -22,7 +22,7 @@
     "firebase": "^10.11.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.2.3",
-    "nodemailer": "^6.9.11",
+    "nodemailer": "^6.9.13",
     "stripe": "^15.1.0"
   },
   "devDependencies": {
