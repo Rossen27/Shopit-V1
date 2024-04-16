@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import { FaRegUser, FaRegEnvelope } from "react-icons/fa6";
 import UserLayout from "../layout/UserLayout";
+import MetaData from "../layout/MetaData";
 
 const UpdateProfile = () => {
   const [name, setName] = useState("");
@@ -43,6 +44,7 @@ const UpdateProfile = () => {
 
   return (
     <UserLayout>
+      <MetaData title={"變更個人資料"} />
       <div className="mx-auto max-w-screen-xl max-h-screen-xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-lg rounded-lg p-4 shadow-lg sm:p-6 lg:p-8 bg-white">
           <h1 className="text-center text-2xl font-bold text-gray-600 sm:text-3xl">

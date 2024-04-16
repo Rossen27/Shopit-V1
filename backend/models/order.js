@@ -71,8 +71,8 @@ const orderSchema = new mongoose.Schema(
       type: String,
       required: [true, "請選擇付款方式"],
       enum: {
-        values: ["信用卡", "ATM"],
-        message: "請選擇付款方式",
+        values: ["COD", "Card"],
+        message: "請選擇付款方式：貨到付款(COD) 或 信用卡(Card)",
       },
     },
     // 付款資訊

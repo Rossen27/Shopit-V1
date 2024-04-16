@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { useResetPasswordMutation } from "../../redux/api/userApi";
+import MetaData from "../layout/MetaData";
 
 const ResetPassword = () => {
   const [password, setPassword] = useState("");
@@ -45,6 +46,7 @@ const ResetPassword = () => {
 
   return (
     <>
+      <MetaData title={"重設密碼"} />
       <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-lg">
           <h1 className="text-center text-2xl font-bold text-gray-600 sm:text-3xl">

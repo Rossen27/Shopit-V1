@@ -5,6 +5,7 @@ import { useForgotPasswordMutation } from "../../redux/api/userApi";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import MetaData from "../layout/MetaData";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -34,6 +35,7 @@ const ForgotPassword = () => {
 
   return (
     <>
+    <MetaData title={"忘記密碼"} />
       <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-lg">
           <h1 className="text-center text-2xl font-bold text-gray-600 sm:text-3xl">
