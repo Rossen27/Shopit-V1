@@ -6,6 +6,7 @@ import { useUpdatePasswordMutation } from "../../redux/api/userApi";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useLazyLogoutQuery } from "../../redux/api/authApi";
+import MetaData from "../layout/MetaData";
 
 const UpdatePassword = () => {
   const [showOldPassword, setShowOldPassword] = useState(false);
@@ -65,6 +66,7 @@ const UpdatePassword = () => {
 
   return (
     <UserLayout>
+      <MetaData title="變更密碼" />
       <div className="mx-auto max-w-screen-md px-4 py-16 mt-6 rounded-lg  shadow-lg bg-white">
         <div className="mx-auto max-w-lg text-center ">
           <h1 className="text-2xl font-bold sm:text-3xl">密碼變更</h1>

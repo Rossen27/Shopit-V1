@@ -77,7 +77,6 @@ userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();
   }
-
   try {
     // 生成鹽值(salt)亂數，原理是使用 bcrypt 中的 genSalt 產生10個字元的鹽值加強密碼的安全性
     const salt = await bcrypt.genSalt(10);
