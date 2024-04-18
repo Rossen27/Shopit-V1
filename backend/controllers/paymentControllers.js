@@ -66,10 +66,10 @@ export const stripeCheckoutSession = catchAsyncErrors(
 // 設定 Stripe Webhook，用來接收付款成功後的建立新的訂單 => /api/v1/payment/webhook
 
 const getOrderItems = async (line_items) => {
-  return new Promise((resolve, reject) => {
-    let cartItems = [];
+  return new Promise(async (resolve, reject) => {
+    const cartItems = [];
 
-    line_items?.data?.forEach(async (item) => {
+    for (const item of line_items.data) {
       const product = await stripe.products.retrieve(item.price.product);
       const productId = product.metadata.productId;
       cartItems.push({
@@ -77,13 +77,9 @@ const getOrderItems = async (line_items) => {
         name: product.name,
         quantity: item.quantity,
         price: item.price.unit_amount_decimal / 100,
-        quantity: item.quantity,
         image: product.images[0],
       });
-      if (cartItems.length === line_items?.data?.length) {
-        resolve(cartItems);
-      }
-    });
+    }
   });
 };
 
