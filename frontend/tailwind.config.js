@@ -43,5 +43,9 @@ export default {
   },
   /*global require*/
   /*eslint no-undef: "error"*/
-  plugins: [require("daisyui"), require("@tailwindcss/forms")],
+  plugins: [
+    require("@tailwindcss/typography"),
+    require("daisyui"),
+    require("@tailwindcss/forms"),
+  ],
 };

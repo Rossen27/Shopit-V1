@@ -76,7 +76,7 @@ export default function Header() {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 "
             >
               <li>
                 <Link to="/me/profile" className="justify-between">
@@ -85,7 +85,7 @@ export default function Header() {
                 </Link>
               </li>
               <li>
-                <Link to="/me/orders">設定</Link>
+                <Link to="/me/orders">訂單管理</Link>
               </li>
               <li>
                 <Link to="/admin/dashboard">管理</Link>
