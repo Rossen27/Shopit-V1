@@ -50,7 +50,7 @@ const PaymentMethod = () => {
     const { itemsPrice, shippingPrice, taxPrice, totalPrice } =
       caluclateOrderCost(cartItems);
 
-    if (method === "COD") {
+    if (method === "貨到付款") {
       // 建立一個現金訂單
       const orderData = {
         shippingInfo,
@@ -67,7 +67,7 @@ const PaymentMethod = () => {
       createNewOrder(orderData);
     }
 
-    if (method === "Card") {
+    if (method === "信用卡") {
       // 導向Stripe
       const orderData = {
         shippingInfo,
@@ -115,11 +115,11 @@ const PaymentMethod = () => {
                 <p className="text-gray-500">VISA, MasterCard, JCB</p>
                 <input
                   type="radio"
-                  value="Card"
+                  value="信用卡"
                   name="payment_mode"
                   id="cardradio"
                   className="sr-only"
-                  onChange={(e) => setMethod("Card")}
+                  onChange={(e) => setMethod("信用卡")}
                 />
               </label>
             </div>

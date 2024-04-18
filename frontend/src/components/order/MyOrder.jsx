@@ -32,27 +32,31 @@ const MyOrders = () => {
   const setOrders = () => {
     const orders = [];
     ordersData?.orders?.forEach((order) => {
+      const paymentStatus = order?.paymentInfo?.status;
+      const isPaid = paymentStatus === "paid";
+      const statusText = isPaid ? "已付款" : "尚未付款";
+      const statusColor = isPaid ? "text-green-500" : "text-red-500";
       orders.push({
         id: order?._id,
         amount: `$ ${order?.totalAmount}`,
-        status: order?.paymentInfo?.status?.toUpperCase(),
+        status: <span className={statusColor}>{statusText}</span>,
         orderStatus: order?.orderStatus,
         actions: (
           <>
-            <div className="flex justify-center">
+            <td className="flex justify-center whitespace-nowrap px-4 py-2">
               <Link
                 to={`/me/order/${order?._id}`}
-                className="btn btn-primary rounded-full mr-2"
+                className="mr-3 inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
               >
                 <i className="fa fa-eye"></i>
               </Link>
               <Link
                 to={`/invoice/order/${order?._id}`}
-                className="btn btn-accent rounded-full"
+                className="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
               >
                 <i className="fa fa-print"></i>
               </Link>
-            </div>
+            </td>
           </>
         ),
       });
@@ -65,7 +69,7 @@ const MyOrders = () => {
       {
         Header: "訂單編號",
         accessor: "id",
-        sortType: "alphanumeric", 
+        sortType: "alphanumeric",
       },
       {
         Header: "總金額",
@@ -99,55 +103,62 @@ const MyOrders = () => {
   if (isLoading) return <Loader />;
 
   return (
-    <div className="overflow-x-auto">
+    <>
       <MetaData title={"訂單明細"} />
-
-      <h1 className="m-5">{ordersData?.orders?.length} 筆歷史訂單</h1>
-      <div className="">
-        <table
-          {...getTableProps()}
-          className="table-auto min-w-full max-w-3xl divide-y-2 divide-gray-200 bg-white text-sm"
-        >
-          <thead className="ltr:text-left rtl:text-right">
-            {headerGroups.map((headerGroup) => (
-              <tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <th
-                    key={column.id}
-                    {...column.getHeaderProps()}
-                    className="whitespace-nowrap px-4 py-2 font-medium text-gray-900"
+      <div className="flex justify-center items-center">
+        <div className="w-10/12 bg-white p-6 rounded-lg">
+          <h1 className="text-center text-3xl font-semibold">{ordersData?.orders?.length} 筆歷史訂單</h1>
+          <div className="overflow-x-auto">
+            <table
+              {...getTableProps()}
+              className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm"
+            >
+              <thead className="ltr:text-left rtl:text-right">
+                {headerGroups.map((headerGroup) => (
+                  <tr
+                    key={headerGroup.id}
+                    {...headerGroup.getHeaderGroupProps()}
                   >
-                    {column.render("Header")}
-                  </th>
-                ))}
-                <th className="px-4 py-2"></th>
-              </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()} className="divide-y divide-gray-200">
-            {rows.map((row) => {
-              prepareRow(row);
-              return (
-                <tr key={row.id} {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return (
-                      <td
-                        key={cell.column.id}
-                        {...cell.getCellProps()}
-                        className="whitespace-nowrap px-4 py-2 text-gray-700"
+                    {headerGroup.headers.map((column) => (
+                      <th
+                        key={column.id}
+                        {...column.getHeaderProps()}
+                        className="whitespace-nowrap px-4 py-2 font-medium text-gray-900"
                       >
-                        {cell.render("Cell")}
-                      </td>
-                    );
-                  })}
-                  <td className="whitespace-nowrap px-4 py-2"></td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                        {column.render("Header")}
+                      </th>
+                    ))}
+                  </tr>
+                ))}
+              </thead>
+              <tbody
+                {...getTableBodyProps()}
+                className="divide-y divide-gray-200"
+              >
+                {rows.map((row) => {
+                  prepareRow(row);
+                  return (
+                    <tr key={row.id} {...row.getRowProps()}>
+                      {row.cells.map((cell) => {
+                        return (
+                          <td
+                            key={cell.column.id}
+                            {...cell.getCellProps()}
+                            className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center"
+                          >
+                            {cell.render("Cell")}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
