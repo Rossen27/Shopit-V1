@@ -73,13 +73,13 @@ const Cart = () => {
                         <li className="flex items-center gap-4">
                           <img
                             src={item?.image}
-                            alt=""
+                            alt={item?.name}
                             className="size-16 rounded object-cover"
                           />
 
                           <div>
                             <Link
-                              to={`/products/${item?.product}`}
+                              to={`/product/${item.product}`}
                               className="text-sm text-gray-900"
                             >
                               {item?.name}
@@ -220,13 +220,12 @@ const Cart = () => {
                         </div> */}
 
                         <div className="flex justify-end">
-                          <a
-                            href="#"
+                          <button
                             className="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
                             onClick={checkoutHandler}
                           >
                             Checkout
-                          </a>
+                          </button>
                         </div>
                       </div>
                     </div>
