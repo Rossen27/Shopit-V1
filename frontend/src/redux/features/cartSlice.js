@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -36,6 +37,10 @@ export const cartSlice = createSlice({
       );
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
+    clearCart: (state, action) => {
+      localStorage.removeItem("cartItems");
+      state.cartItems = [];
+    },
     saveShoppingInfo: (state, action) => {
       state.shippingInfo = action.payload;
       localStorage.setItem("shippingInfo", JSON.stringify(state.shippingInfo));
@@ -45,5 +50,6 @@ export const cartSlice = createSlice({
 
 export default cartSlice.reducer;
 
-export const { setCartItem, removeCartItem, saveShoppingInfo } =
+export const { setCartItem, removeCartItem, saveShoppingInfo, clearCart } =
   cartSlice.actions;
+  clearCart

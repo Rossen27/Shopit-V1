@@ -105,15 +105,15 @@ const orderSchema = new mongoose.Schema(
       type: String,
       enum: {
         values: [
-          "Processing", // 處理中
-          "Shipped", // 已出貨
-          "Delivered", // 已送達
-          "Paid", // 已付款
-          "Cancelled", // 已取消
+          "處理中", // 處理中
+          "已出貨", // 已出貨
+          "已送達", // 已送達
+          "已付款", // 已付款
+          "已取消", // 已取消
         ],
         message: "請選擇訂單狀態",
       },
-      default: "Processing", // 處理中
+      default: "處理中", // 處理中
     },
     // 時間
     deliveredAt: Date,
