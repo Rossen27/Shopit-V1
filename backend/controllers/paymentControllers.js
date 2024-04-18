@@ -40,8 +40,8 @@ export const stripeCheckoutSession = catchAsyncErrors(
 
     // 4) 紀錄客戶資訊、金額、訂單資訊、付款方式等等
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["信用卡"], // 付款方式
-      success_url: `${process.env.FRONTEND_URL}/me/orders`, // 付款成功後導向
+      payment_method_types: ["card"], // 付款方式
+      success_url: `${process.env.FRONTEND_URL}/me/orders?order_success=true`, // 付款成功後導向
       cancel_url: `${process.env.FRONTEND_URL}`, // 付款取消後導向
       customer_email: req?.user?.email, // 顧客 Email
       client_reference_id: req?.user?._id?.toString(), // 訂單 ID
@@ -129,7 +129,7 @@ export const stripeWebhook = catchAsyncErrors(async (req, res, next) => {
         shippingAmount,
         totalAmount,
         paymentInfo,
-        paymentMethod: "信用卡",
+        paymentMethod: "Card",
         user,
       }; // 訂單資訊
 

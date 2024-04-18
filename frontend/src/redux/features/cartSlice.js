@@ -52,4 +52,3 @@ export default cartSlice.reducer;
 
 export const { setCartItem, removeCartItem, saveShoppingInfo, clearCart } =
   cartSlice.actions;
-  clearCart

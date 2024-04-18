@@ -70,7 +70,7 @@ const Cart = () => {
                   <div className="mt-8">
                     <ul className="space-y-4">
                       {cartItems?.map((item) => (
-                        <li className="flex items-center gap-4">
+                        <li  key={item.product}  className="flex items-center gap-4">
                           <img
                             src={item?.image}
                             alt={item?.name}

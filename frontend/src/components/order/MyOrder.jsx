@@ -25,7 +25,7 @@ const MyOrders = () => {
 
     if (orderSuccess) {
       dispatch(clearCart());
-      navigate("/me/orders");
+      navigate("/me/orders?order_success=true");
     }
   }, [error, orderSuccess]);
 
@@ -107,7 +107,9 @@ const MyOrders = () => {
       <MetaData title={"訂單明細"} />
       <div className="flex justify-center items-center">
         <div className="w-10/12 bg-white p-6 rounded-lg">
-          <h1 className="text-center text-3xl font-semibold">{ordersData?.orders?.length} 筆歷史訂單</h1>
+          <h1 className="text-center text-3xl font-semibold">
+            {ordersData?.orders?.length} 筆歷史訂單
+          </h1>
           <div className="overflow-x-auto">
             <table
               {...getTableProps()}

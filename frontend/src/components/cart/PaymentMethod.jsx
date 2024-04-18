@@ -40,7 +40,7 @@ const PaymentMethod = () => {
     }
 
     if (isSuccess) {
-      navigate("/");
+      navigate("/me/orders?order_success=true");
     }
   }, [error, isSuccess]);
 
@@ -62,12 +62,12 @@ const PaymentMethod = () => {
         paymentInfo: {
           status: "尚未付款",
         },
-        paymentMethod: "COD",
+        paymentMethod: "貨到付款",
       };
       createNewOrder(orderData);
     }
 
-    if (method === "信用卡") {
+    if (method === "Card") {
       // 導向Stripe
       const orderData = {
         shippingInfo,
@@ -97,11 +97,11 @@ const PaymentMethod = () => {
                 <p className="text-gray-700">貨到付款</p>
                 <input
                   type="radio"
-                  value="COD"
+                  value="貨到付款"
                   name="payment_mode"
                   id="codradio"
                   className="sr-only"
-                  onChange={(e) => setMethod("COD")}
+                  onChange={(e) => setMethod("貨到付款")}
                 />
               </label>
             </div>
@@ -115,11 +115,11 @@ const PaymentMethod = () => {
                 <p className="text-gray-500">VISA, MasterCard, JCB</p>
                 <input
                   type="radio"
-                  value="信用卡"
+                  value="Card"
                   name="payment_mode"
                   id="cardradio"
                   className="sr-only"
-                  onChange={(e) => setMethod("信用卡")}
+                  onChange={(e) => setMethod("Card")}
                 />
               </label>
             </div>

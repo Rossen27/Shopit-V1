@@ -25,7 +25,7 @@ const HeaderCart = () => {
             <div className="mt-4 space-y-6">
               <ul className="space-y-4">
                 {cartItems?.map((item) => (
-                  <li className="flex items-center gap-4">
+                  <li  key={item.product}  className="flex items-center gap-4">
                     <img
                       src={item?.image}
                       alt=""
