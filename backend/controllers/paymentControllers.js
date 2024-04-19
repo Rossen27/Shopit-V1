@@ -40,8 +40,8 @@ export const stripeCheckoutSession = catchAsyncErrors(
 
     // 4) 紀錄客戶資訊、金額、訂單資訊、付款方式等等
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["信用卡"], // 付款方式
-      success_url: `${process.env.FRONTEND_URL}/me/orders`, // 付款成功後導向
+      payment_method_types: ["card"], // 付款方式
+      success_url: `${process.env.FRONTEND_URL}/me/orders?order_success=true`, // 付款成功後導向
       cancel_url: `${process.env.FRONTEND_URL}`, // 付款取消後導向
       customer_email: req?.user?.email, // 顧客 Email
       client_reference_id: req?.user?._id?.toString(), // 訂單 ID
@@ -66,10 +66,10 @@ export const stripeCheckoutSession = catchAsyncErrors(
 // 設定 Stripe Webhook，用來接收付款成功後的建立新的訂單 => /api/v1/payment/webhook
 
 const getOrderItems = async (line_items) => {
-  return new Promise((resolve, reject) => {
-    let cartItems = [];
+  return new Promise(async (resolve, reject) => {
+    const cartItems = [];
 
-    line_items?.data?.forEach(async (item) => {
+    for (const item of line_items.data) {
       const product = await stripe.products.retrieve(item.price.product);
       const productId = product.metadata.productId;
       cartItems.push({
@@ -77,13 +77,9 @@ const getOrderItems = async (line_items) => {
         name: product.name,
         quantity: item.quantity,
         price: item.price.unit_amount_decimal / 100,
-        quantity: item.quantity,
         image: product.images[0],
       });
-      if (cartItems.length === line_items?.data?.length) {
-        resolve(cartItems);
-      }
-    });
+    }
   });
 };
 
@@ -129,7 +125,7 @@ export const stripeWebhook = catchAsyncErrors(async (req, res, next) => {
         shippingAmount,
         totalAmount,
         paymentInfo,
-        paymentMethod: "信用卡",
+        paymentMethod: "Card",
         user,
       }; // 訂單資訊
 

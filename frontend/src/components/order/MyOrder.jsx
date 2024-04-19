@@ -25,7 +25,7 @@ const MyOrders = () => {
 
     if (orderSuccess) {
       dispatch(clearCart());
-      navigate("/me/orders");
+      navigate("/me/orders?order_success=true");
     }
   }, [error, orderSuccess]);
 
@@ -46,13 +46,13 @@ const MyOrders = () => {
             <td className="flex justify-center whitespace-nowrap px-4 py-2">
               <Link
                 to={`/me/order/${order?._id}`}
-                className="mr-3 inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
+                className="mr-3 inline-block rounded bg-rose-600 px-4 py-2 text-xs font-medium text-white hover:bg-rose-700"
               >
                 <i className="fa fa-eye"></i>
               </Link>
               <Link
                 to={`/invoice/order/${order?._id}`}
-                className="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
+                className="inline-block rounded bg-emerald-600 px-4 py-2 text-xs font-medium text-white hover:bg-emerald-700"
               >
                 <i className="fa fa-print"></i>
               </Link>
@@ -105,9 +105,11 @@ const MyOrders = () => {
   return (
     <>
       <MetaData title={"訂單明細"} />
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center m-3">
         <div className="w-10/12 bg-white p-6 rounded-lg">
-          <h1 className="text-center text-3xl font-semibold">{ordersData?.orders?.length} 筆歷史訂單</h1>
+          <h1 className="text-center text-3xl font-semibold">
+            {ordersData?.orders?.length} 筆歷史訂單
+          </h1>
           <div className="overflow-x-auto">
             <table
               {...getTableProps()}

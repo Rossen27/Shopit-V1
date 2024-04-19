@@ -26,7 +26,7 @@ export default function Header() {
         <div className="flex">
           <Link to="/" className="bg-auto md:bg-contain">
             <img
-              src="../images/shopit_logo.png"
+              src="../../images/shopit_logo.png"
               alt=""
               className="w-auto h-10 cursor-pointer text-gray-600"
             />

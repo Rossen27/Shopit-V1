@@ -104,24 +104,34 @@ const UpdateProfile = () => {
                 </span>
               </div>
             </div>
+            <div className="flex justify-center">
             {isLoading ? (
               <button
                 type="submit"
                 disabled={isLoading}
-                className="block w-full rounded-full bg-gray-600 px-5 py-3 text-sm font-medium text-white"
+                className="group relative inline-block focus:outline-none focus:ring"
               >
-                <span className="loading loading-spinner"></span>
-                更新資料中...
+                <span className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-yellow-300 transition-transform group-hover:translate-x-0 group-hover:translate-y-0"></span>
+
+                <span className="relative inline-block border-2 border-current px-8 py-3 text-sm font-bold uppercase tracking-widest text-black group-active:text-opacity-75">
+                  <span className="loading loading-spinner"></span>
+                  更新資料中...
+                </span>
               </button>
             ) : (
               <button
                 type="submit"
                 disabled={isLoading}
-                className="block w-full rounded-full bg-gray-600 px-5 py-3 text-sm font-medium text-white"
+                className="group relative inline-block focus:outline-none focus:ring"
               >
-                更新資料
+                <span className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-yellow-300 transition-transform group-hover:translate-x-0 group-hover:translate-y-0"></span>
+
+                <span className="relative inline-block border-2 border-current px-8 py-3 text-sm font-bold uppercase tracking-widest text-black group-active:text-opacity-75">
+                  更新資料
+                </span>
               </button>
             )}
+            </div>
 
             {/* <p className="text-center text-sm text-gray-500">
               No account?
