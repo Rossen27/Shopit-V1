@@ -31,7 +31,7 @@ export const newProduct = catchAsyncErrors(async (req, res) => {
 export const getProductDetails = catchAsyncErrors(async (req, res) => {
   const product = await Product.findById(req?.params?.id); // 獲取單一產品
   if (!product) {
-    return next(new ErrorHandler('查無此產品', 404));
+    return next(new ErrorHandler("查無此產品", 404));
   }
   res.status(200).json({
     product,
@@ -42,7 +42,7 @@ export const getProductDetails = catchAsyncErrors(async (req, res) => {
 export const updateProduct = catchAsyncErrors(async (req, res) => {
   let product = await Product.findById(req?.params?.id); // 獲取單一產品
   if (!product) {
-    return next(new ErrorHandler('查無此產品', 404));
+    return next(new ErrorHandler("查無此產品", 404));
   }
   product = await Product.findByIdAndUpdate(req?.params?.id, req.body, {
     new: true,
@@ -57,12 +57,90 @@ export const updateProduct = catchAsyncErrors(async (req, res) => {
 export const deleteProduct = catchAsyncErrors(async (req, res) => {
   const product = await Product.findById(req?.params?.id); // 獲取單一產品
   if (!product) {
-    return next(new ErrorHandler('查無此產品', 404));
+    return next(new ErrorHandler("查無此產品", 404));
   }
 
   await product.deleteOne(); // 刪除產品
 
   res.status(200).json({
     message: "刪除成功",
+  });
+});
+
+// 新增/更新產品評論 -> POST /api/v1/reviews
+export const createProductReview = catchAsyncErrors(async (req, res, next) => {
+  const { rating, comment, productId } = req.body; // 評分、評論、產品 id
+  const review = {
+    user: req?.user?._id, // 使用者 id
+    // name: req.user.name, // 使用者名稱
+    rating: Number(rating), // 評分
+    comment, // 評論
+  };
+  const product = await Product.findById(productId);
+  if (!product) {
+    return next(new ErrorHandler("查無此產品", 404));
+  }
+
+  const isReviewed = product?.reviews?.find(
+    // (review) => review.user.toString() === req.user._id.toString()
+    (r) => r.user.toString() === req?.user?._id.toString()
+  ); // 是否已評論
+  if (isReviewed) {
+    product.reviews.forEach((review) => {
+      if (review?.user?.toString() === req?.user?._id.toString()) {
+        review.comment = comment;
+        review.rating = rating;
+      }
+    });
+  } else {
+    product.reviews.push(review);
+    product.numOfReviews = product.reviews.length;
+  }
+  // 計算產品評分
+  product.ratings =
+    product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+    product.reviews.length;
+  await product.save({ validateBeforeSave: false }); // 儲存產品
+  res.status(200).json({
+    success: true,
+  });
+});
+
+// 獲取產品評論 -> GET /api/v1/reviews
+export const getProductReviews = catchAsyncErrors(async (req, res, next) => {
+  const product = await Product.findById(req?.query?.id);
+  if (!product) {
+    return next(new ErrorHandler('查無此產品', 404));
+  }
+  res.status(200).json({
+    reviews: product?.reviews,
+  });
+});
+
+// 刪除產品評論 -> DELETE /api/v1/admin/reviews
+export const deleteReview = catchAsyncErrors(async (req, res, next) => {
+  let product = await Product.findById(req.query.productId);
+  if (!product) {
+    return next(new ErrorHandler('查無此產品', 404));
+  }
+  const reviews = product?.reviews?.filter(
+    // (review) => review.user.toString() === req.user._id.toString()
+    (review) => review._id.toString() !== req?.query?.id.toString()
+  ); // 過濾評論
+  const numOfReviews = reviews.length; // 評論數量
+  // 計算產品評分，product.numOfReviews = product.reviews.length;
+  const ratings =
+    numOfReviews === 0
+      ? 0
+      : product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+        numOfReviews;
+  product = await Product.findByIdAndUpdate(
+    req.query.productId,
+    { reviews, numOfReviews, ratings },
+    { new: true }
+  ); // 儲存產品
+  res.status(200).json({
+    success: true,
+    product,
   });
 });
