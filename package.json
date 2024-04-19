@@ -21,7 +21,7 @@
     "express": "^5.0.0-alpha.2",
     "firebase": "^10.11.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.2.3",
+    "mongoose": "^8.2.4",
     "nodemailer": "^6.9.11",
     "stripe": "^15.1.0"
   },
