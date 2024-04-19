@@ -31,9 +31,21 @@ const [comment, setComment] = useState("");
   }, [error, isSuccess]);
 
   const submitHandler = () => {
-    const reviewData = { rating, comment, productId };
-    submitReview(reviewData); // 提交評論資料
-    setShowReviewModal(false);
+    if (rating === 0 && comment === "") {
+      // 如果rating為0且comment為空，顯示錯誤提示
+      toast.error("請輸入評分和評論後再提交");
+    } else {
+      const reviewData = { rating, comment, productId };
+      submitReview(reviewData) // 提交評論資料
+        .then(() => {
+          setShowReviewModal(false);
+          window.location.reload(); // 提交後刷新頁面
+        })
+        .catch((error) => {
+          toast.error("提交評論時發生錯誤:", error);
+          // 在發生錯誤時進行錯誤處理
+        });
+    }
   };
 
   const clearHandler = () => {
