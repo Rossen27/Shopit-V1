@@ -32,7 +32,7 @@ const OrderDetails = () => {
   return (
     <>
       <MetaData title={"訂單明細"} />
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center m-6">
         <div className="w-10/12 bg-white p-6 rounded-lg">
           <h1 className="text-center text-3xl font-semibold">訂 單 明 細</h1>
           <h4 className="text-xl font-semibold mt-6">訂單資訊</h4>

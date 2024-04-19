@@ -33,7 +33,7 @@ const HeaderCart = () => {
                     />
                     <div>
                       <Link
-                        to={`/products/${item?.product}`}
+                        to={`/product/${item?.product}`}
                         className="text-sm text-gray-900"
                       >
                         {item?.name}
