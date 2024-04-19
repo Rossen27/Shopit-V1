@@ -52,7 +52,7 @@ const ProductItem = ({ product, columnSize }) => {
               ({product?.numOfReviews})
             </span>
           </div>
-          <div className="text-right">
+          <div className="text-right m-3">
             {" "}
             <Link
               to={`/product/${product?._id}`}

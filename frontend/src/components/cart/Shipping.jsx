@@ -9,7 +9,7 @@ import CheckoutSteps from "./CheckoutSteps";
 const Shipping = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [name, setName] = useState(""); 
+  const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [phoneNo, setPhoneNo] = useState("");
@@ -33,7 +33,9 @@ const Shipping = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    dispatch(saveShoppingInfo({ name ,address, city, phoneNo, country, zipCode }));
+    dispatch(
+      saveShoppingInfo({ name, address, city, phoneNo, country, zipCode })
+    );
     navigate("/confirm_order");
   };
 
@@ -213,12 +215,16 @@ const Shipping = () => {
                   ></textarea>
                 </div> */}
 
-                <div className="mt-4">
+                <div className="mt-4 flex justify-end">
                   <button
                     type="submit"
-                    className="inline-block w-full rounded-lg bg-black px-5 py-3 font-medium text-white sm:w-auto"
+                    className="group relative inline-block focus:outline-none focus:ring"
                   >
-                    Send Enquiry
+                    <span className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-yellow-300 transition-transform group-hover:translate-x-0 group-hover:translate-y-0"></span>
+
+                    <span className="relative inline-block border-2 border-current px-8 py-3 text-sm font-bold uppercase tracking-widest text-black group-active:text-opacity-75">
+                      送 出
+                    </span>
                   </button>
                 </div>
               </form>

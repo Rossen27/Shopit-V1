@@ -70,7 +70,10 @@ const Cart = () => {
                   <div className="mt-8">
                     <ul className="space-y-4">
                       {cartItems?.map((item) => (
-                        <li  key={item.product}  className="flex items-center gap-4">
+                        <li
+                          key={item.product}
+                          className="flex items-center gap-4"
+                        >
                           <img
                             src={item?.image}
                             alt={item?.name}
@@ -221,10 +224,14 @@ const Cart = () => {
 
                         <div className="flex justify-end">
                           <button
-                            className="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
+                            className="group relative inline-block focus:outline-none focus:ring"
                             onClick={checkoutHandler}
                           >
-                            Checkout
+                            <span className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-yellow-300 transition-transform group-hover:translate-x-0 group-hover:translate-y-0"></span>
+
+                            <span className="relative inline-block border-2 border-current px-8 py-3 text-sm font-bold uppercase tracking-widest text-black group-active:text-opacity-75">
+                              送 出
+                            </span>
                           </button>
                         </div>
                       </div>
