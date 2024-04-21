@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import StarRatings from 'react-star-ratings';
-import { FaRegHeart } from 'react-icons/fa6';
 import { IoCloseOutline } from 'react-icons/io5';
 import { MdOutlineRateReview } from "react-icons/md";
-import { useSubmitReviewMutation } from '../../redux/api/productsApi';
+import { useCanUserReviewQuery, useSubmitReviewMutation } from '../../redux/api/productsApi';
 import { toast } from "react-hot-toast";
 import Loader from "../layout/Loader";
 import PropTypes from 'prop-types';
@@ -20,6 +19,9 @@ const [comment, setComment] = useState("");
 
   const [submitReview, { isLoading, error, isSuccess }] =
     useSubmitReviewMutation(); // 使用 submitReview endpoint 的 hook
+
+    const { data } = useCanUserReviewQuery(productId);
+    const canReview = data?.canReview;
 
   useEffect(() => {
     if(error) {
@@ -56,15 +58,17 @@ const [comment, setComment] = useState("");
   return (
     <>
       <div className="">
+      {canReview && (
         <button
           className="w-full group inline-block rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-[2px] hover:text-white focus:outline-none focus:ring active:text-opacity-75"
           onClick={() => setShowReviewModal(true)} // 點擊時設置顯示評論模態視窗為真
           type="button"
         >
           <span className="flex justify-center rounded-full bg-white px-8 py-3 text-sm font-medium group-hover:bg-transparent">
-            <FaRegHeart className="h-4 w-4 mx-1" />評 價
+          <i className="fa-regular fa-message h-4 w-4 m-1"></i>{" "}留 下 評 價
           </span>
         </button>
+        )}
         {/* 顯示評論模態視窗的內容 */}
         {showReviewModal && (
           <div
