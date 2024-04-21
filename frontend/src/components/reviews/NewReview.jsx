@@ -38,8 +38,7 @@ const [comment, setComment] = useState("");
       const reviewData = { rating, comment, productId };
       submitReview(reviewData) // 提交評論資料
         .then(() => {
-          setShowReviewModal(false);
-          window.location.reload(); // 提交後刷新頁面
+          setShowReviewModal(false); // 提交成功後設置顯示評論模態視窗為假
         })
         .catch((error) => {
           toast.error("提交評論時發生錯誤:", error);
