@@ -25,7 +25,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Toaster position="top-right" />
+        <Toaster position="top-center" />
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
