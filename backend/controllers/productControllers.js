@@ -30,7 +30,7 @@ export const newProduct = catchAsyncErrors(async (req, res) => {
 });
 // 獲取單一產品 -> GET /api/v1/products/:id
 export const getProductDetails = catchAsyncErrors(async (req, res) => {
-  const product = await Product.findById(req?.params?.id); // 獲取單一產品
+  const product = await Product.findById(req?.params?.id).populate('reviews.user'); // 獲取單一產品
   if (!product) {
     return next(new ErrorHandler("查無此產品", 404));
   }
