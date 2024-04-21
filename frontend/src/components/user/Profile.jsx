@@ -24,16 +24,25 @@ export default function Profile() {
     if (isSuccess) {
       toast.success("用戶頭像更新成功");
       navigate("/me/profile");
+      setAvatar(""); // 清空 avatar 狀態
+      setAvatarPreview(user?.avatar ? user?.avatar?.url : "/images/default_avatar.jpg"); // 重置 avatar 預覽
     }
   }, [error, isSuccess]);
 
   const submitHandler = (e) => {
     e.preventDefault(); // 防止表單提交
+
+    if (!avatar) {
+      toast.error("請選擇要上傳的圖片");
+      return;
+    }
+
     const userData = {
       avatar,
     };
     uploadAvatar(userData);
   };
+
 
   const onChange = (e) => {
     const reader = new FileReader();

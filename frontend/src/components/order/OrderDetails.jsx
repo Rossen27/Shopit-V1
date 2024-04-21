@@ -143,7 +143,7 @@ const OrderDetails = () => {
                   orderItems.map((item) => (
                     <tr key={item.product}>
                       <td className="py-2">
-                        <Link to={`/product/${item.product}`} className="flex">
+                        <Link to={`/products/${item.product}`} className="flex">
                           <img
                             src={item.image}
                             alt={item.name}

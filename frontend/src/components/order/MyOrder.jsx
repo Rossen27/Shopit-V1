@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useMyOrdersQuery } from "../../redux/api/orderApi";
 import Loader from "../layout/Loader";
 import { toast } from "react-hot-toast";
@@ -11,11 +11,9 @@ import { useTable } from "react-table";
 
 const MyOrders = () => {
   const { data: ordersData, isLoading, error } = useMyOrdersQuery();
-
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const orderSuccess = searchParams.get("order_success");
 
   useEffect(() => {
@@ -97,8 +95,24 @@ const MyOrders = () => {
 
   const data = useMemo(() => setOrders(), [ordersData]);
 
+  const pageSize = 10; // 每頁顯示的資料筆數
+  const [pageIndex, setPageIndex] = useState(0);
+
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data });
+    useTable({
+      columns,
+      data,
+      initialState: { pageIndex }, // 初始頁面索引
+      pageCount: Math.ceil(data.length / pageSize), // 計算頁面總數
+    });
+
+  const handleNextPage = () => {
+    setPageIndex((prevIndex) => Math.min(prevIndex + 1, Math.ceil(data.length / pageSize) - 1));
+  };
+
+  const handlePrevPage = () => {
+    setPageIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+  };
 
   if (isLoading) return <Loader />;
 
@@ -137,7 +151,7 @@ const MyOrders = () => {
                 {...getTableBodyProps()}
                 className="divide-y divide-gray-200"
               >
-                {rows.map((row) => {
+                {rows.slice(pageIndex * pageSize, (pageIndex + 1) * pageSize).map((row) => {
                   prepareRow(row);
                   return (
                     <tr key={row.id} {...row.getRowProps()}>
@@ -158,6 +172,39 @@ const MyOrders = () => {
               </tbody>
             </table>
           </div>
+          <ol className="flex justify-center gap-1 text-xs font-medium">
+            <li>
+              <a
+                href="#"
+                onClick={handlePrevPage}
+                className={`inline-flex size-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180 ${pageIndex === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
+              >
+                <span className="sr-only">Prev Page</span>
+                <i className="fa-solid fa-angle-left"></i>
+              </a>
+            </li>
+            {Array.from(Array(Math.ceil(data.length / pageSize)).keys()).map((page, index) => (
+              <li key={index}>
+                <a
+                  href="#"
+                  className={`block size-8 rounded border ${pageIndex === page ? 'border-gray-600 bg-gray-600 text-white' : 'border-gray-100 bg-white'} text-center leading-8 text-gray-900`}
+                  onClick={() => setPageIndex(page)}
+                >
+                  {page + 1}
+                </a>
+              </li>
+            ))}
+            <li>
+              <a
+                href="#"
+                onClick={handleNextPage}
+                className={`inline-flex size-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180 ${pageIndex === Math.ceil(data.length / pageSize) - 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+              >
+                <span className="sr-only">Next Page</span>
+                <i className="fa-solid fa-angle-right"></i>
+              </a>
+            </li>
+          </ol>
         </div>
       </div>
     </>

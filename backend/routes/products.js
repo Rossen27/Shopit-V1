@@ -7,7 +7,8 @@ import {
   deleteProduct,
   createProductReview,
   getProductReviews,
-  deleteReview 
+  deleteReview,
+  canUserReview,
 } from "../controllers/productControllers.js";
 import { authorizeRoles, isAuthenticatedUser } from "../middlewares/auth.js";
 const router = express.Router(); // 創建一個 router 實例
@@ -30,4 +31,6 @@ router
 router
   .route("/admin/reviews")
   .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteReview); // 這裡的 deleteReview
+
+router.route("/can_review").get(isAuthenticatedUser, canUserReview); // 這裡的 canUserReview
 export default router;

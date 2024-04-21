@@ -86,7 +86,6 @@ export default function ProductDetails() {
               alt={product?.name}
               className="lg:w-1/3 w-full h-full object-center border border-gray-200 rounded-xl object-cover shadow-xl transition group-hover:grayscale-[50%]"
             />
-
             <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
               <h2 className="text-sm title-font text-gray-500 tracking-widest">
                 產品編號：＃{product?._id}
@@ -227,10 +226,7 @@ export default function ProductDetails() {
                   >
                     <div className="flex items-center gap-2 text-red-800">
                       <MdError />
-                      <strong className="block font-medium">
-                        {" "}
-                        請先登入{" "}
-                      </strong>
+                      <strong className="block font-medium"> 請先登入 </strong>
                     </div>
 
                     <p className="mt-2 text-sm text-red-700">
@@ -238,11 +234,11 @@ export default function ProductDetails() {
                     </p>
                   </div>
                 )}
-                {product?.reviews?.length > 0 && (
-                  <ListReviews reviews={product?.reviews} />
-                )}
               </div>
-            </div>
+            </div>{" "}
+            {product?.reviews?.length > 0 && (
+              <ListReviews reviews={product?.reviews} />
+            )}
           </div>
         </div>
       </section>

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import StarRatings from 'react-star-ratings';
-import { FaRegHeart } from 'react-icons/fa6';
 import { IoCloseOutline } from 'react-icons/io5';
 import { MdOutlineRateReview } from "react-icons/md";
-import { useSubmitReviewMutation } from '../../redux/api/productsApi';
+import { useCanUserReviewQuery, useSubmitReviewMutation } from '../../redux/api/productsApi';
 import { toast } from "react-hot-toast";
 import Loader from "../layout/Loader";
 import PropTypes from 'prop-types';
@@ -21,6 +20,9 @@ const [comment, setComment] = useState("");
   const [submitReview, { isLoading, error, isSuccess }] =
     useSubmitReviewMutation(); // 使用 submitReview endpoint 的 hook
 
+    const { data } = useCanUserReviewQuery(productId);
+    const canReview = data?.canReview;
+
   useEffect(() => {
     if(error) {
       toast.error(error?.data?.message);
@@ -31,9 +33,20 @@ const [comment, setComment] = useState("");
   }, [error, isSuccess]);
 
   const submitHandler = () => {
-    const reviewData = { rating, comment, productId };
-    submitReview(reviewData); // 提交評論資料
-    setShowReviewModal(false);
+    if (rating === 0 && comment === "") {
+      // 如果rating為0且comment為空，顯示錯誤提示
+      toast.error("請輸入評分和評論後再提交");
+    } else {
+      const reviewData = { rating, comment, productId };
+      submitReview(reviewData) // 提交評論資料
+        .then(() => {
+          setShowReviewModal(false); // 提交成功後設置顯示評論模態視窗為假
+        })
+        .catch((error) => {
+          toast.error("提交評論時發生錯誤:", error);
+          // 在發生錯誤時進行錯誤處理
+        });
+    }
   };
 
   const clearHandler = () => {
@@ -45,15 +58,17 @@ const [comment, setComment] = useState("");
   return (
     <>
       <div className="">
+      {canReview && (
         <button
           className="w-full group inline-block rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-[2px] hover:text-white focus:outline-none focus:ring active:text-opacity-75"
           onClick={() => setShowReviewModal(true)} // 點擊時設置顯示評論模態視窗為真
           type="button"
         >
           <span className="flex justify-center rounded-full bg-white px-8 py-3 text-sm font-medium group-hover:bg-transparent">
-            <FaRegHeart className="h-4 w-4 mx-1" />評 價
+          <i className="fa-regular fa-message h-4 w-4 m-1"></i>{" "}留 下 評 價
           </span>
         </button>
+        )}
         {/* 顯示評論模態視窗的內容 */}
         {showReviewModal && (
           <div

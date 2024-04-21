@@ -2,6 +2,7 @@ import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import Product from "../models/product.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import APIFilters from "../utils/apiFilters.js";
+import Order from "../models/order.js";
 
 // 獲取產品 -> POST /api/v1/products
 export const getProducts = catchAsyncErrors(async (req, res) => {
@@ -29,7 +30,7 @@ export const newProduct = catchAsyncErrors(async (req, res) => {
 });
 // 獲取單一產品 -> GET /api/v1/products/:id
 export const getProductDetails = catchAsyncErrors(async (req, res) => {
-  const product = await Product.findById(req?.params?.id); // 獲取單一產品
+  const product = await Product.findById(req?.params?.id).populate('reviews.user'); // 獲取單一產品
   if (!product) {
     return next(new ErrorHandler("查無此產品", 404));
   }
@@ -108,12 +109,12 @@ export const createProductReview = catchAsyncErrors(async (req, res, next) => {
 
 // 獲取產品評論 -> GET /api/v1/reviews
 export const getProductReviews = catchAsyncErrors(async (req, res, next) => {
-  const product = await Product.findById(req?.query?.id);
+  const product = await Product.findById(req.query.id);
   if (!product) {
-    return next(new ErrorHandler('查無此產品', 404));
+    return next(new ErrorHandler("查無此產品", 404));
   }
   res.status(200).json({
-    reviews: product?.reviews,
+    reviews: product.reviews,
   });
 });
 
@@ -142,5 +143,22 @@ export const deleteReview = catchAsyncErrors(async (req, res, next) => {
   res.status(200).json({
     success: true,
     product,
+  });
+});
+
+// 獲取用戶產品評論 -> GET /api/v1/can_review
+export const canUserReview = catchAsyncErrors(async (req, res) => {
+  // 獲取用戶訂單
+  const orders = await Order.find({
+    user: req.user._id,
+    "orderItems.product": req.query.productId,
+  });
+  // 如果用戶沒有訂單，則不能評論
+  if (orders.length === 0) {
+    return res.status(200).json({ canReview: false });
+  }
+  // 如果用戶有訂單，則可以評論
+  res.status(200).json({
+    canReview: true,
   });
 });

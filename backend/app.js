@@ -19,15 +19,15 @@ connectDatabase();
 
 app.use(
   express.json({
-    limit: "5mb", // 設定限制大小為 5mb
+    limit: "10mb", // 設定限制大小為 10mb
     verify: (req, res, buf) => {
       req.rawBody = buf.toString(); // 使用 req.rawBody 取得請求主體中的原始資料
     },
   })
-); // 使用 express.json() 中介軟體，以解析請求主體中的 JSON 資料  (這裡是解析 req.body) 並設定限制大小為 5mb
+); // 使用 express.json() 中介軟體，以解析請求主體中的 JSON 資料  (這裡是解析 req.body) 並設定限制大小為 10mb
 app.use(
   express.urlencoded({
-    limit: "5mb",
+    limit: "10mb",
     verify: (req, res, buf) => {
       req.rawBody = buf.toString(); // 使用 req.rawBody 取得請求主體中的原始資料
     },

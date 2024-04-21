@@ -21,6 +21,7 @@ export const productApi = createApi({
     }),
     getProductDetails: builder.query({
       query: (id) => `/products/${id}`,
+      providesTags: ["Product"], // 3) 定義提供 tag 的名稱
     }),
     submitReview: builder.mutation({
       query(body) {
@@ -30,7 +31,7 @@ export const productApi = createApi({
           body,
         };
       },
-      invalidatesTags: ["Product"],
+      invalidatesTags: ["Product"], // 4) 定義需要更新的 tag
     }),
     canUserReview: builder.query({
       query: (productId) => `/can_review/?productId=${productId}`,
@@ -43,4 +44,4 @@ export const {
   useGetProductDetailsQuery,
   useSubmitReviewMutation,
   useCanUserReviewQuery,
-} = productApi; // 2) 將 getProducts endpoint 的 hook 匯出
+} = productApi; 
