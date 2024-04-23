@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const productApi = createApi({
   reducerPath: "productApi", // 設定 reducer 的名稱
   baseQuery: fetchBaseQuery({ baseUrl: "/api/v1" }), // 設定 API 的基本路徑
-  tagTypes: ["Product"], // 設定 tag 的類型
+  tagTypes: ["Product", "AdminProducts", "Reviews"], // 設定 tag 的類型
   endpoints: (builder) => ({
     // 1) 定義一個名為 getProducts 的 endpoint
     getProducts: builder.query({
@@ -36,6 +36,20 @@ export const productApi = createApi({
     canUserReview: builder.query({
       query: (productId) => `/can_review/?productId=${productId}`,
     }),
+    getAdminProducts: builder.query({
+      query: () => `/admin/products`,
+      providesTags: ["AdminProducts"],
+    }),
+    createProduct: builder.mutation({
+      query(body) {
+        return {
+          url: "/admin/products",
+          method: "POST",
+          body,
+        };
+      },
+      invalidatesTags: ["AdminProducts"],
+    }),
   }),
 });
 
@@ -44,4 +58,6 @@ export const {
   useGetProductDetailsQuery,
   useSubmitReviewMutation,
   useCanUserReviewQuery,
+  useGetAdminProductsQuery,
+  useCreateProductMutation,
 } = productApi; 

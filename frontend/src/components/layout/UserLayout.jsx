@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import SideMenu from "./SideMenu";
-import { FaUserGear, FaFileImage, FaKey, FaAddressBook } from "react-icons/fa6";
+import { FaUserGear, FaKey, FaAddressBook } from "react-icons/fa6";
 
 const UserLayout = ({ children }) => {
   const menuItems = [

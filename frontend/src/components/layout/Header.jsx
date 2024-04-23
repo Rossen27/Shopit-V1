@@ -6,7 +6,6 @@ import { useLazyLogoutQuery } from "../../redux/api/authApi";
 import { FiShoppingCart } from "react-icons/fi";
 import HeaderCart from "../cart/HeaderCart";
 
-
 export default function Header() {
   const navigate = useNavigate();
 
@@ -87,9 +86,11 @@ export default function Header() {
               <li>
                 <Link to="/me/orders">訂單管理</Link>
               </li>
-              <li>
-                <Link to="/admin/dashboard">管理</Link>
-              </li>
+              {user?.role === "admin" && (
+                <li>
+                  <Link to="/admin/dashboard">後台管理</Link>
+                </li>
+              )}
               {user ? (
                 !isLoading && (
                   <li>

@@ -28,6 +28,7 @@ export const newProduct = catchAsyncErrors(async (req, res) => {
     product,
   });
 });
+
 // 獲取單一產品 -> GET /api/v1/products/:id
 export const getProductDetails = catchAsyncErrors(async (req, res) => {
   const product = await Product.findById(req?.params?.id).populate('reviews.user'); // 獲取單一產品
@@ -36,6 +37,15 @@ export const getProductDetails = catchAsyncErrors(async (req, res) => {
   }
   res.status(200).json({
     product,
+  });
+});
+
+// 獲取產品 - ADMIN   =>  /api/v1/admin/products
+export const getAdminProducts = catchAsyncErrors(async (req, res, next) => {
+  const products = await Product.find();
+
+  res.status(200).json({
+    products,
   });
 });
 

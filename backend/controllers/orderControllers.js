@@ -109,3 +109,87 @@ export const deleteOrder = catchAsyncErrors(async (req, res, next) => {
     success: true,
   });
 });
+
+async function getSalesData(startDate, endDate) {
+  const salesData = await Order.aggregate([
+    {
+      // 1) 過濾日期
+      $match: {
+        createdAt: {
+          $gte: new Date(startDate),
+          $lte: new Date(endDate),
+        },
+      },
+    },
+    {
+      // 2) 將資料分組
+      $group: {
+        _id: {
+          date: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+        },
+        totalSales: { $sum: "$totalAmount" },
+        numOrders: { $sum: 1 }, // 計算訂單數量
+      },
+    },
+  ]);
+  // 建立一個Map來儲存銷售數據和訂單數量數據
+  const salesMap = new Map();
+  let totalSales = 0;
+  let totalNumOrders = 0;
+
+  salesData.forEach((entry) => {
+    const date = entry?._id.date;
+    const sales = entry?.totalSales;
+    const numOrders = entry?.numOrders;
+
+    salesMap.set(date, { sales, numOrders });
+    totalSales += sales;
+    totalNumOrders += numOrders;
+  });
+
+  // 產生開始日期和結束日期之間的日期數組
+  const datesBetween = getDatesBetween(startDate, endDate);
+
+  // 建立最終銷售資料數組，其中沒有銷售的日期為 0
+  const finalSalesData = datesBetween.map((date) => ({
+    date,
+    sales: (salesMap.get(date) || { sales: 0 }).sales,
+    numOrders: (salesMap.get(date) || { numOrders: 0 }).numOrders,
+  }));
+
+  return { salesData: finalSalesData, totalSales, totalNumOrders };
+}
+
+//
+function getDatesBetween(startDate, endDate) {
+  const dates = [];
+  let currentDate = new Date(startDate);
+
+  while (currentDate <= new Date(endDate)) {
+    const formattedDate = currentDate.toISOString().split("T")[0];
+    dates.push(formattedDate);
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+
+  return dates;
+}
+
+// 管理員功能 => 取得訂單統計 => /api/v1/admin/get_sales
+export const getSales = catchAsyncErrors(async (req, res, next) => {
+  const startDate = new Date(req.query.startDate); // 從前端取得開始日期
+  const endDate = new Date(req.query.endDate); // 從前端取得結束日期
+
+  startDate.setUTCHours(0, 0, 0, 0); // 設定開始日期時間
+  endDate.setUTCHours(23, 59, 59, 999); // 設定結束日期時間
+
+  const { salesData, totalSales, totalNumOrders } = await getSalesData(
+    startDate,
+    endDate
+  );
+
+  res.status(200).json({
+    totalSales,
+    totalNumOrders,
+    sales: salesData,
+  });
+});
