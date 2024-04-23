@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import AdminLayout from "../layout/AdminLayout";
 import dayjs from "dayjs";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
@@ -108,7 +109,7 @@ const Dashboard = () => {
           <div className="h-32 rounded-lg">
             <article className="flex items-end justify-between rounded-lg border border-gray-100 bg-gray-100 p-6">
               <div className="flex items-center gap-4">
-                <span className="hidden rounded-full bg-sky-600 p-2 text-gray-600 sm:block">
+                <span className="hidden rounded-full bg-sky-600 p-2 text-gray-100 sm:block">
                   <i className="fa-solid fa-money-bills"></i>
                 </span>
 
@@ -132,7 +133,7 @@ const Dashboard = () => {
           <div className="h-32 rounded-lg">
             <article className="flex items-end justify-between rounded-lg border border-gray-100 bg-gray-100 p-6">
               <div className="flex items-center gap-4">
-                <span className="hidden rounded-full bg-rose-600  p-2 text-gray-600 sm:block">
+                <span className="hidden rounded-full bg-rose-600  p-2 text-gray-100 sm:block">
                   <i className="fa-solid fa-comments-dollar"></i>
                 </span>
 
