@@ -153,10 +153,9 @@ const Dashboard = () => {
             </article>
           </div>
         </div>
-        <div className="flex justify-center">
-          <SalesChart salesData={data?.sales} />
+        <div className="flex justify-center w-auto h-1/2">
+          <SalesChart salesData={data?.sales} className="" />
         </div>
-        <div className="mb-20"></div>
       </AdminLayout>
     </>
   );

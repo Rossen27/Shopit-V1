@@ -179,8 +179,8 @@ export const getSales = catchAsyncErrors(async (req, res, next) => {
   const startDate = new Date(req.query.startDate); // 從前端取得開始日期
   const endDate = new Date(req.query.endDate); // 從前端取得結束日期
 
-  startDate.setHours(0, 0, 0, 0); // 設定開始日期時間
-  endDate.setHours(23, 59, 59, 999); // 設定結束日期時間
+  startDate.setUTCHours(0, 0, 0, 0); // 設定開始日期時間
+  endDate.setUTCHours(23, 59, 59, 999); // 設定結束日期時間
 
   const { salesData, totalSales, totalNumOrders } = await getSalesData(
     startDate,
