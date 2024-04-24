@@ -158,7 +158,7 @@ const UpdateProduct = () => {
                       value={category}
                       onChange={onChange}
                     >
-                      <option disabled selected value="">
+                      <option disabled defaultValue="">
                         請選擇商品類別
                       </option>
                       {PRODUCT_CATEGORIES?.map((category) => (
