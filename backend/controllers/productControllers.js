@@ -3,6 +3,7 @@ import Product from "../models/product.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import APIFilters from "../utils/apiFilters.js";
 import Order from "../models/order.js";
+import { upload_file } from "../utils/cloudinary.js";
 
 // 獲取產品 -> POST /api/v1/products
 export const getProducts = catchAsyncErrors(async (req, res) => {
@@ -31,7 +32,9 @@ export const newProduct = catchAsyncErrors(async (req, res) => {
 
 // 獲取單一產品 -> GET /api/v1/products/:id
 export const getProductDetails = catchAsyncErrors(async (req, res) => {
-  const product = await Product.findById(req?.params?.id).populate('reviews.user'); // 獲取單一產品
+  const product = await Product.findById(req?.params?.id).populate(
+    "reviews.user"
+  ); // 獲取單一產品
   if (!product) {
     return next(new ErrorHandler("查無此產品", 404));
   }
@@ -58,6 +61,52 @@ export const updateProduct = catchAsyncErrors(async (req, res) => {
   product = await Product.findByIdAndUpdate(req?.params?.id, req.body, {
     new: true,
   }); // 更新產品
+
+  res.status(200).json({
+    product,
+  });
+});
+
+// 更新產品圖片 -> PUT /api/v1/admin/products/:id/upload_images
+export const uploadProductImages = catchAsyncErrors(async (req, res) => {
+  let product = await Product.findById(req?.params?.id); // 獲取單一產品
+  // 如果沒有產品，則返回錯誤
+  if (!product) {
+    return next(new ErrorHandler("查無此產品", 404));
+  }
+  // 上傳圖片
+  const uploader = async (image) => upload_file(image, "shopit/products");
+
+  // 獲取所有圖片的 URL
+  const urls = await Promise.all((req?.body?.images).map(uploader));
+
+  // 更新產品圖片
+  product?.images?.push(...urls);
+  await product?.save();
+
+  res.status(200).json({
+    product,
+  });
+});
+
+// 刪除產品圖片 -> DELETE /api/v1/admin/products/:id/delete_image
+export const deleteProductImage = catchAsyncErrors(async (req, res) => {
+  let product = await Product.findById(req?.params?.id); // 獲取單一產品
+  // 如果沒有產品，則返回錯誤
+  if (!product) {
+    return next(new ErrorHandler("查無此產品", 404));
+  }
+  // 刪除圖片
+  const isDeleted = await delete_file(req.body.imgId);
+
+  // 更新產品圖片
+  if (isDeleted) {
+    product.images = product?.images?.filter(
+      (img) => img.public_id !== req.body.imgId
+    );
+
+    await product?.save();
+  }
 
   res.status(200).json({
     product,
@@ -132,7 +181,7 @@ export const getProductReviews = catchAsyncErrors(async (req, res, next) => {
 export const deleteReview = catchAsyncErrors(async (req, res, next) => {
   let product = await Product.findById(req.query.productId);
   if (!product) {
-    return next(new ErrorHandler('查無此產品', 404));
+    return next(new ErrorHandler("查無此產品", 404));
   }
   const reviews = product?.reviews?.filter(
     // (review) => review.user.toString() === req.user._id.toString()
