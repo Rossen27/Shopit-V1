@@ -5,6 +5,7 @@ import ListProducts from "../admin/ListProducts.jsx";
 import NewProduct from "../admin/NewProduct.jsx";
 import UpdateProduct from "../admin/UpdateProduct.jsx";
 import UploadImages from "../admin/UploadImages";
+import ListOrders from "../admin/ListOrders.jsx";
 
 const adminRoutes = () => {
   return (
@@ -46,6 +47,14 @@ const adminRoutes = () => {
         element={
           <ProtectedRoute admin={true}>
             <UploadImages />
+          </ProtectedRoute>
+        }
+      />
+            <Route
+        path="/admin/orders"
+        element={
+          <ProtectedRoute admin={true}>
+            <ListOrders />
           </ProtectedRoute>
         }
       />

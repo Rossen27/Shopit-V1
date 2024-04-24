@@ -23,9 +23,9 @@ const MyOrders = () => {
 
     if (orderSuccess) {
       dispatch(clearCart());
-      navigate("/me/orders?order_success=true");
+      navigate("/me/orders");
     }
-  }, [error, orderSuccess]);
+  }, [error, orderSuccess, dispatch, navigate]);
 
   const setOrders = () => {
     const orders = [];
