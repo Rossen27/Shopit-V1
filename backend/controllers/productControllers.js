@@ -1,9 +1,9 @@
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import Product from "../models/product.js";
-import ErrorHandler from "../utils/errorHandler.js";
-import APIFilters from "../utils/apiFilters.js";
 import Order from "../models/order.js";
-import { upload_file } from "../utils/cloudinary.js";
+import APIFilters from "../utils/apiFilters.js";
+import ErrorHandler from "../utils/errorHandler.js";
+import { delete_file, upload_file } from "../utils/cloudinary.js";
 
 // 獲取產品 -> POST /api/v1/products
 export const getProducts = catchAsyncErrors(async (req, res) => {
@@ -118,6 +118,10 @@ export const deleteProduct = catchAsyncErrors(async (req, res) => {
   const product = await Product.findById(req?.params?.id); // 獲取單一產品
   if (!product) {
     return next(new ErrorHandler("查無此產品", 404));
+  }
+  // 刪除所有圖片
+  for (let i = 0; i < product?.images?.length; i++) {
+    await delete_file(product?.images[i].public_id);
   }
 
   await product.deleteOne(); // 刪除產品

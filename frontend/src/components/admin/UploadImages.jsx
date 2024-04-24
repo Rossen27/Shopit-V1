@@ -125,7 +125,7 @@ const UploadImages = () => {
                 className="text-gray-600 hover:text-gray-700"
               >
                 <span className="sr-only">選擇圖片</span>
-                <i className="fa-regular fa-image"></i>
+                {/* <i className="fa-regular fa-image"></i> */}
               </button>
             </span>
             {imagesPreview?.length > 0 && (

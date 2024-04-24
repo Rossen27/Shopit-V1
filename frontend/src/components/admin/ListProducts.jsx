@@ -1,17 +1,44 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Loader from "../layout/Loader";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import MetaData from "../layout/MetaData";
 import { useTable } from "react-table";
-import { useGetAdminProductsQuery } from "../../redux/api/productsApi";
+import {
+  useDeleteProductMutation,
+  useGetAdminProductsQuery,
+} from "../../redux/api/productsApi";
 import AdminLayout from "../layout/AdminLayout";
 
 const ListProducts = () => {
-  const { data: productsData, isLoading, error, refetch } = useGetAdminProductsQuery();
+  const {
+    data: productsData,
+    isLoading,
+    error,
+    refetch,
+  } = useGetAdminProductsQuery();
 
+  const [
+    deleteProduct,
+    { isLoading: isDeleteLoading, error: deleteError, isSuccess },
+  ] = useDeleteProductMutation();
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error?.data?.message);
+    }
+
+    if (deleteError) {
+      toast.error(deleteError?.data?.message);
+    }
+
+    if (isSuccess) {
+      toast.success("商品刪除成功");
+    }
+  }, [error, deleteError, isSuccess]);
+  
   useMemo(() => {
     if (error) {
       toast.error(error?.data?.message);
@@ -43,6 +70,8 @@ const ListProducts = () => {
               <button
                 className="inline-block p-3 text-gray-700 hover:bg-gray-50 hover:text-red-700 focus:relative"
                 title="Delete Product"
+                onClick={() => deleteProductHandler(product?._id)}
+                disabled={isDeleteLoading}
               >
                 <i className="fa-regular fa-trash-alt"></i>
               </button>
@@ -101,6 +130,10 @@ const ListProducts = () => {
 
   const handlePrevPage = () => {
     setPageIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+  };
+
+  const deleteProductHandler = (id) => {
+    deleteProduct(id);
   };
 
   if (isLoading) return <Loader />;
