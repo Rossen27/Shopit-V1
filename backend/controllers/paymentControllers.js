@@ -11,25 +11,15 @@ export const stripeCheckoutSession = catchAsyncErrors(
     // 2) 設定運費
     const body = req?.body;
 
-    const shipping_rate =
-      body?.itemsPrice >= 2000
-        ? "shr_1P62VMCq5oWqyU7yu0KL9qhd"
-        : "shr_1P62UkCq5oWqyU7yYkXA0y3x";
-
-    // 5) 設定送貨地址
-    const shippingInfo = body?.shippingInfo;
-
     // 3) 設定商品
-    const line_items = body?.orderItems.map((item) => {
+    const line_items = body?.orderItems?.map((item) => {
       return {
         price_data: {
           currency: "twd",
           product_data: {
             name: item?.name,
             images: [item?.image],
-            metadata: {
-              productId: item?.product,
-            },
+            metadata: { productId: item?.product },
           },
           unit_amount: item?.price * 100, // 金額
         },
@@ -37,6 +27,15 @@ export const stripeCheckoutSession = catchAsyncErrors(
         quantity: item?.quantity, // 數量
       };
     });
+
+    // 5) 設定送貨地址
+    const shippingInfo = body?.shippingInfo;
+
+    const shipping_rate =
+      body?.itemsPrice >= 2000
+        ? "shr_1P62VMCq5oWqyU7yu0KL9qhd"
+        : "shr_1P62UkCq5oWqyU7yYkXA0y3x";
+
 
     // 4) 紀錄客戶資訊、金額、訂單資訊、付款方式等等
     const session = await stripe.checkout.sessions.create({
@@ -66,23 +65,29 @@ export const stripeCheckoutSession = catchAsyncErrors(
 // 設定 Stripe Webhook，用來接收付款成功後的建立新的訂單 => /api/v1/payment/webhook
 
 const getOrderItems = async (line_items) => {
-  return new Promise(async (resolve, reject) => {
-    const cartItems = [];
+  return new Promise((resolve, reject) => {
+    let cartItems = [];
 
-    for (const item of line_items.data) {
+    line_items?.data?.forEach(async (item) => {
       const product = await stripe.products.retrieve(item.price.product);
       const productId = product.metadata.productId;
+
       cartItems.push({
         product: productId,
         name: product.name,
-        quantity: item.quantity,
         price: item.price.unit_amount_decimal / 100,
+        quantity: item.quantity,
         image: product.images[0],
       });
-    }
+
+      if (cartItems.length === line_items?.data?.length) {
+        resolve(cartItems);
+      }
+    });
   });
 };
 
+// 付款後建立新訂單 ->  /api/v1/payment/webhook
 export const stripeWebhook = catchAsyncErrors(async (req, res, next) => {
   try {
     const signature = req.headers["stripe-signature"]; // 取得簽名

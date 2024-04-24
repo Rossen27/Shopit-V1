@@ -165,25 +165,6 @@ const Cart = () => {
                             </dd>
                           </div>
 
-                          {/* <div className="flex justify-between">
-                            <dt>小計</dt>
-                            <dd>
-                              ${" "}
-                              {cartItems
-                                ?.reduce(
-                                  (acc, item) =>
-                                    acc + item?.quantity * item.price,
-                                  0
-                                )
-                                .toFixed(2)}
-                            </dd>
-                          </div>
-
-                          <div className="flex justify-between">
-                            <dt>折扣</dt>
-                            <dd>-£20</dd>
-                          </div> */}
-
                           <div className="flex justify-between !text-base font-medium">
                             <dt>總金額</dt>
                             <dd>

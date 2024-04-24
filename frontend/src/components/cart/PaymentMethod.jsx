@@ -19,17 +19,18 @@ const PaymentMethod = () => {
 
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
 
-  const [createNewOrder, { error, isSuccess }] =
-    useCreateNewOrderMutation();
+  const [createNewOrder, { error, isSuccess }] = useCreateNewOrderMutation();
 
-  const [stripeCheckoutSession, { data: checkoutData, error: checkoutError, isLoading }] =
-    useStripeCheckoutSessionMutation();
+  const [
+    stripeCheckoutSession,
+    { data: checkoutData, error: checkoutError, isLoading },
+  ] = useStripeCheckoutSessionMutation();
 
   useEffect(() => {
     if (checkoutData) {
-      window.location.href =  checkoutData?.url;
+      window.location.href = checkoutData?.url;
     }
-    if(checkoutError){
+    if (checkoutError) {
       toast.error(checkoutError?.data?.message);
     }
   }, [checkoutData, checkoutError]);
@@ -73,10 +74,11 @@ const PaymentMethod = () => {
         shippingInfo,
         orderItems: cartItems,
         itemsPrice,
-        taxAmount: taxPrice,
         shippingAmount: shippingPrice,
+        taxAmount: taxPrice,
         totalAmount: totalPrice,
       };
+
       stripeCheckoutSession(orderData);
     }
   };
@@ -114,11 +116,11 @@ const PaymentMethod = () => {
                 <p className="text-gray-700">信用卡</p>
                 <p className="text-gray-500">VISA, MasterCard, JCB</p>
                 <input
+                  className="sr-only"
                   type="radio"
-                  value="Card"
                   name="payment_mode"
                   id="cardradio"
-                  className="sr-only"
+                  value="Card"
                   onChange={(e) => setMethod("Card")}
                 />
               </label>
