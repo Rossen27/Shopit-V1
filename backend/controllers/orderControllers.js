@@ -75,18 +75,29 @@ export const updateOrder = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("查無此筆訂單", 404));
   }
   // 2) 更新訂單狀態
-  if (order?.orderStatus === "Delivered") {
+  if (order?.orderStatus === "已送達") {
     return next(new ErrorHandler("此筆訂單已送達，無法變更狀態", 400));
   }
+
+  let productNotFound = false;
+
   // 3) 商品庫存更新
-  for (const item of order?.orderItems) {
+  for (const item of order.orderItems) {
     const product = await Product.findById(item?.product?.toString());
     if (!product) {
-      return next(new ErrorHandler("查無此商品", 404));
+      productNotFound = true;
+      break;
     }
     product.stock = product.stock - item.quantity;
-    await product.save({ validateBeforeSave: false }); // 關閉驗證
+    await product.save({ validateBeforeSave: false });
   }
+
+  if (productNotFound) {
+    return next(
+      new ErrorHandler("查無此商品", 404)
+    );
+  }
+  
   order.orderStatus = req.body.status; // 已付款、已送達
   order.deliveredAt = Date.now(); // 送達時間
   await order.save();

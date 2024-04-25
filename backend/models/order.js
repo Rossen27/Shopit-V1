@@ -108,8 +108,6 @@ const orderSchema = new mongoose.Schema(
           "處理中", // 處理中
           "已出貨", // 已出貨
           "已送達", // 已送達
-          "已付款", // 已付款
-          "已取消", // 已取消
         ],
         message: "請選擇訂單狀態",
       },

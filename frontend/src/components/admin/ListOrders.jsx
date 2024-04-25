@@ -7,21 +7,32 @@ import { Link } from "react-router-dom";
 import MetaData from "../layout/MetaData";
 import { useTable } from "react-table";
 import AdminLayout from "../layout/AdminLayout";
-import { useGetAdminOrdersQuery } from "../../redux/api/orderApi";
+import { useDeleteOrderMutation, useGetAdminOrdersQuery } from "../../redux/api/orderApi";
 
 const ListProducts = () => {
   const {
     data: ordersData,
     isLoading,
     error,
-    refetch,
   } = useGetAdminOrdersQuery();
+
+  const [
+    deleteOrder,
+    { error: deleteError, isLoading: isDeleteLoading, isSuccess },
+  ] = useDeleteOrderMutation();
 
   useEffect(() => {
     if (error) {
       toast.error(error?.data?.message);
     }
-  }, [error]);
+    if (deleteError) {
+      toast.error(deleteError?.data?.message);
+    }
+
+    if (isSuccess) {
+      toast.success("Order Deleted");
+    }
+  }, [error, deleteError, isSuccess]);
 
   useMemo(() => {
     if (error) {
@@ -39,12 +50,10 @@ const ListProducts = () => {
       const orderStatus = order?.orderStatus;
       const orderStatusText =
         orderStatus === "處理中"
-          ? "text-yellow-500"
-          : orderStatus === "已付款" ||
-            orderStatus === "已完成" ||
-            orderStatus === "已送達"
-          ? "text-green-500"
-          : "text-red-500";
+        ? "text-yellow-500"
+        : orderStatus === "已送達"
+        ? "text-green-500"
+        : "text-sky-500";
       orders.push({
         id: order?._id,
         paymentStatus: <span className={statusColor}>{statusText}</span>,
@@ -63,8 +72,8 @@ const ListProducts = () => {
               <button
                 className="inline-block p-3 text-gray-700 hover:bg-gray-50 hover:text-red-700 focus:relative"
                 title="Delete Order"
-                // onClick={() => deleteProductHandler(order?._id)}
-                // disabled={isDeleteLoading}
+                onClick={() => deleteOrderHandler(order?._id)}
+                disabled={isDeleteLoading}
               >
                 <i className="fa-regular fa-trash-alt"></i>
               </button>
@@ -125,9 +134,9 @@ const ListProducts = () => {
     setPageIndex((prevIndex) => Math.max(prevIndex - 1, 0));
   };
 
-  // const deleteProductHandler = (id) => {
-  //   deleteProduct(id);
-  // };
+  const deleteOrderHandler = (id) => {
+    deleteOrder(id);
+  };
 
   if (isLoading) return <Loader />;
 
