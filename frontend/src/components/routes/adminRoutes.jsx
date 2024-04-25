@@ -7,6 +7,8 @@ import UpdateProduct from "../admin/UpdateProduct.jsx";
 import UploadImages from "../admin/UploadImages";
 import ListOrders from "../admin/ListOrders.jsx";
 import ProcessOrder from "../admin/ProcessOrder.jsx";
+import ListUsers from "../admin/ListUsers.jsx";
+import UpdateUser from "../admin/UpdateUser.jsx";
 
 const adminRoutes = () => {
   return (
@@ -64,6 +66,22 @@ const adminRoutes = () => {
         element={
           <ProtectedRoute admin={true}>
             <ProcessOrder />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/users"
+        element={
+          <ProtectedRoute admin={true}>
+            <ListUsers />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/users/:id"
+        element={
+          <ProtectedRoute admin={true}>
+            <UpdateUser />
           </ProtectedRoute>
         }
       />
