@@ -59,9 +59,6 @@ const UpdateProfile = () => {
             className="mb-0 mt-6 space-y-4 p-4 sm:p-6 lg:p-8"
             onSubmit={submitHandler}
           >
-            {/* <p className="text-center text-lg font-medium">
-              Sign in to your account
-            </p> */}
 
             <div>
               <label htmlFor="email_name" className="sr-only">

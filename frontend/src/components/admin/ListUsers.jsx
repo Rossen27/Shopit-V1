@@ -7,19 +7,19 @@ import { Link } from "react-router-dom";
 import MetaData from "../layout/MetaData";
 import { useTable } from "react-table";
 import AdminLayout from "../layout/AdminLayout";
-import { useDeleteOrderMutation, useGetAdminOrdersQuery } from "../../redux/api/orderApi";
+import { useDeleteUserMutation, useGetAdminUsersQuery } from "../../redux/api/userApi";
 
-const ListProducts = () => {
+const ListUsers = () => {
   const {
-    data: ordersData,
+    data: usersData,
     isLoading,
     error,
-  } = useGetAdminOrdersQuery();
+  } = useGetAdminUsersQuery();
 
   const [
-    deleteOrder,
+    deleteUser,
     { error: deleteError, isLoading: isDeleteLoading, isSuccess },
-  ] = useDeleteOrderMutation();
+  ] = useDeleteUserMutation();
 
   useEffect(() => {
     if (error) {
@@ -30,7 +30,7 @@ const ListProducts = () => {
     }
 
     if (isSuccess) {
-      toast.success("Order Deleted");
+      toast.success("用戶已刪除");
     }
   }, [error, deleteError, isSuccess]);
 
@@ -40,31 +40,20 @@ const ListProducts = () => {
     }
   }, [error]);
 
-  const setOrders = () => {
-    const orders = [];
-    ordersData?.orders?.forEach((order) => {
-      const paymentStatus = order?.paymentInfo?.status;
-      const isPaid = paymentStatus === "paid";
-      const statusText = isPaid ? "已付款" : "尚未付款";
-      const statusColor = isPaid ? "text-green-500" : "text-red-500";
-      const orderStatus = order?.orderStatus;
-      const orderStatusText =
-        orderStatus === "處理中"
-        ? "text-yellow-500"
-        : orderStatus === "已送達"
-        ? "text-green-500"
-        : "text-sky-500";
-      orders.push({
-        id: order?._id,
-        paymentStatus: <span className={statusColor}>{statusText}</span>,
-        orderStatus: (
-          <span className={orderStatusText}>{order?.orderStatus}</span>
-        ),
+  const setUsers = () => {
+    const users = [];
+    usersData?.users?.forEach((user) => {
+      const role = user?.role === "admin" ? "管理員" : "一般會員";
+      users.push({
+        id: user?._id,
+        name: user?.name,
+        email: user?.email,
+        role: role,
         actions: (
           <>
             <td className="inline-flex overflow-hidden rounded-md border bg-white shadow-sm">
               <Link
-                to={`/admin/orders/${order?._id}`}
+                to={`/admin/users/${user?._id}`}
                 className="inline-block border-e p-3 text-gray-700 hover:bg-gray-50 hover:text-sky-700 focus:relative"
               >
                 <i className="fa-regular fa-pen-to-square h-4 w-4"></i>
@@ -72,7 +61,7 @@ const ListProducts = () => {
               <button
                 className="inline-block p-3 text-gray-700 hover:bg-gray-50 hover:text-red-700 focus:relative"
                 title="Delete Order"
-                onClick={() => deleteOrderHandler(order?._id)}
+                onClick={() => deleteUserHandler(user?._id)}
                 disabled={isDeleteLoading}
               >
                 <i className="fa-regular fa-trash-alt"></i>
@@ -82,24 +71,29 @@ const ListProducts = () => {
         ),
       });
     });
-    return orders;
+    return users;
   };
 
   const columns = useMemo(
     () => [
       {
-        Header: "商品編號",
+        Header: "會員編號",
         accessor: "id",
+        sortType: "alphanumeric", // 排序方式
+      },
+      {
+        Header: "會員名稱",
+        accessor: "name",
         sortType: "alphanumeric",
       },
       {
-        Header: "付款狀態",
-        accessor: "paymentStatus",
+        Header: "電子郵件",
+        accessor: "email",
         sortType: "alphanumeric",
       },
       {
-        Header: "訂單狀態",
-        accessor: "orderStatus",
+        Header: "帳號權限",
+        accessor: "role",
         sortType: "alphanumeric",
       },
       {
@@ -111,7 +105,7 @@ const ListProducts = () => {
     []
   );
 
-  const data = useMemo(() => setOrders(), [ordersData]);
+  const data = useMemo(() => setUsers(), [usersData]);
 
   const pageSize = 5; // 每頁顯示的資料筆數
   const [pageIndex, setPageIndex] = useState(0);
@@ -134,19 +128,19 @@ const ListProducts = () => {
     setPageIndex((prevIndex) => Math.max(prevIndex - 1, 0));
   };
 
-  const deleteOrderHandler = (id) => {
-    deleteOrder(id);
+  const deleteUserHandler = (id) => {
+    deleteUser(id);
   };
 
   if (isLoading) return <Loader />;
 
   return (
     <AdminLayout>
-      <MetaData title={"訂單明細"} />
+      <MetaData title={"會員管理"} />
       <div className="flex justify-center items-center m-3">
         <div className="w-10/12 bg-white p-6 rounded-lg">
           <h1 className="text-center text-3xl font-semibold">
-            {ordersData?.orders?.length} 筆商品
+            帳號總數：{usersData?.users?.length}
           </h1>
           <div className="overflow-x-auto">
             <table
@@ -249,4 +243,4 @@ const ListProducts = () => {
   );
 };
 
-export default ListProducts;
+export default ListUsers;

@@ -1,5 +1,5 @@
 import MetaData from "../layout/MetaData";
-import { MdWork, MdPhoneEnabled, MdLocalPrintshop } from "react-icons/md";
+import { MdLocalPrintshop } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import { useOrderDetailsQuery } from "../../redux/api/orderApi";
 import Loader from "../layout/Loader";
@@ -199,12 +199,12 @@ const Invoice = () => {
               </table>
               <div className="flex border-b border border-dashed justify-end text-left"></div>
               <div className="py-4 justify-center items-center flex flex-col gap-2">
-                <p className="flex gap-2">
+                {/* <p className="flex gap-2">
                   <MdWork /> info@example.com
                 </p>
                 <p className="flex gap-2">
                   <MdPhoneEnabled /> +234XXXXXXXX
-                </p>
+                </p> */}
               </div>
             </div>
           </div>

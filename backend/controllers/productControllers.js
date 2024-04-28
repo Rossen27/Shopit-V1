@@ -172,7 +172,7 @@ export const createProductReview = catchAsyncErrors(async (req, res, next) => {
 
 // 獲取產品評論 -> GET /api/v1/reviews
 export const getProductReviews = catchAsyncErrors(async (req, res, next) => {
-  const product = await Product.findById(req.query.id);
+  const product = await Product.findById(req.query.id).populate('reviews.user');
   if (!product) {
     return next(new ErrorHandler("查無此產品", 404));
   }

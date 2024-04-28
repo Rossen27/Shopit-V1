@@ -6,6 +6,10 @@ import NewProduct from "../admin/NewProduct.jsx";
 import UpdateProduct from "../admin/UpdateProduct.jsx";
 import UploadImages from "../admin/UploadImages";
 import ListOrders from "../admin/ListOrders.jsx";
+import ProcessOrder from "../admin/ProcessOrder.jsx";
+import ListUsers from "../admin/ListUsers.jsx";
+import UpdateUser from "../admin/UpdateUser.jsx";
+import ProductReviews from "../admin/ProductReviews.jsx";
 
 const adminRoutes = () => {
   return (
@@ -50,11 +54,43 @@ const adminRoutes = () => {
           </ProtectedRoute>
         }
       />
-            <Route
+      <Route
         path="/admin/orders"
         element={
           <ProtectedRoute admin={true}>
             <ListOrders />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/orders/:id"
+        element={
+          <ProtectedRoute admin={true}>
+            <ProcessOrder />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/users"
+        element={
+          <ProtectedRoute admin={true}>
+            <ListUsers />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/users/:id"
+        element={
+          <ProtectedRoute admin={true}>
+            <UpdateUser />
+          </ProtectedRoute>
+        }
+      />
+            <Route
+        path="/admin/reviews"
+        element={
+          <ProtectedRoute admin={true}>
+            <ProductReviews />
           </ProtectedRoute>
         }
       />

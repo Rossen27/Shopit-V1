@@ -117,7 +117,7 @@ export const uploadAvatar = catchAsyncErrors(async (req, res, next) => {
   }
 
   const user = await User.findByIdAndUpdate(req?.user?._id, {
-    avatar: avatarResponse.url,
+    avatar: avatarResponse,
   }); // 更新用戶資料
 
   res.status(200).json({
@@ -300,6 +300,9 @@ export const deleteUser = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler(`找不到ID為 ${req.params.id} 的用戶`, 404));
   }
   // 刪除用戶圖片
+  if (user.avatar?.public_id) {
+    await delete_file(user.avatar?.public_id);
+  }
 
   await user.deleteOne(); // 刪除單一用戶
 
