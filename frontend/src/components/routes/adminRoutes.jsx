@@ -9,6 +9,7 @@ import ListOrders from "../admin/ListOrders.jsx";
 import ProcessOrder from "../admin/ProcessOrder.jsx";
 import ListUsers from "../admin/ListUsers.jsx";
 import UpdateUser from "../admin/UpdateUser.jsx";
+import ProductReviews from "../admin/ProductReviews.jsx";
 
 const adminRoutes = () => {
   return (
@@ -82,6 +83,14 @@ const adminRoutes = () => {
         element={
           <ProtectedRoute admin={true}>
             <UpdateUser />
+          </ProtectedRoute>
+        }
+      />
+            <Route
+        path="/admin/reviews"
+        element={
+          <ProtectedRoute admin={true}>
+            <ProductReviews />
           </ProtectedRoute>
         }
       />
