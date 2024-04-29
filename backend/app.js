@@ -55,12 +55,12 @@ app.use("/api/v1", orderRoutes); // 使用訂單路由
 app.use("/api/v1", paymentRoutes); // 使用付款路由
 
 if (process.env.NODE_ENV === "PRODUCTION") {
-  app.use(express.static(path.join(__dirname, "../frontend/build"))); // 使用 express.static() 中介軟體，以提供靜態檔案 (這裡是提供前端檔案)
+  app.use(express.static(path.join(__dirname, "../frontend/dist"))); // 使用 express.static() 中介軟體，以提供靜態檔案 (這裡是提供前端檔案)
 
   // file deepcode ignore NoRateLimitingForExpensiveWebOperation: <please specify a reason of ignoring this>
   // deepcode ignore NoRateLimitingForExpensiveWebOperation: <please specify a reason of ignoring this>
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../frontend/build/index.html")); // 使用 res.sendFile() 方法，以發送檔案 (這裡是發送 index.html)
+    res.sendFile(path.resolve(__dirname, "frontend","dist","index.html")); // 使用 res.sendFile() 方法，以發送檔案 (這裡是發送 index.html)
   });
 }
 
