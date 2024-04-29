@@ -7,6 +7,7 @@ import { useEffect, useRef } from "react";
 import { toast } from "react-hot-toast";
 import { toPng } from 'dom-to-image';
 import pdfMake from 'pdfmake/build/pdfmake';
+import invoiceLogo from "../../assets/images/shopit_logo_black.png";
 // import { pdfFonts } from 'pdfmake/build/vfs_fonts';
 
 // // 設置 pdfMake 使用的字體
@@ -59,7 +60,7 @@ const Invoice = () => {
           </div>
           <div id="order_invoice" ref={invoiceRef}>
             <img
-              src="../../assets/images/shopit_logo_black.png"
+              src={invoiceLogo}
               alt="Logo"
               className="mx-auto py-4 w-1/4"
             />
