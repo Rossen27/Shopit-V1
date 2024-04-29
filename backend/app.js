@@ -18,7 +18,9 @@ process.on("uncaughtException", (err) => {
 });
 
 // 設定 .env 檔案的路徑
-dotenv.config({ path: "backend/config/config.env" }); // 使用 dotenv.config() 方法，並指定 .env 檔案的路徑
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  dotenv.config({ path: "backend/config/config.env" }); // 使用 dotenv.config() 方法，並指定 .env 檔案的路徑
+}
 // 引入資料庫連接模組
 connectDatabase();
 
@@ -53,12 +55,12 @@ app.use("/api/v1", orderRoutes); // 使用訂單路由
 app.use("/api/v1", paymentRoutes); // 使用付款路由
 
 if (process.env.NODE_ENV === "PRODUCTION") {
-  app.use(express.static(path.join(__dirname, "../frontend/build"))); // 使用 express.static() 中介軟體，以提供靜態檔案 (這裡是提供前端檔案)
+  app.use(express.static(path.join(__dirname, "../frontend/dist"))); // 使用 express.static() 中介軟體，以提供靜態檔案 (這裡是提供前端檔案)
 
   // file deepcode ignore NoRateLimitingForExpensiveWebOperation: <please specify a reason of ignoring this>
   // deepcode ignore NoRateLimitingForExpensiveWebOperation: <please specify a reason of ignoring this>
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../frontend/build/index.html")); // 使用 res.sendFile() 方法，以發送檔案 (這裡是發送 index.html)
+    res.sendFile(path.resolve(__dirname, "frontend","dist","index.html")); // 使用 res.sendFile() 方法，以發送檔案 (這裡是發送 index.html)
   });
 }
 
