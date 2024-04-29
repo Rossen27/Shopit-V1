@@ -6,6 +6,7 @@ import { useLazyLogoutQuery } from "../../redux/api/authApi";
 import { FiShoppingCart } from "react-icons/fi";
 import HeaderCart from "../cart/HeaderCart";
 import avatar from "../../assets/images/default_avatar.jpg";
+import headerLogo from "../../assets/images/shopit_logo.png";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ export default function Header() {
         <div className="flex">
           <Link to="/" className="bg-auto md:bg-contain">
             <img
-              src="../assets/images/shopit_logo.png"
+              src={headerLogo}
               alt=""
               className="w-auto h-10 cursor-pointer text-gray-600"
             />
