@@ -59,7 +59,7 @@ const Invoice = () => {
           </div>
           <div id="order_invoice" ref={invoiceRef}>
             <img
-              src="../assets/images/shopit_logo_black.png"
+              src="../../assets/images/shopit_logo_black.png"
               alt="Logo"
               className="mx-auto py-4 w-1/4"
             />
