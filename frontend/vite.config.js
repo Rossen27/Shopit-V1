@@ -6,10 +6,10 @@ import svgr from 'vite-plugin-svgr';
 export default defineConfig({
   plugins: [react(), svgr()],
   server: {
-    // port: 8080,
+    port: 8080,
     proxy: {
       "/api": {
-        target: "http://localhost:10000", // 這裡是後端的 port
+        target: "http://localhost:3000", // 這裡是後端的 port
         secure: false, // 若後端是 https 則設為 true
       },
     },
