@@ -9,7 +9,7 @@ export default defineConfig({
     port: 8080,
     proxy: {
       "/api": {
-        target: "http://localhost:3000", // 這裡是後端的 port
+        target: "http://localhost:4000", // 這裡是後端的 port
         secure: false, // 若後端是 https 則設為 true
       },
     },
