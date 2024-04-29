@@ -67,7 +67,7 @@ export default function Header() {
                   <img src={user.avatar} className="rounded-circle" />
                 ) : (
                   <img
-                    src="/images/default_avatar.jpg"
+                    src="../../assets/images/default_avatar.jpg"
                     className="rounded-circle"
                   />
                 )}
