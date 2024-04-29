@@ -1,3 +1,5 @@
+import footerLogo from "../../assets/images/shopit_logo.png";
+
 export default function Footer() {
   return (
     // <footer className="footer footer-center p-4 bg-white text-base-content">
@@ -10,8 +12,8 @@ export default function Footer() {
     <div className="sm:flex sm:items-center sm:justify-between">
       <div className="flex justify-center sm:justify-start">
         <img
-          src="../../assets/images/shopit_logo.png"
-          alt=""
+          src={footerLogo}
+          alt="Footer Logo"
           className="h-8 cursor-pointer text-gray-800"
         />
       </div>
