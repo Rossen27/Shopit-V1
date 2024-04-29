@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useLazyLogoutQuery } from "../../redux/api/authApi";
 import { FiShoppingCart } from "react-icons/fi";
 import HeaderCart from "../cart/HeaderCart";
+import avatar from "../../assets/images/default_avatar.jpg";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -67,7 +68,7 @@ export default function Header() {
                   <img src={user.avatar} className="rounded-circle" />
                 ) : (
                   <img
-                    src="../../assets/images/default_avatar.jpg"
+                    src={avatar}
                     className="rounded-circle"
                   />
                 )}

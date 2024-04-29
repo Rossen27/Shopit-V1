@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { LuEye, LuEyeOff } from "react-icons/lu";
 import MetaData from "../layout/MetaData";
+import logo from "../../assets/images/shopit_logo_white.png";
 
 function Register() {
   const [showPassword, setShowPassword] = useState(false);
@@ -70,7 +71,7 @@ function Register() {
                 <span className="sr-only">Home</span>
                 <img
                   className="h-12"
-                  src="../../assets/images/shopit_logo_white.png"
+                  src={logo}
                 />
               </Link>
 
