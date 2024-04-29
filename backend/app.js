@@ -5,6 +5,11 @@ import cookieParser from "cookie-parser";
 import { connectDatabase } from "./config/dbConnect.js"; // 引入資料庫連接模組
 import errorMiddleware from "./middlewares/errors.js"; // 引入錯誤處理中介軟體
 
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 // 處理未處理的拒絕
 process.on("uncaughtException", (err) => {
   console.log(`錯誤： ${err}`);
@@ -46,6 +51,17 @@ app.use("/api/v1", productRoutes); // 使用產品路由
 app.use("/api/v1", authRoutes); // 使用使用者路由
 app.use("/api/v1", orderRoutes); // 使用訂單路由
 app.use("/api/v1", paymentRoutes); // 使用付款路由
+
+if (process.env.NODE_ENV === "PRODUCTION") {
+  app.use(express.static(path.join(__dirname, "../frontend/build"))); // 使用 express.static() 中介軟體，以提供靜態檔案 (這裡是提供前端檔案)
+
+  // file deepcode ignore NoRateLimitingForExpensiveWebOperation: <please specify a reason of ignoring this>
+  // deepcode ignore NoRateLimitingForExpensiveWebOperation: <please specify a reason of ignoring this>
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../frontend/build/index.html")); // 使用 res.sendFile() 方法，以發送檔案 (這裡是發送 index.html)
+  });
+}
+
 
 // 使用錯誤處理中介軟體
 app.use(errorMiddleware);

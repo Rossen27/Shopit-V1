@@ -12,6 +12,7 @@ import MetaData from "../layout/MetaData";
 import NewReview from "../reviews/NewReview";
 import ListReviews from "../reviews/ListReviews";
 import { MdError } from "react-icons/md";
+import NotFound from "../layout/NotFound";
 
 export default function ProductDetails() {
   const params = useParams();
@@ -72,6 +73,8 @@ export default function ProductDetails() {
     dispatch(setCartItem(cartItem));
     toast.success("已加入購物車");
   };
+
+  if(error && error?.status === 404) return <NotFound/>;
 
   if (isLoading) return <Loader />;
   // eslint-disable-next-line react/jsx-key

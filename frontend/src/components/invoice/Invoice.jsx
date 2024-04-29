@@ -7,10 +7,10 @@ import { useEffect, useRef } from "react";
 import { toast } from "react-hot-toast";
 import { toPng } from 'dom-to-image';
 import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
+// import { pdfFonts } from 'pdfmake/build/vfs_fonts';
 
-// 設置 pdfMake 使用的字體
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+// // 設置 pdfMake 使用的字體
+// pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const Invoice = () => {
   const params = useParams();
