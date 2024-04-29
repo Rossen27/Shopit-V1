@@ -10,7 +10,7 @@ export default function Footer() {
     <div className="sm:flex sm:items-center sm:justify-between">
       <div className="flex justify-center sm:justify-start">
         <img
-          src="../../images/shopit_logo.png"
+          src="../assets/images/shopit_logo.png"
           alt=""
           className="h-8 cursor-pointer text-gray-800"
         />

@@ -1,4 +1,4 @@
-import spinner from "/images/spinner.svg";
+import spinner from "../assets/svg/spinner.svg";
 
 export default function Loader() {
   return (

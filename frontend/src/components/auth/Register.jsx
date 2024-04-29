@@ -70,7 +70,7 @@ function Register() {
                 <span className="sr-only">Home</span>
                 <img
                   className="h-12"
-                  src="../images/shopit_logo_white.png"
+                  src="../assets/images/shopit_logo_white.png"
                 />
               </Link>
 
