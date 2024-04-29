@@ -18,7 +18,9 @@ process.on("uncaughtException", (err) => {
 });
 
 // 設定 .env 檔案的路徑
-dotenv.config({ path: "backend/config/config.env" }); // 使用 dotenv.config() 方法，並指定 .env 檔案的路徑
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  dotenv.config({ path: "backend/config/config.env" }); // 使用 dotenv.config() 方法，並指定 .env 檔案的路徑
+}
 // 引入資料庫連接模組
 connectDatabase();
 
