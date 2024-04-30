@@ -34,9 +34,11 @@ const userSchema = new mongoose.Schema(
     avatar: {
       public_id: String,
       url: String,
-      // type: String, // 必須為字串
-      default: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png", // 預設值為網路圖片
     },
+    // avatar: {
+    //   type: String, // 必須為字串
+    //   default: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png", // 預設值為網路圖片
+    // },
     // // 地址
     // address: [
     //   {
