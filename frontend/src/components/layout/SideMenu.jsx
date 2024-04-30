@@ -23,7 +23,7 @@ const SideMenu = ({ menuItems }) => {
                 src={
                   user?.avatar
                     ? user?.avatar?.url
-                    : "/images/default_avatar.jpg"
+                    : avatar
                 }
                 className="rounded-md"
               />

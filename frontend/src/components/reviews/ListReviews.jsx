@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import StarRatings from "react-star-ratings";
-
+import avatar from "../../assets/images/default_avatar.jpg";
 const ListReviews = ({ reviews }) => {
   console.log(reviews);
   return (
@@ -16,7 +16,7 @@ const ListReviews = ({ reviews }) => {
               <div className="block shrink-0">
                 <img
                   alt={review.user?.name}
-                  src={review?.user?.avatar || "../../assets/images/default_avatar.jpg"}
+                  src={review?.user?.avatar || avatar}
                   className="size-14 rounded-lg object-cover"
                 />
               </div>

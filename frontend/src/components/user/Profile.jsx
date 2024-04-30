@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUploadAvatarMutation } from "../../redux/api/userApi";
 import toast from "react-hot-toast";
+import avatar from "../../assets/images/default_avatar.jpg";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.auth);
@@ -28,7 +29,7 @@ const Profile = () => {
       setAvatarPreview(
         user?.avatar
           ? user?.avatar?.url
-          : "../../assets/images/default_avatar.jpg"
+          : avatar
       ); // 重置 avatar 預覽
     }
   }, [error, isSuccess]);
@@ -84,7 +85,7 @@ const Profile = () => {
                 src={
                   avatarPreview || user?.avatar
                     ? user?.avatar?.url
-                    : "/images/default_avatar.jpg"
+                    : avatar
                 }
               />
               <button
