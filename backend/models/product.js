@@ -77,7 +77,7 @@ const productSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId, // 使用者 ID
       ref: "User", // 使用者模型
-      required: true, // 測試時先設為 false
+      required: false, // 測試時先設為 false
     },
     // createdAt: {
     //   type: Date,
