@@ -65,11 +65,14 @@ const Header = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="rounded-full avatar avatar-nav">
-                {user ? (
-                  <img src={user.avatar} className="rounded-circle" />
-                ) : (
-                  <img src={avatar} className="rounded-circle" />
-                )}
+                <img
+                  src={
+                    user?.avatar
+                      ? user?.avatar?.url
+                      : "/images/default_avatar.jpg"
+                  }
+                  className="rounded-circle"
+                />
               </div>
             </div>
             <ul

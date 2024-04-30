@@ -19,14 +19,14 @@ const SideMenu = ({ menuItems }) => {
         <div className="">
           <div className="inline-flex size-16 items-center justify-center">
             <span className="grid size-10 place-content-center bg-gray-100">
-              {user ? (
-                <img src={user.avatar} className="rounded-md" />
-              ) : (
-                <img
-                  src={avatar}
-                  className="rounded-md"
-                />
-              )}
+              <img
+                src={
+                  user?.avatar
+                    ? user?.avatar?.url
+                    : "/images/default_avatar.jpg"
+                }
+                className="rounded-md"
+              />
             </span>
           </div>
 
