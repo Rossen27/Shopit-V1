@@ -16,7 +16,7 @@ const ListReviews = ({ reviews }) => {
               <div className="block shrink-0">
                 <img
                   alt={review.user?.name}
-                  src={review?.user?.avatar || "/images/default_avatar.jpg"}
+                  src={review?.user?.avatar || "../../assets/images/default_avatar.jpg"}
                   className="size-14 rounded-lg object-cover"
                 />
               </div>

@@ -2,6 +2,7 @@
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import avatar from "../../assets/images/default_avatar.jpg";
 
 const SideMenu = ({ menuItems }) => {
   const { user } = useSelector((state) => state.auth);
@@ -22,7 +23,7 @@ const SideMenu = ({ menuItems }) => {
                 <img src={user.avatar} className="rounded-md" />
               ) : (
                 <img
-                  src="/images/default_avatar.jpg"
+                  src={avatar}
                   className="rounded-md"
                 />
               )}

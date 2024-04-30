@@ -11,7 +11,7 @@ const Profile = () => {
   const { user } = useSelector((state) => state.auth);
   const [avatar, setAvatar] = useState(""); // 將大頭照的狀態設為空字串
   const [avatarPreview, setAvatarPreview] = useState(
-    user?.avatar ? user?.avatar?.url : "/images/default_avatar.jpg"
+    user?.avatar ? user?.avatar?.url : "../../assets/images/default_avatar.jpg"
   );
   const navigate = useNavigate();
   const [uploadAvatar, { isLoading, error, isSuccess }] =
@@ -25,7 +25,7 @@ const Profile = () => {
       toast.success("用戶頭像更新成功");
       navigate("/me/profile");
       setAvatar(""); // 清空 avatar 狀態
-      setAvatarPreview(user?.avatar ? user?.avatar?.url : "/images/default_avatar.jpg"); // 重置 avatar 預覽
+      setAvatarPreview(user?.avatar ? user?.avatar?.url : "../../assets/images/default_avatar.jpg"); // 重置 avatar 預覽
     }
   }, [error, isSuccess]);
 
