@@ -1,34 +1,34 @@
-import { Route } from "react-router-dom";
 import ProductDetails from "../product/ProductDetails";
+import Filters from "../Filters.jsx";
 import Login from "../auth/Login";
-import Register from "../auth/Register";
-import Profile from "../user/Profile";
-import UpdateProfile from "../user/UpdateProfile";
-import ProtectedRoute from "../auth/ProtectedRoute";
-import UploadAvatar from "../user/UploadAvatar";
-import UpdatePassword from "../user/UpdatePassword";
-import ForgotPassword from "../auth/ForgotPassword";
-import ResetPassword from "../auth/ResetPassword";
-import Cart from "../cart/Cart";
-import Shipping from "../cart/Shipping";
-import ConfirmOrder from "../cart/ConfirmOrder";
-import PaymentMethod from "../cart/PaymentMethod";
-import MyOrders from "../order/MyOrders";
-import OrderDetails from "../order/OrderDetails";
-import Invoice from "../invoice/Invoice";
-import Home from "../Home";
+import Register from "../auth/Register.jsx";
+import Profile from "../user/Profile.jsx";
+import UpdateProfile from "../user/UpdateProfile.jsx";
+import ProtectedRoute from "../auth/ProtectedRoute.jsx";
+import UpdatePassword from "../user/UpdatePassword.jsx";
+import ForgotPassword from "../auth/ForgotPassword.jsx";
+import ResetPassword from "../auth/ResetPassword.jsx";
+import Cart from "../cart/Cart.jsx";
+import Shipping from "../cart/Shipping.jsx";
+import ConfirmOrder from "../cart/ConfirmOrder.jsx";
+import PaymentMethod from "../cart/PaymentMethod.jsx";
+import MyOrders from "../order/MyOrders.jsx";
+import OrderDetails from "../order/OrderDetails.jsx";
+import Invoice from "../invoice/Invoice.jsx";
+import Home from "../Home.jsx";
+import { Route } from "react-router-dom";
+
 
 const userRoutes = () => {
   return (
     <>
       <Route path="/" element={<Home />} />
       <Route path="/product/:id" element={<ProductDetails />} />
+      <Route path="/filters" element={<Filters />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-
       <Route path="/password/forgot" element={<ForgotPassword />} />
       <Route path="/password/reset/:token" element={<ResetPassword />} />
-
       <Route
         path="/me/profile"
         element={
@@ -37,7 +37,6 @@ const userRoutes = () => {
           </ProtectedRoute>
         }
       />
-
       <Route
         path="/me/update_profile"
         element={
@@ -46,16 +45,6 @@ const userRoutes = () => {
           </ProtectedRoute>
         }
       />
-
-      <Route
-        path="/me/upload_avatar"
-        element={
-          <ProtectedRoute>
-            <UploadAvatar />
-          </ProtectedRoute>
-        }
-      />
-
       <Route
         path="/me/update_password"
         element={
@@ -64,7 +53,14 @@ const userRoutes = () => {
           </ProtectedRoute>
         }
       />
-
+      {/* <Route
+      path="/me/upload_avatar"
+      element={
+        <ProtectedRoute>
+          <UploadAvatar/>
+        </ProtectedRoute>
+      }
+    /> */}
       <Route path="/cart" element={<Cart />} />
       <Route
         path="/shipping"
@@ -90,7 +86,6 @@ const userRoutes = () => {
           </ProtectedRoute>
         }
       />
-
       <Route
         path="/me/orders"
         element={
@@ -99,7 +94,6 @@ const userRoutes = () => {
           </ProtectedRoute>
         }
       />
-
       <Route
         path="/me/order/:id"
         element={
@@ -108,7 +102,6 @@ const userRoutes = () => {
           </ProtectedRoute>
         }
       />
-
       <Route
         path="/invoice/order/:id"
         element={
