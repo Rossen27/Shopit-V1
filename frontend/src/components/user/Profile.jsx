@@ -19,7 +19,7 @@ export default function Profile() {
 
   useEffect(() => {
     if (error) {
-      toast.error(error?.data);
+      toast.error(error?.data?.message);
     }
     if (isSuccess) {
       toast.success("用戶頭像更新成功");
