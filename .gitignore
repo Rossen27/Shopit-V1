@@ -11,5 +11,3 @@
 *.sln
 *.sw?
 *.env
-*.firebaserc
-firebase.json
