@@ -30,7 +30,7 @@ const MyOrders = () => {
   const setOrders = () => {
     const orders = [];
     ordersData?.orders?.forEach((order) => {
-      const paymentStatus = order?.paymentInfo?.status;
+      const paymentStatus = order?.paymentInfo?.status.toUpperCase();
       const isPaid = paymentStatus === "paid";
       const statusText = isPaid ? "已付款" : "尚未付款";
       const statusColor = isPaid ? "text-green-500" : "text-red-500";
