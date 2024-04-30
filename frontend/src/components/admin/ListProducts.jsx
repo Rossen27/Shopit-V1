@@ -56,13 +56,13 @@ const ListProducts = () => {
           <>
             <td className="inline-flex overflow-hidden rounded-md border bg-white shadow-sm">
               <Link
-                to={`/admin/products/${product?._id}`}
+                to={`/admin/product/${product?._id}`}
                 className="inline-block border-e p-3 text-gray-700 hover:bg-gray-50 hover:text-sky-700 focus:relative"
               >
                 <i className="fa-regular fa-pen-to-square h-4 w-4"></i>
               </Link>
               <Link
-                to={`/admin/products/${product?._id}/upload_images`}
+                to={`/admin/product/${product?._id}/upload_images`}
                 className="inline-block border-e p-3 text-gray-700 hover:bg-gray-50 hover:text-green-700 focus:relative"
               >
                 <i className="fa-regular fa-image"></i>
