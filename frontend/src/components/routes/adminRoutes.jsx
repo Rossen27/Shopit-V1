@@ -1,15 +1,15 @@
 import { Route } from "react-router-dom";
-import ProtectedRoute from "../auth/ProtectedRoute.jsx";
-import Dashboard from "../admin/Dashboard.jsx";
-import ListProducts from "../admin/ListProducts.jsx";
-import NewProduct from "../admin/NewProduct.jsx";
-import UpdateProduct from "../admin/UpdateProduct.jsx";
+import ProtectedRoute from "../auth/ProtectedRoute";
+import Dashboard from "../admin/Dashboard";
+import ListProducts from "../admin/ListProducts";
+import NewProduct from "../admin/NewProduct";
+import UpdateProduct from "../admin/UpdateProduct";
 import UploadImages from "../admin/UploadImages";
-import ListOrders from "../admin/ListOrders.jsx";
-import ProcessOrder from "../admin/ProcessOrder.jsx";
-import ListUsers from "../admin/ListUsers.jsx";
-import UpdateUser from "../admin/UpdateUser.jsx";
-import ProductReviews from "../admin/ProductReviews.jsx";
+import ListOrders from "../admin/ListOrders";
+import ProcessOrder from "../admin/ProcessOrder";
+import ListUsers from "../admin/ListUsers";
+import UpdateUser from "../admin/UpdateUser";
+import ProductReviews from "../admin/ProductReviews";
 
 const adminRoutes = () => {
   return (
@@ -54,6 +54,7 @@ const adminRoutes = () => {
           </ProtectedRoute>
         }
       />
+
       <Route
         path="/admin/orders"
         element={
@@ -62,6 +63,7 @@ const adminRoutes = () => {
           </ProtectedRoute>
         }
       />
+
       <Route
         path="/admin/orders/:id"
         element={
@@ -70,6 +72,7 @@ const adminRoutes = () => {
           </ProtectedRoute>
         }
       />
+
       <Route
         path="/admin/users"
         element={
@@ -78,6 +81,7 @@ const adminRoutes = () => {
           </ProtectedRoute>
         }
       />
+
       <Route
         path="/admin/users/:id"
         element={
@@ -86,7 +90,8 @@ const adminRoutes = () => {
           </ProtectedRoute>
         }
       />
-            <Route
+
+      <Route
         path="/admin/reviews"
         element={
           <ProtectedRoute admin={true}>

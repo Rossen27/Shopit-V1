@@ -14,7 +14,7 @@ import ListReviews from "../reviews/ListReviews";
 import { MdError } from "react-icons/md";
 import NotFound from "../layout/NotFound";
 
-export default function ProductDetails() {
+const ProductDetails = () => {
   const params = useParams();
   const dispatch = useDispatch();
 
@@ -248,3 +248,5 @@ export default function ProductDetails() {
     </>
   );
 }
+
+export default ProductDetails;

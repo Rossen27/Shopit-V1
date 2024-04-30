@@ -8,7 +8,7 @@ import HeaderCart from "../cart/HeaderCart";
 import avatar from "../../assets/images/default_avatar.jpg";
 import headerLogo from "../../assets/images/shopit_logo.png";
 
-export default function Header() {
+const Header = () => {
   const navigate = useNavigate();
 
   const { isLoading } = useGetMeQuery();
@@ -68,10 +68,7 @@ export default function Header() {
                 {user ? (
                   <img src={user.avatar} className="rounded-circle" />
                 ) : (
-                  <img
-                    src={avatar}
-                    className="rounded-circle"
-                  />
+                  <img src={avatar} className="rounded-circle" />
                 )}
               </div>
             </div>
@@ -112,4 +109,5 @@ export default function Header() {
       </header>
     </>
   );
-}
+};
+export default Header;

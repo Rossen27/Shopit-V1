@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useUploadAvatarMutation } from "../../redux/api/userApi";
 import toast from "react-hot-toast";
 
-export default function Profile() {
+const Profile = () => {
   const { user } = useSelector((state) => state.auth);
   const [avatar, setAvatar] = useState(""); // 將大頭照的狀態設為空字串
   const [avatarPreview, setAvatarPreview] = useState(
@@ -134,3 +134,5 @@ export default function Profile() {
     </UserLayout>
   );
 }
+
+export default Profile;
