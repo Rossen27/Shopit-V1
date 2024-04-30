@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { countries } from "countries-list";
 import { useDispatch, useSelector } from "react-redux";
-import { saveShoppingInfo } from "../../redux/features/cartSlice";
+import { saveShippingInfo } from "../../redux/features/cartSlice";
 import { useNavigate } from "react-router-dom";
 import MetaData from "../layout/MetaData";
 import CheckoutSteps from "./CheckoutSteps";
@@ -33,9 +33,7 @@ const Shipping = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    dispatch(
-      saveShoppingInfo({ name, address, city, phoneNo, country, zipCode })
-    );
+    dispatch(saveShippingInfo({ address, city, phoneNo, zipCode, country }));
     navigate("/confirm_order");
   };
 
