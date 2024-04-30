@@ -25,7 +25,11 @@ const Profile = () => {
       toast.success("用戶頭像更新成功");
       navigate("/me/profile");
       setAvatar(""); // 清空 avatar 狀態
-      setAvatarPreview(user?.avatar ? user?.avatar?.url : "../../assets/images/default_avatar.jpg"); // 重置 avatar 預覽
+      setAvatarPreview(
+        user?.avatar
+          ? user?.avatar?.url
+          : "../../assets/images/default_avatar.jpg"
+      ); // 重置 avatar 預覽
     }
   }, [error, isSuccess]);
 
@@ -42,7 +46,6 @@ const Profile = () => {
     };
     uploadAvatar(userData);
   };
-
 
   const onChange = (e) => {
     const reader = new FileReader();
@@ -78,7 +81,11 @@ const Profile = () => {
                 onClick={() => document.getElementById("customFile").click()}
                 className="rounded-full w-32 h-32"
                 alt="avatar"
-                src={avatarPreview || user.avatar}
+                src={
+                  avatarPreview || user?.avatar
+                    ? user?.avatar?.url
+                    : "/images/default_avatar.jpg"
+                }
               />
               <button
                 className="mt-2 btn glass btn-sm text-slate-600 hover:text-slate-800"
@@ -133,6 +140,6 @@ const Profile = () => {
       </div>
     </UserLayout>
   );
-}
+};
 
 export default Profile;
