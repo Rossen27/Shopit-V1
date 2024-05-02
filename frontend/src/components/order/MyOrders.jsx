@@ -31,16 +31,16 @@ const MyOrders = () => {
     const orders = [];
     ordersData?.orders?.forEach((order) => {
       const paymentStatus = order?.paymentInfo?.status.toUpperCase();
-      const isPaid = paymentInfo?.status === "paid" ? "已付款" : "尚未付款";
+      const isPaid = paymentStatus?.status === "paid" ? "已付款" : "尚未付款";
       orders.push({
         id: order?._id,
         amount: `$ ${order?.totalAmount}`,
         status: (
           <>
-            {paymentInfo && (
+            {paymentStatus && (
               <span
                 className={
-                  paymentInfo?.status === "paid"
+                  paymentStatus?.status === "paid"
                     ? "text-green-500"
                     : "text-red-500"
                 }
