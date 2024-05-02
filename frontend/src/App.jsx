@@ -15,12 +15,14 @@ function App() {
       <BrowserRouter>
         <Toaster position="top-center" />
         <Header />
-        <Routes>
-          {userRoutes}
-          {adminRoutes}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <Footer />
+        <div className="min-h-screen grid grid-rows-[auto,1fr,auto]">
+          <Routes className="row-span-2">
+            {userRoutes}
+            {adminRoutes}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <Footer className="row-span-1" />
+        </div>
       </BrowserRouter>
     </>
   );

@@ -1,5 +1,4 @@
 import MetaData from "../layout/MetaData";
-import { MdLocalPrintshop } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import { useOrderDetailsQuery } from "../../redux/api/orderApi";
 import Loader from "../layout/Loader";
@@ -50,22 +49,22 @@ const Invoice = () => {
   return (
     <>
       <MetaData title={"收據明細"} />
-      <div className="flex h-screen w-full items-center justify-center m-8">
-        <div className="w-1/2 rounded m-2 p-4 bg-gray-50 shadow-lg hover:shadow-2xl">
+      <div className="flex justify-center items-center m-3">
+        <div className="w-full h-full p-6">
+          <div id="order_invoice" ref={invoiceRef} className="flow-root rounded-2xl border bg-gray-50 p-3 shadow-lg hover:shadow-2xl">
           <div className="flex justify-end">
             <button className="btn btn-neutral btn-sm" onClick={handleDownload}>
-              <MdLocalPrintshop />
-              列印發票
+            <i className="fa-regular fa-file-powerpoint"></i>
+              列 印 明 細
             </button>
           </div>
-          <div id="order_invoice" ref={invoiceRef}>
             <img
               src={invoiceLogo}
               alt="Logo"
               className="mx-auto py-4 w-1/4"
             />
             <div className="flex flex-col justify-center items-center gap-2">
-              <h4 className="font-semibold">INVOICE</h4>
+              <h4 className="font-semibold">交 易 明 細</h4>
               <p className="text-xs"># {order?._id}</p>
             </div>
             <div className="flex flex-col gap-3 border-b py-6 text-xs">
@@ -209,8 +208,10 @@ const Invoice = () => {
               </div>
             </div>
           </div>
+          <div className="mt-10"></div>
         </div>
       </div>
+      
     </>
   );
 };

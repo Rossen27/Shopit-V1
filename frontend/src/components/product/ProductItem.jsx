@@ -5,7 +5,7 @@ import StarRatings from "react-star-ratings";
 const ProductItem = ({ product, columnSize }) => {
   return (
     <li>
-      <Link to={`/product/${product?._id}`} className="group block overflow-hidden">
+      <div  className="group block overflow-hidden">
         <div className="relative h-[350px] sm:h-[450px]">
           <img
             src={product?.images[0]?.url}
@@ -61,7 +61,7 @@ const ProductItem = ({ product, columnSize }) => {
             </Link>
           </div>
         </div>
-      </Link>
+      </div>
     </li>
   );
 }

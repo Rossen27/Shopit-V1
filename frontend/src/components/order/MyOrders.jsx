@@ -31,7 +31,8 @@ const MyOrders = () => {
     const orders = [];
     ordersData?.orders?.forEach((order) => {
       const paymentStatus = order?.paymentInfo?.status.toUpperCase();
-      const isPaid = order?.paymentInfo?.status === "paid" ? "已付款" : "尚未付款";
+      const isPaid =
+        order?.paymentInfo?.status === "paid" ? "已付款" : "尚未付款";
       orders.push({
         id: order?._id,
         amount: `$ ${order?.totalAmount}`,
@@ -53,7 +54,7 @@ const MyOrders = () => {
         orderStatus: order?.orderStatus,
         actions: (
           <>
-            <td className="flex justify-center whitespace-nowrap px-4 py-2">
+            <div className="flex justify-center whitespace-nowrap px-4 py-2">
               <Link
                 to={`/me/order/${order?._id}`}
                 className="mr-3 inline-block rounded bg-rose-600 px-4 py-2 text-xs font-medium text-white hover:bg-rose-700"
@@ -66,7 +67,7 @@ const MyOrders = () => {
               >
                 <i className="fa fa-print"></i>
               </Link>
-            </td>
+            </div>
           </>
         ),
       });
@@ -110,7 +111,7 @@ const MyOrders = () => {
   const pageSize = 10; // 每頁顯示的資料筆數
   const [pageIndex, setPageIndex] = useState(0);
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+  const { getTableProps, headerGroups, rows, prepareRow } =
     useTable({
       columns,
       data,
@@ -144,15 +145,12 @@ const MyOrders = () => {
               className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm"
             >
               <thead className="ltr:text-left rtl:text-right">
-                {headerGroups.map((headerGroup) => (
-                  <tr
-                    key={headerGroup.id}
-                    {...headerGroup.getHeaderGroupProps()}
-                  >
+                {headerGroups.map((headerGroup, index) => (
+                  <tr key={index}>
                     {headerGroup.headers.map((column) => (
                       <th
-                        key={column.id}
                         {...column.getHeaderProps()}
+                        key={column.id} // 将 key 直接传递到 JSX 中
                         className="whitespace-nowrap px-4 py-2 font-medium text-gray-900"
                       >
                         {column.render("Header")}
@@ -161,21 +159,19 @@ const MyOrders = () => {
                   </tr>
                 ))}
               </thead>
-              <tbody
-                {...getTableBodyProps()}
-                className="divide-y divide-gray-200"
-              >
+
+              <tbody className="divide-y divide-gray-200">
                 {rows
                   .slice(pageIndex * pageSize, (pageIndex + 1) * pageSize)
-                  .map((row) => {
+                  .map((row, rowIndex) => {
                     prepareRow(row);
                     return (
-                      <tr key={row.id} {...row.getRowProps()}>
-                        {row.cells.map((cell) => {
+                      <tr key={rowIndex}>
+                        {row.cells.map((cell, cellIndex) => {
                           return (
                             <td
-                              key={cell.column.id}
                               {...cell.getCellProps()}
+                              key={cellIndex} // 这里你可以选择移除，因为不是必须的
                               className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center"
                             >
                               {cell.render("Cell")}

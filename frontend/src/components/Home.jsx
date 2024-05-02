@@ -10,7 +10,7 @@ import CustomPagination from "./layout/CustomPagination";
 import { useSearchParams } from "react-router-dom";
 import HomeBanner from "./layout/HomeBanner";
 
-export default function Home() {
+const Home = () => {
   let [searchParams] = useSearchParams();
   const page = searchParams.get("page") || 1;
   const keyword = searchParams.get("keyword") || "";
@@ -55,7 +55,7 @@ export default function Home() {
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {data?.products?.map((product) => (
               <ProductItem
-                key={product.id}
+                key={product?._id}
                 product={product}
                 columnSize={columnSize}
               />
@@ -70,3 +70,4 @@ export default function Home() {
     </>
   );
 }
+export default Home;
