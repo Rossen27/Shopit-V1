@@ -31,13 +31,25 @@ const MyOrders = () => {
     const orders = [];
     ordersData?.orders?.forEach((order) => {
       const paymentStatus = order?.paymentInfo?.status.toUpperCase();
-      const isPaid = paymentStatus === "paid";
-      const statusText = isPaid ? "已付款" : "尚未付款";
-      const statusColor = isPaid ? "text-green-500" : "text-red-500";
+      const isPaid = paymentInfo?.status === "paid" ? "已付款" : "尚未付款";
       orders.push({
         id: order?._id,
         amount: `$ ${order?.totalAmount}`,
-        status: <span className={statusColor}>{statusText}</span>,
+        status: (
+          <>
+            {paymentInfo && (
+              <span
+                className={
+                  paymentInfo?.status === "paid"
+                    ? "text-green-500"
+                    : "text-red-500"
+                }
+              >
+                <span>{isPaid}</span>
+              </span>
+            )}
+          </>
+        ),
         orderStatus: order?.orderStatus,
         actions: (
           <>
@@ -107,7 +119,9 @@ const MyOrders = () => {
     });
 
   const handleNextPage = () => {
-    setPageIndex((prevIndex) => Math.min(prevIndex + 1, Math.ceil(data.length / pageSize) - 1));
+    setPageIndex((prevIndex) =>
+      Math.min(prevIndex + 1, Math.ceil(data.length / pageSize) - 1)
+    );
   };
 
   const handlePrevPage = () => {
@@ -151,24 +165,26 @@ const MyOrders = () => {
                 {...getTableBodyProps()}
                 className="divide-y divide-gray-200"
               >
-                {rows.slice(pageIndex * pageSize, (pageIndex + 1) * pageSize).map((row) => {
-                  prepareRow(row);
-                  return (
-                    <tr key={row.id} {...row.getRowProps()}>
-                      {row.cells.map((cell) => {
-                        return (
-                          <td
-                            key={cell.column.id}
-                            {...cell.getCellProps()}
-                            className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center"
-                          >
-                            {cell.render("Cell")}
-                          </td>
-                        );
-                      })}
-                    </tr>
-                  );
-                })}
+                {rows
+                  .slice(pageIndex * pageSize, (pageIndex + 1) * pageSize)
+                  .map((row) => {
+                    prepareRow(row);
+                    return (
+                      <tr key={row.id} {...row.getRowProps()}>
+                        {row.cells.map((cell) => {
+                          return (
+                            <td
+                              key={cell.column.id}
+                              {...cell.getCellProps()}
+                              className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center"
+                            >
+                              {cell.render("Cell")}
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    );
+                  })}
               </tbody>
             </table>
           </div>
@@ -177,28 +193,40 @@ const MyOrders = () => {
               <a
                 href="#"
                 onClick={handlePrevPage}
-                className={`inline-flex size-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180 ${pageIndex === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`inline-flex size-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180 ${
+                  pageIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
+                }`}
               >
                 <span className="sr-only">Prev Page</span>
                 <i className="fa-solid fa-angle-left"></i>
               </a>
             </li>
-            {Array.from(Array(Math.ceil(data.length / pageSize)).keys()).map((page, index) => (
-              <li key={index}>
-                <a
-                  href="#"
-                  className={`block size-8 rounded border ${pageIndex === page ? 'border-gray-600 bg-gray-600 text-white' : 'border-gray-100 bg-white'} text-center leading-8 text-gray-900`}
-                  onClick={() => setPageIndex(page)}
-                >
-                  {page + 1}
-                </a>
-              </li>
-            ))}
+            {Array.from(Array(Math.ceil(data.length / pageSize)).keys()).map(
+              (page, index) => (
+                <li key={index}>
+                  <a
+                    href="#"
+                    className={`block size-8 rounded border ${
+                      pageIndex === page
+                        ? "border-gray-600 bg-gray-600 text-white"
+                        : "border-gray-100 bg-white"
+                    } text-center leading-8 text-gray-900`}
+                    onClick={() => setPageIndex(page)}
+                  >
+                    {page + 1}
+                  </a>
+                </li>
+              )
+            )}
             <li>
               <a
                 href="#"
                 onClick={handleNextPage}
-                className={`inline-flex size-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180 ${pageIndex === Math.ceil(data.length / pageSize) - 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`inline-flex size-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180 ${
+                  pageIndex === Math.ceil(data.length / pageSize) - 1
+                    ? "opacity-50 cursor-not-allowed"
+                    : ""
+                }`}
               >
                 <span className="sr-only">Next Page</span>
                 <i className="fa-solid fa-angle-right"></i>
