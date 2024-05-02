@@ -9,6 +9,7 @@ const OrderDetails = () => {
   const params = useParams();
   const { data, isLoading, error } = useOrderDetailsQuery(params.id);
   const order = data?.order || {};
+  
 
   const {
     shippingInfo,
@@ -31,12 +32,15 @@ const OrderDetails = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   // 計算總頁數
-  const totalPages = Math.ceil(orderItems.length / itemsPerPage);
+  let totalPages = 0;
+  if (orderItems) {
+    totalPages = Math.ceil(orderItems.length / itemsPerPage);
+  }
 
   // 根據當前頁碼和每頁顯示的數量計算要顯示的 `orderItems`
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentOrderItems = orderItems.slice(startIndex, endIndex);
+  const currentOrderItems = orderItems?.slice(startIndex, endIndex) || [];
 
   if (isLoading) return <Loader />;
 
