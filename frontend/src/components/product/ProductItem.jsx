@@ -5,12 +5,7 @@ import StarRatings from "react-star-ratings";
 const ProductItem = ({ product, columnSize }) => {
   return (
     <li>
-      <a href={`/product/${product?._id}`} className="group block overflow-hidden">
-        {/* <img
-          src={product?.images[0]?.url}
-          alt={product?.name}
-          className="rounded-bl-3xl rounded-tr-3xl h-[350px] w-full object-cover shadow-xl transition group-hover:grayscale-[50%]"
-        /> */}
+      <Link to={`/product/${product?._id}`} className="group block overflow-hidden">
         <div className="relative h-[350px] sm:h-[450px]">
           <img
             src={product?.images[0]?.url}
@@ -66,7 +61,7 @@ const ProductItem = ({ product, columnSize }) => {
             </Link>
           </div>
         </div>
-      </a>
+      </Link>
     </li>
   );
 }

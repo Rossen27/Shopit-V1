@@ -10,7 +10,6 @@ import CustomPagination from "./layout/CustomPagination";
 import { useSearchParams } from "react-router-dom";
 import HomeBanner from "./layout/HomeBanner";
 
-/* eslint-disable react/prop-types */
 export default function Home() {
   let [searchParams] = useSearchParams();
   const page = searchParams.get("page") || 1;
@@ -47,10 +46,10 @@ export default function Home() {
         <div className="mx-auto max-w-screen-3xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
           <header>
             <h2 className="text-xl font-bold text-gray-900 sm:text-3xl">
-              無麩美食地圖
+              產品列表
             </h2>
             <p className="mt-4  text-gray-500">
-              「無麩美食地圖」網頁是一個旨在幫助無麩質飲食者尋找合適餐廳和食品的資源。
+              從科技產品到美妝保健，我們提供的產品範圍廣泛，滿足各種喜好和需求。
             </p>
           </header>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
