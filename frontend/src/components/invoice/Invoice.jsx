@@ -4,9 +4,10 @@ import { useOrderDetailsQuery } from "../../redux/api/orderApi";
 import Loader from "../layout/Loader";
 import { useEffect, useRef } from "react";
 import { toast } from "react-hot-toast";
-import { toPng } from 'dom-to-image';
-import pdfMake from 'pdfmake/build/pdfmake';
+import { toPng } from "dom-to-image";
+import pdfMake from "pdfmake/build/pdfmake";
 import invoiceLogo from "../../assets/images/shopit_logo_black.png";
+import { Button } from "@nextui-org/react";
 // import { pdfFonts } from 'pdfmake/build/vfs_fonts';
 
 // // 設置 pdfMake 使用的字體
@@ -25,7 +26,6 @@ const Invoice = () => {
   }, [error]);
   const invoiceRef = useRef(null); // 使用 useRef 創建 ref
 
-
   const handleDownload = async () => {
     const input = invoiceRef.current; // 使用 ref 取得元素
 
@@ -35,14 +35,13 @@ const Invoice = () => {
       content: [
         {
           image: imgData,
-          width: 500
-        }
-      ]
+          width: 500,
+        },
+      ],
     };
 
     pdfMake.createPdf(docDefinition).download(`invoice_${order?._id}.pdf`);
   };
-
 
   if (isLoading) return <Loader />;
 
@@ -51,18 +50,23 @@ const Invoice = () => {
       <MetaData title={"收據明細"} />
       <div className="flex justify-center items-center m-3">
         <div className="w-full h-full p-6">
-          <div id="order_invoice" ref={invoiceRef} className="flow-root rounded-2xl border bg-gray-50 p-3 shadow-lg hover:shadow-2xl">
-          <div className="flex justify-end">
-            <button className="btn btn-neutral btn-sm" onClick={handleDownload}>
-            <i className="fa-regular fa-file-powerpoint"></i>
-              列 印 明 細
-            </button>
-          </div>
-            <img
-              src={invoiceLogo}
-              alt="Logo"
-              className="mx-auto py-4 w-1/4"
-            />
+          <div
+            id="order_invoice"
+            ref={invoiceRef}
+            className="flow-root rounded-2xl border bg-gray-50 p-3 shadow-lg hover:shadow-2xl"
+          >
+            <div className="flex justify-end">
+              <Button
+                radius="full"
+                size="sm"
+                className="bg-gradient-to-tr from-rose-500 to-sky-500 text-slate-200 shadow-lg"
+                onClick={handleDownload}
+                startContent={<i className="fa-regular fa-file-powerpoint"></i>}
+              >
+                列 印 明 細
+              </Button>
+            </div>
+            <img src={invoiceLogo} alt="Logo" className="mx-auto py-4 w-1/4" />
             <div className="flex flex-col justify-center items-center gap-2">
               <h4 className="font-semibold">交 易 明 細</h4>
               <p className="text-xs"># {order?._id}</p>
@@ -211,7 +215,6 @@ const Invoice = () => {
           <div className="mt-10"></div>
         </div>
       </div>
-      
     </>
   );
 };
