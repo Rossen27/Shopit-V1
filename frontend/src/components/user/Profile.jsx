@@ -7,11 +7,12 @@ import { useNavigate } from "react-router-dom";
 import { useUploadAvatarMutation } from "../../redux/api/userApi";
 import toast from "react-hot-toast";
 
-export default function Profile() {
+
+const Profile = () => {
   const { user } = useSelector((state) => state.auth);
   const [avatar, setAvatar] = useState(""); // 將大頭照的狀態設為空字串
   const [avatarPreview, setAvatarPreview] = useState(
-    user?.avatar ? user?.avatar?.url : "/images/default_avatar.jpg"
+    user?.avatar ? user?.avatar?.url : "../../assets/images/default_avatar.jpg"
   );
   const navigate = useNavigate();
   const [uploadAvatar, { isLoading, error, isSuccess }] =
@@ -19,13 +20,11 @@ export default function Profile() {
 
   useEffect(() => {
     if (error) {
-      toast.error(error?.data);
+      toast.error(error?.data?.message);
     }
     if (isSuccess) {
       toast.success("用戶頭像更新成功");
       navigate("/me/profile");
-      setAvatar(""); // 清空 avatar 狀態
-      setAvatarPreview(user?.avatar ? user?.avatar?.url : "/images/default_avatar.jpg"); // 重置 avatar 預覽
     }
   }, [error, isSuccess]);
 
@@ -42,7 +41,6 @@ export default function Profile() {
     };
     uploadAvatar(userData);
   };
-
 
   const onChange = (e) => {
     const reader = new FileReader();
@@ -78,7 +76,9 @@ export default function Profile() {
                 onClick={() => document.getElementById("customFile").click()}
                 className="rounded-full w-32 h-32"
                 alt="avatar"
-                src={avatarPreview || user.avatar}
+                src={
+                  avatarPreview
+                }
               />
               <button
                 className="mt-2 btn glass btn-sm text-slate-600 hover:text-slate-800"
@@ -133,4 +133,6 @@ export default function Profile() {
       </div>
     </UserLayout>
   );
-}
+};
+
+export default Profile;

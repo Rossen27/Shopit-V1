@@ -3,7 +3,7 @@ import Order from "../models/order.js";
 
 import Stripe from "stripe";
 // 1) 初始化 Stripe
-const stripe = Stripe(process.env.STRIPE_SECRET_KET);
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 // TODO: 建立 Stripe 結帳端點 => /api/v1/payment/checkout_session
 export const stripeCheckoutSession = catchAsyncErrors(
@@ -35,7 +35,6 @@ export const stripeCheckoutSession = catchAsyncErrors(
       body?.itemsPrice >= 2000
         ? "shr_1P62VMCq5oWqyU7yu0KL9qhd"
         : "shr_1P62UkCq5oWqyU7yYkXA0y3x";
-
 
     // 4) 紀錄客戶資訊、金額、訂單資訊、付款方式等等
     const session = await stripe.checkout.sessions.create({
@@ -103,12 +102,15 @@ export const stripeWebhook = catchAsyncErrors(async (req, res, next) => {
       const line_items = await stripe.checkout.sessions.listLineItems(
         session.id
       ); // 取得商品
+
       const orderItems = await getOrderItems(line_items); // 取得訂單商品
       const user = session.client_reference_id; // 取得使用者
+
       const totalAmount = session.amount_total / 100; // 取得總價
       const taxAmount = session.total_details.amount_tax / 100; // 取得稅金
       const shippingAmount = session.total_details.amount_shipping / 100; // 取得運費
       const itemsPrice = session.metadata.itemsPrice; // 取得商品價格
+
       const shippingInfo = {
         address: session.metadata.address,
         city: session.metadata.city,
@@ -134,7 +136,8 @@ export const stripeWebhook = catchAsyncErrors(async (req, res, next) => {
         user,
       }; // 訂單資訊
 
-      await Order.create(orderData); // 建立訂單
+      await Order.create(orderData); // 建立新訂單
+
       res.status(200).json({ success: true });
     }
   } catch (error) {

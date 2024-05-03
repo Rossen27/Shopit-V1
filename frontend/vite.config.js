@@ -15,16 +15,7 @@ export default defineConfig({
       },
     },
   },
-  // // 建構配置
-  // build: {
-  //   // 生成環境時將環境變數注入到代碼中
-  //   sourcemap: true,
-  //   rollupOptions: {
-  //     output: {
-  //       inlineDynamicImports: true,
-  //     },
-  //   },
-  // },
+
   extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx"],
   resolve: {
     mainFields: [],

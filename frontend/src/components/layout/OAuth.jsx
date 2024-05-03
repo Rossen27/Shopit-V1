@@ -1,10 +1,11 @@
 import { FcGoogle } from "react-icons/fc";
-import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
-import { app } from '../../firebase';
-import { useDispatch } from 'react-redux';
-import { signInSuccess } from '../../redux/features/userSlice';
-import { useNavigate } from 'react-router-dom';
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import { app } from "../../firebase";
+import { useDispatch } from "react-redux";
+import { signInSuccess } from "../../redux/features/userSlice";
+import { useNavigate } from "react-router-dom";
 import { useGoogleLoginMutation } from "../../redux/api/authApi";
+import { Button } from "@nextui-org/react";
 
 export default function OAuth() {
   const dispatch = useDispatch();
@@ -17,25 +18,29 @@ export default function OAuth() {
       const auth = getAuth(app);
       const result = await signInWithPopup(auth, provider);
       // 將登入資料傳送給後端
-      const { data } = await googleLogin({ // 呼叫後端的 Google 登入 API
+      const { data } = await googleLogin({
+        // 呼叫後端的 Google 登入 API
         name: result.user.displayName,
         email: result.user.email,
         photo: result.user.photoURL,
       });
       dispatch(signInSuccess(data));
-      navigate('/');
+      navigate("/");
     } catch (error) {
       console.log("無法使用 Google 登入", error);
     }
   };
 
   return (
-    <button
+    <Button
       onClick={handleGoogleClick}
       type="button"
-      className="w-full btn btn-md text-slate-500 hover:text-slate-800"
+      className="w-full"
+      variant="ghost"
+      color="success"
+      startContent={<FcGoogle />}
     >
-      <FcGoogle className="text-2xl rounded-full mr-2" /> Google 登入
-    </button>
+      Google 登入
+    </Button>
   );
 }

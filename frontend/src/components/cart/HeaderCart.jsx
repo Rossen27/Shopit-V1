@@ -33,7 +33,7 @@ const HeaderCart = () => {
                     />
                     <div>
                       <Link
-                        to={`/products/${item?.product}`}
+                        to={`/product/${item?.product}`}
                         className="text-sm text-gray-900"
                       >
                         {item?.name}
@@ -57,7 +57,7 @@ const HeaderCart = () => {
                         <input
                           type="number"
                           min="1"
-                          value={item?.quantity}
+                          defaultValue={item?.quantity}
                           id="Line1Qty"
                           className="h-8 w-12 rounded border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
                         />

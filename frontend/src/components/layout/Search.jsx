@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaSearch } from "react-icons/fa";
+import { Input } from "@nextui-org/react";
 
 const Search = () => {
   const [keyword, setKeyword] = useState("");
@@ -17,20 +17,19 @@ const Search = () => {
     }
   };
   return (
-    <form onSubmit={submitHandler} className="relative">
-      <input
-        type="text"
-        placeholder="搜尋"
-        className="w-full rounded-full border-gray-200 py-2.5 pe-10 shadow-sm sm:text-sm"
-        name="keyword"
+    <form onSubmit={submitHandler}>
+      <Input
+        
+        size="lg"
+        startContent={
+          <button type="submit">
+            <i className="fa-solid fa-magnifying-glass"></i>
+          </button>
+        }
+        type="search"
         value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
       />
-      <span className="absolute inset-y-0 end-0 grid w-10 place-content-center">
-        <button type="submit" className="text-gray-600 hover:text-gray-700">
-          <FaSearch />
-        </button>
-      </span>
     </form>
   );
 };

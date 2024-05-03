@@ -13,14 +13,18 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Toaster position="top-center" />
         <Header />
-        <Routes>
-          {userRoutes}
-          {adminRoutes}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <Footer />
+        <div className="flex flex-col min-h-screen">
+          <div className="flex-grow">
+            <Routes>
+              {userRoutes}
+              {adminRoutes}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+          <Footer />
+        </div>
+        <Toaster position="top-center" />
       </BrowserRouter>
     </>
   );

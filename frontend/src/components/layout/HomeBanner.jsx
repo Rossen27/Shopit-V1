@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import { Button } from "@nextui-org/react";
 export default function HomeBanner() {
   return (
     <>
@@ -7,30 +9,30 @@ export default function HomeBanner() {
         <div className="p-8 md:p-12 lg:px-16 lg:py-24">
           <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
             <h2 className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-4xl">
-              發現味蕾的自由之旅：
-              <br />
-              無麩美食地圖，為你引領無限可能。
+              探索無限可能性的購物體驗！
             </h2>
 
             <p className="hidden text-gray-500 md:mt-4 md:block">
-              探索無麩美食的世界！無論您是因為健康、美味還是對新鮮體驗的渴望，我們的無麩美食地圖為您打開了無限可能。
+              在這裡，您將發現前所未有的購物體驗。
               <br />
-              從精緻的餐廳到溫馨的咖啡館，我們精心挑選了各種無麩料理，讓您輕鬆尋找到心儀的美食之地。
+              從時尚服飾到家居裝飾，從科技產品到美妝保健，我們提供的產品範圍廣泛，滿足各種喜好和需求。
               <br />
-              立即加入我們，探索一場無麩的美食冒險！
+              無論您是在尋找新的時尚靈感，或是為您的家居添加一絲個性，我們都有您所需的一切。
+              <br />
+              透過我們直觀的網站界面和方便的購物流程，您可以輕鬆地探索各種商品，並享受無壓力的購物體驗。
+              <br />
+              立即瀏覽我們的網站，開始您的購物之旅吧！
             </p>
 
             <div className="mt-4 md:mt-8">
-              <a
-                className="group relative inline-block focus:outline-none focus:ring"
-                href="#"
-              >
-                <span className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-yellow-300 transition-transform group-hover:translate-x-0 group-hover:translate-y-0"></span>
-
-                <span className="relative inline-block border-2 border-current px-8 py-3 text-sm font-bold uppercase tracking-widest text-black group-active:text-opacity-75">
-                  了解更多
-                </span>
-              </a>
+              <Link to="/">
+                <Button
+                  radius="full"
+                  className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
+                >
+                  立 即 探 索
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

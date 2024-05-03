@@ -14,7 +14,7 @@ import ListReviews from "../reviews/ListReviews";
 import { MdError } from "react-icons/md";
 import NotFound from "../layout/NotFound";
 
-export default function ProductDetails() {
+const ProductDetails = () => {
   const params = useParams();
   const dispatch = useDispatch();
 
@@ -131,7 +131,7 @@ export default function ProductDetails() {
               <div className="flex flex-wrap -m-2">
                 {product?.images?.map((img, index) => (
                   <div className="col-2 ms-4 mt-2" key={index}>
-                    <a role="button">
+                    <div role="button">
                       <img
                         className={`d-block border rounded p-3 cursor-pointer ${
                           img.url === activeImg ? "border-warning" : ""
@@ -142,7 +142,7 @@ export default function ProductDetails() {
                         alt={img?.url}
                         onClick={() => setActiveImg(img.url)}
                       />
-                    </a>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -161,7 +161,7 @@ export default function ProductDetails() {
                     <input
                       type="number"
                       id="Quantity"
-                      value={quantity}
+                      defaultValue={quantity}
                       className="h-10 w-16 count border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
                     />
                     <button
@@ -248,3 +248,5 @@ export default function ProductDetails() {
     </>
   );
 }
+
+export default ProductDetails;

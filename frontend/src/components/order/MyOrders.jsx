@@ -30,18 +30,31 @@ const MyOrders = () => {
   const setOrders = () => {
     const orders = [];
     ordersData?.orders?.forEach((order) => {
-      const paymentStatus = order?.paymentInfo?.status;
-      const isPaid = paymentStatus === "paid";
-      const statusText = isPaid ? "已付款" : "尚未付款";
-      const statusColor = isPaid ? "text-green-500" : "text-red-500";
+      const paymentStatus = order?.paymentInfo?.status.toUpperCase();
+      const isPaid =
+        order?.paymentInfo?.status === "paid" ? "已付款" : "尚未付款";
       orders.push({
         id: order?._id,
         amount: `$ ${order?.totalAmount}`,
-        status: <span className={statusColor}>{statusText}</span>,
+        status: (
+          <>
+            {paymentStatus && (
+              <span
+                className={
+                  order?.paymentInfo?.status === "paid"
+                    ? "text-green-500"
+                    : "text-red-500"
+                }
+              >
+                <span>{isPaid}</span>
+              </span>
+            )}
+          </>
+        ),
         orderStatus: order?.orderStatus,
         actions: (
           <>
-            <td className="flex justify-center whitespace-nowrap px-4 py-2">
+            <div className="flex justify-center whitespace-nowrap px-4 py-2">
               <Link
                 to={`/me/order/${order?._id}`}
                 className="mr-3 inline-block rounded bg-rose-600 px-4 py-2 text-xs font-medium text-white hover:bg-rose-700"
@@ -54,7 +67,7 @@ const MyOrders = () => {
               >
                 <i className="fa fa-print"></i>
               </Link>
-            </td>
+            </div>
           </>
         ),
       });
@@ -98,7 +111,7 @@ const MyOrders = () => {
   const pageSize = 10; // 每頁顯示的資料筆數
   const [pageIndex, setPageIndex] = useState(0);
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+  const { getTableProps, headerGroups, rows, prepareRow } =
     useTable({
       columns,
       data,
@@ -107,7 +120,9 @@ const MyOrders = () => {
     });
 
   const handleNextPage = () => {
-    setPageIndex((prevIndex) => Math.min(prevIndex + 1, Math.ceil(data.length / pageSize) - 1));
+    setPageIndex((prevIndex) =>
+      Math.min(prevIndex + 1, Math.ceil(data.length / pageSize) - 1)
+    );
   };
 
   const handlePrevPage = () => {
@@ -130,15 +145,12 @@ const MyOrders = () => {
               className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm"
             >
               <thead className="ltr:text-left rtl:text-right">
-                {headerGroups.map((headerGroup) => (
-                  <tr
-                    key={headerGroup.id}
-                    {...headerGroup.getHeaderGroupProps()}
-                  >
+                {headerGroups.map((headerGroup, index) => (
+                  <tr key={index}>
                     {headerGroup.headers.map((column) => (
                       <th
-                        key={column.id}
                         {...column.getHeaderProps()}
+                        key={column.id} // 将 key 直接传递到 JSX 中
                         className="whitespace-nowrap px-4 py-2 font-medium text-gray-900"
                       >
                         {column.render("Header")}
@@ -147,28 +159,28 @@ const MyOrders = () => {
                   </tr>
                 ))}
               </thead>
-              <tbody
-                {...getTableBodyProps()}
-                className="divide-y divide-gray-200"
-              >
-                {rows.slice(pageIndex * pageSize, (pageIndex + 1) * pageSize).map((row) => {
-                  prepareRow(row);
-                  return (
-                    <tr key={row.id} {...row.getRowProps()}>
-                      {row.cells.map((cell) => {
-                        return (
-                          <td
-                            key={cell.column.id}
-                            {...cell.getCellProps()}
-                            className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center"
-                          >
-                            {cell.render("Cell")}
-                          </td>
-                        );
-                      })}
-                    </tr>
-                  );
-                })}
+
+              <tbody className="divide-y divide-gray-200">
+                {rows
+                  .slice(pageIndex * pageSize, (pageIndex + 1) * pageSize)
+                  .map((row, rowIndex) => {
+                    prepareRow(row);
+                    return (
+                      <tr key={rowIndex}>
+                        {row.cells.map((cell, cellIndex) => {
+                          return (
+                            <td
+                              {...cell.getCellProps()}
+                              key={cellIndex} // 这里你可以选择移除，因为不是必须的
+                              className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center"
+                            >
+                              {cell.render("Cell")}
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    );
+                  })}
               </tbody>
             </table>
           </div>
@@ -177,28 +189,40 @@ const MyOrders = () => {
               <a
                 href="#"
                 onClick={handlePrevPage}
-                className={`inline-flex size-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180 ${pageIndex === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`inline-flex size-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180 ${
+                  pageIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
+                }`}
               >
                 <span className="sr-only">Prev Page</span>
                 <i className="fa-solid fa-angle-left"></i>
               </a>
             </li>
-            {Array.from(Array(Math.ceil(data.length / pageSize)).keys()).map((page, index) => (
-              <li key={index}>
-                <a
-                  href="#"
-                  className={`block size-8 rounded border ${pageIndex === page ? 'border-gray-600 bg-gray-600 text-white' : 'border-gray-100 bg-white'} text-center leading-8 text-gray-900`}
-                  onClick={() => setPageIndex(page)}
-                >
-                  {page + 1}
-                </a>
-              </li>
-            ))}
+            {Array.from(Array(Math.ceil(data.length / pageSize)).keys()).map(
+              (page, index) => (
+                <li key={index}>
+                  <a
+                    href="#"
+                    className={`block size-8 rounded border ${
+                      pageIndex === page
+                        ? "border-gray-600 bg-gray-600 text-white"
+                        : "border-gray-100 bg-white"
+                    } text-center leading-8 text-gray-900`}
+                    onClick={() => setPageIndex(page)}
+                  >
+                    {page + 1}
+                  </a>
+                </li>
+              )
+            )}
             <li>
               <a
                 href="#"
                 onClick={handleNextPage}
-                className={`inline-flex size-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180 ${pageIndex === Math.ceil(data.length / pageSize) - 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`inline-flex size-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180 ${
+                  pageIndex === Math.ceil(data.length / pageSize) - 1
+                    ? "opacity-50 cursor-not-allowed"
+                    : ""
+                }`}
               >
                 <span className="sr-only">Next Page</span>
                 <i className="fa-solid fa-angle-right"></i>

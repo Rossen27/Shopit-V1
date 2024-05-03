@@ -12,17 +12,18 @@ import Cart from "../cart/Cart.jsx";
 import Shipping from "../cart/Shipping.jsx";
 import ConfirmOrder from "../cart/ConfirmOrder.jsx";
 import PaymentMethod from "../cart/PaymentMethod.jsx";
-import MyOrder from "../order/MyOrder.jsx";
+import MyOrders from "../order/MyOrders.jsx";
 import OrderDetails from "../order/OrderDetails.jsx";
 import Invoice from "../invoice/Invoice.jsx";
 import Home from "../Home.jsx";
 import { Route } from "react-router-dom";
 
+
 const userRoutes = () => {
   return (
     <>
       <Route path="/" element={<Home />} />
-      <Route path="/products/:id" element={<ProductDetails />} />
+      <Route path="/product/:id" element={<ProductDetails />} />
       <Route path="/filters" element={<Filters />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
@@ -89,7 +90,7 @@ const userRoutes = () => {
         path="/me/orders"
         element={
           <ProtectedRoute>
-            <MyOrder />
+            <MyOrders />
           </ProtectedRoute>
         }
       />

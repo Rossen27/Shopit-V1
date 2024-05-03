@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 import MetaData from "../layout/MetaData";
 import AdminLayout from "../layout/AdminLayout";
 import { useNavigate, useParams } from "react-router-dom";
-import { PRODUCT_CATEGORIES } from "./../constants/constants";
+import { PRODUCT_CATEGORIES } from "../../constants/constants";
 import { useGetProductDetailsQuery, useUpdateProductMutation } from "../../redux/api/productsApi";
 
 const UpdateProduct = () => {

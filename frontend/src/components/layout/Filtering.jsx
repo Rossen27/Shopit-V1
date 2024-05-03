@@ -7,7 +7,7 @@ import { getPriceQueryParams } from "../../helpers/helpers.js";
 import { PRODUCT_CATEGORIES } from "../constants/constants.js";
 import StarRatings from "react-star-ratings";
 
-function Filtering() {
+const Filtering = () => {
   const [min, setMin] = useState(0);
   const [max, setMax] = useState(0);
 
