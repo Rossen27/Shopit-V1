@@ -119,7 +119,7 @@ const Shipping = () => {
                       className="relative block overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-gray-600"
                     >
                       <select
-                        className="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                        className="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 text-base sm:text-lg"
                         id="country_field"
                         value={country}
                         onChange={(e) => setCountry(e.target.value)}

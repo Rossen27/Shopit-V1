@@ -55,7 +55,7 @@ const Invoice = () => {
             ref={invoiceRef}
             className="flow-root rounded-2xl border bg-gray-50 p-3 shadow-lg hover:shadow-2xl"
           >
-            <div className="flex justify-end">
+            <div className="justify-end hidden sm:flex gap-4">
               <Button
                 radius="full"
                 size="sm"
@@ -111,7 +111,7 @@ const Invoice = () => {
                 )}
               </p>
             </div>
-            <div className="overflow-x-auto rounded-lg">
+            <div className="overflow-x-auto">
               <table className="min-w-full divide-y-2 divide-gray-200 text-xs">
                 <thead className="ltr:text-left rtl:text-right">
                   <tr>

@@ -40,17 +40,12 @@ const Header = () => {
     navigate(0);
   };
   const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
+    { name: "首頁", path: "/" },
+    { name: "關於", path: "/" },
+    { name: "部落格", path: "/" },
+    { name: "聯絡", path: "/" },
   ];
+  
 
   return (
     <>
@@ -93,21 +88,14 @@ const Header = () => {
         </NavbarContent>
 
         <NavbarMenu>
-          {menuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
+          {menuItems.map((item) => (
+            <NavbarMenuItem key={item.name}>
               <Link
                 className="w-full"
-                color={
-                  index === 2
-                    ? "warning"
-                    : index === menuItems.length - 1
-                    ? "danger"
-                    : "foreground"
-                }
-                href="#"
+                to={item.path}
                 size="lg"
               >
-                {item}
+                {item.name}
               </Link>
             </NavbarMenuItem>
           ))}

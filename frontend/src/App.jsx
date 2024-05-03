@@ -13,16 +13,18 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Toaster position="top-center" />
-<Header /> 
-        <div className="min-h-screen grid grid-rows-[auto,1fr,auto]">
-          <Routes className="row-span-2">
-            {userRoutes}
-            {adminRoutes}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <Footer className="row-span-1" />
+        <Header />
+        <div className="flex flex-col min-h-screen">
+          <div className="flex-grow">
+            <Routes>
+              {userRoutes}
+              {adminRoutes}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+          <Footer />
         </div>
+        <Toaster position="top-center" />
       </BrowserRouter>
     </>
   );

@@ -7,7 +7,7 @@ const Footer = () => {
     //     <p className="text-gray-500">Copyright © 2024 - All right reserved by Rossen</p>
     //   </div>
     // </footer>
-    <footer className="footer footer-center bg-white text-base-content fixed bottom-0 w-full">
+    <footer className="footer footer-center bg-white text-base-content w-full">
       <div className="mx-auto max-w-screen-xl px-4 py-4 sm:px-6 lg:px-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="flex justify-center sm:justify-start">

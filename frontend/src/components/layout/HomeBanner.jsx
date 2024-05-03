@@ -25,7 +25,7 @@ export default function HomeBanner() {
             </p>
 
             <div className="mt-4 md:mt-8">
-              <Link to="/filters">
+              <Link to="/">
                 <Button
                   radius="full"
                   className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
