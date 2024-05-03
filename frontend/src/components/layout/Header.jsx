@@ -193,7 +193,7 @@ const Header = () => {
                   }
                   color="success"
                 >
-                  <Link to="/login">登入</Link>
+                  <a href="/login">登入</a>
                 </DropdownItem>
               )}
             </DropdownMenu>
