@@ -9,6 +9,7 @@ import { useLoginMutation } from "../../redux/api/authApi";
 import { Link } from "react-router-dom";
 import { LuEye, LuEyeOff } from "react-icons/lu";
 import MetaData from "../layout/MetaData";
+import { Button } from "@nextui-org/react";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -126,13 +127,9 @@ const Login = () => {
                   快速註冊
                 </Link>
               </p>
-              <button
-                type="submit"
-                className="btn btn-outline rounded-full btn-sm"
-                disabled={isLoading}
-              >
+              <Button type="submit" variant="bordered" disabled={isLoading}>
                 {isLoading ? "登入中..." : "登入"}
-              </button>
+              </Button>
             </div>
             <p className="text-sm text-gray-500">
               <Link to="/password/forgot" className="underline" href="#">

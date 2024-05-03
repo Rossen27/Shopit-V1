@@ -14,7 +14,7 @@ function App() {
     <>
       <BrowserRouter>
         <Toaster position="top-center" />
-        <Header />
+<Header /> 
         <div className="min-h-screen grid grid-rows-[auto,1fr,auto]">
           <Routes className="row-span-2">
             {userRoutes}

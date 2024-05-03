@@ -227,7 +227,7 @@ function Register() {
                       )}
                     </span>
                     <span className="absolute start-0 top-2 -translate-y-1/2 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs">
-                      PasswordConfirmation
+                      PasswordCheck
                     </span>
                   </label>
                 </div>
