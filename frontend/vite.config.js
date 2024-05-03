@@ -12,6 +12,7 @@ export default defineConfig({
         // secure: false, // 若後端是 https 則設為 true
         target: "https://rossen-hua.onrender.com", // 這裡是後端的 port
         secure: true, // 若後端是 https 則設為 true
+
       },
     },
   },

@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import { LuEye, LuEyeOff } from "react-icons/lu";
 import MetaData from "../layout/MetaData";
 import { Button } from "@nextui-org/react";
+import Loader from "../layout/Loader";
+
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -35,6 +37,7 @@ const Login = () => {
     };
     login(loginData);
   };
+  if (isLoading) return <Loader />;
 
   return (
     <>
