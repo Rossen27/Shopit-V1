@@ -19,5 +19,3 @@ jobs:
           channelId: live
           projectId: shopit-v1-c66ae
       - run: npm start
-
-
