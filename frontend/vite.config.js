@@ -10,7 +10,7 @@ export default defineConfig({
       "/api": {
         // target: "http://localhost:10000", // 這裡是後端的 port
         // secure: false, // 若後端是 https 則設為 true
-        target: "http://localhost:3000", // 這裡是後端的 port
+        target: "https://shopit-v1-c66ae.web.app", // 這裡是後端的 port
         secure: true, // 若後端是 https 則設為 true
 
       },

@@ -19,4 +19,3 @@ jobs:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SHOPIT_V1_C66AE }}
           projectId: shopit-v1-c66ae
-      - run: npm start
