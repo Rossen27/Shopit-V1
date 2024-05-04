@@ -18,3 +18,4 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SHOPIT_V1_C66AE }}
           channelId: live
           projectId: shopit-v1-c66ae
+      - run: npm start  # 在部署之後啟動後端應用程序
