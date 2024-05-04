@@ -18,4 +18,3 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SHOPIT_V1_C66AE }}
           channelId: live
           projectId: shopit-v1-c66ae
-        
