@@ -20,12 +20,4 @@ jobs:
           projectId: shopit-v1-c66ae
       - run: npm start
 
-  start_backend_server:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out the code
-        uses: actions/checkout@v2
-      - name: Install dependencies and start backend server
-        run: |
-          npm ci
-          npm start
+
