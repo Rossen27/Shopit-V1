@@ -15,7 +15,7 @@ export const authApi = createApi({
       },
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
-          await queryFulfilled; // 等待 query 完成
+          await queryFulfilled;
           await dispatch(userApi.endpoints.getMe.initiate(null));
         } catch (error) {
           console.log(error);
@@ -42,25 +42,8 @@ export const authApi = createApi({
     logout: builder.query({
       query: () => "/logout",
     }),
-    googleLogin: builder.mutation({
-      query(body) {
-        return {
-          url: "/google",
-          method: "POST",
-          body,
-        };
-      },
-      async onQueryStarted(args, { dispatch, queryFulfilled }) {
-        try {
-          await queryFulfilled;
-          await dispatch(userApi.endpoints.getMe.initiate(null));
-        } catch (error) {
-          console.log(error);
-        }
-      },
-    }),
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useLazyLogoutQuery, useGoogleLoginMutation } =
+export const { useLoginMutation, useRegisterMutation, useLazyLogoutQuery } =
   authApi;
