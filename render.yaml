@@ -1,0 +1,62 @@
+# Exported from Render on 2024-05-06T12:13:58Z
+services:
+- type: web
+  name: Rossen-Hua
+  runtime: node
+  repo: https://github.com/Rossen27/Shopit-V1
+  plan: free
+  envVars:
+  - key: VITE_FIREBASE_API_KEY
+    sync: false
+  - key: STRIPE_WEBHOOK_SECRET
+    sync: false
+  - key: STRIPE_SECRET_KEY
+    sync: false
+  - key: SMTP_PORT
+    sync: false
+  - key: SMTP_PASSWORD
+    sync: false
+  - key: SMTP_HOST
+    sync: false
+  - key: SMTP_FROM_NAME
+    sync: false
+  - key: SMTP_FROM_EMAIL
+    sync: false
+  - key: SMTP_EMAIL
+    sync: false
+  - key: NODE_ENV
+    sync: false
+  - key: JWT_SECRET
+    sync: false
+  - key: JWT_EXPIRES_TIME
+    sync: false
+  - key: FRONTEND_URL
+    sync: false
+  - key: FIREBASE_STORAGE_BUCKET
+    sync: false
+  - key: FIREBASE_PROJECT_ID
+    sync: false
+  - key: FIREBASE_MESSAGING_SENDER_ID
+    sync: false
+  - key: FIREBASE_MEASUREMENT_ID
+    sync: false
+  - key: FIREBASE_AUTH_DOMAIN
+    sync: false
+  - key: FIREBASE_APP_ID
+    sync: false
+  - key: FIREBASE_API_KEY
+    sync: false
+  - key: DB_URI
+    sync: false
+  - key: COOKIE_EXPIRES_TIME
+    sync: false
+  - key: CLOUDINARY_CLOUD_NAME
+    sync: false
+  - key: CLOUDINARY_API_SECRET
+    sync: false
+  - key: CLOUDINARY_API_KEY
+    sync: false
+  region: oregon
+  buildCommand: npm run build
+  startCommand: npm start
+version: "1"
