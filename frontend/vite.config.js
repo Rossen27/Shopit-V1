@@ -10,7 +10,7 @@ export default defineConfig({
       "/api": {
         // target: "http://localhost:3000", // Firebase Hosting 的 URL
         // secure: false, // Firebase Hosting 是 https，因此設為 true
-        target: "https://shopit-v1-c66ae.web.app", // Firebase Hosting 的 URL
+        target: "https://rossen-hua.onrender.com/", 
         secure: true, // Firebase Hosting 是 https，因此設為 true
       },
     },
