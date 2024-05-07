@@ -33,7 +33,7 @@ const Shipping = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    dispatch(saveShippingInfo({ address, city, phoneNo, zipCode, country }));
+    dispatch(saveShippingInfo({ name, address, city, phoneNo, zipCode, country }));
     navigate("/confirm_order");
   };
 
@@ -44,7 +44,7 @@ const Shipping = () => {
       <section className="">
         <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
-            <h1 className="text-4xl font-medium">Contact us</h1>
+            <h1 className="text-3xl font-medium">收件資料確認</h1>
             {/* <div className="lg:col-span-2 lg:py-12">
               <p className="max-w-xl text-lg">
                 在這裡，我們為您帶來一系列精選的無麩質美食，讓您可以享受美味的飲食體驗，同時不用擔心麩質對您的身體健康造成的影響。

@@ -45,7 +45,6 @@ const Header = () => {
     { name: "部落格", path: "/" },
     { name: "聯絡", path: "/" },
   ];
-  
 
   return (
     <>
@@ -90,11 +89,7 @@ const Header = () => {
         <NavbarMenu>
           {menuItems.map((item) => (
             <NavbarMenuItem key={item.name}>
-              <Link
-                className="w-full"
-                to={item.path}
-                size="lg"
-              >
+              <Link className="w-full" to={item.path} size="lg">
                 {item.name}
               </Link>
             </NavbarMenuItem>
@@ -103,8 +98,7 @@ const Header = () => {
 
         <NavbarContent as="div" className="items-center" justify="end">
           <Dropdown placement="bottom-end">
-            <Link to="/cart">
-              <Badge
+            <Link to="/cart"><Badge
                 content={cartItems?.length}
                 isInvisible={isInvisible}
                 shape="circle"
@@ -118,10 +112,9 @@ const Header = () => {
                 >
                   <FiShoppingCart size={24} />
                 </Button>
-              </Badge>
-            </Link>
+              </Badge></Link>
+              
           </Dropdown>
-
           <Dropdown placement="bottom-end">
             <DropdownTrigger>
               <Avatar
