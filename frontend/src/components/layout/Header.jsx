@@ -41,7 +41,7 @@ const Header = () => {
   };
   const menuItems = [
     { name: "首頁", path: "/" },
-    { name: "關於", path: "/" },
+    { name: "購物車", path: "/cart" },
     { name: "部落格", path: "/" },
     { name: "聯絡", path: "/" },
   ];
@@ -98,7 +98,8 @@ const Header = () => {
 
         <NavbarContent as="div" className="items-center" justify="end">
           <Dropdown placement="bottom-end">
-            <Link to="/cart"><Badge
+            <Link to="/cart">
+              <Badge
                 content={cartItems?.length}
                 isInvisible={isInvisible}
                 shape="circle"
@@ -112,8 +113,8 @@ const Header = () => {
                 >
                   <FiShoppingCart size={24} />
                 </Button>
-              </Badge></Link>
-              
+              </Badge>
+            </Link>
           </Dropdown>
           <Dropdown placement="bottom-end">
             <DropdownTrigger>
