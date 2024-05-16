@@ -10,6 +10,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+
 // 處理未處理的拒絕
 process.on("uncaughtException", (err) => {
   console.log(`錯誤： ${err}`);
@@ -67,11 +68,15 @@ if (process.env.NODE_ENV === "PRODUCTION") {
 // 使用錯誤處理中介軟體
 app.use(errorMiddleware);
 
+const DEFAULT_PORT = 3000; // 預設的端口
+
 // 啟動伺服器
-const server = app.listen(process.env.PORT, () => {
+const server = app.listen(process.env.PORT || DEFAULT_PORT, () => {
   console.log(
-    `伺服器正在連接埠號： ${process.env.PORT} 上，並以 ${process.env.NODE_ENV} 模式啟動`
-  ); // 使用 process.env.PORT 取得 .env 檔案中的 PORT 變數 (這裡是 3000)
+    `伺服器正在連接埠號： ${
+      process.env.PORT || DEFAULT_PORT
+    } 上，並以 ${process.env.NODE_ENV} 模式啟動`
+  );
 });
 
 // 處理未處理的拒絕

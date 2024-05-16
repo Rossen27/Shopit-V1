@@ -8,14 +8,13 @@ export default defineConfig({
     port: 8080,
     proxy: {
       "/api": {
-        target: "http://localhost:10000", // 這裡是後端的 port
-        secure: false, // 若後端是 https 則設為 true
-//        target: "https://rossen-hua.onrender.com", // 這裡是後端的 port
-//        secure: true, // 若後端是 https 則設為 true
+        // target: "http://localhost:3000", // Firebase Hosting 的 URL
+        // secure: false, // Firebase Hosting 是 https，因此設為 true
+        target: "https://rossen-hua.onrender.com/", 
+        secure: true, // Firebase Hosting 是 https，因此設為 true
       },
     },
   },
-
   extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx"],
   resolve: {
     mainFields: [],
