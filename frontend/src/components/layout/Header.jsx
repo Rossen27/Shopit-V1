@@ -39,6 +39,7 @@ const Header = () => {
     logout();
     navigate(0);
   };
+
   const menuItems = [
     { name: "首頁", path: "/" },
     { name: "購物車", path: "/cart" },
@@ -60,7 +61,7 @@ const Header = () => {
         <NavbarContent justify="start">
           <NavbarBrand className="mr-4">
             <Link to="/" className="hidden sm:block font-bold text-inherit">
-              <img src={headerLogo} alt="" className="w-auto h-10" />
+              <img src={headerLogo} alt="Logo" className="w-auto h-10" />
             </Link>
           </NavbarBrand>
         </NavbarContent>
@@ -68,17 +69,17 @@ const Header = () => {
         <NavbarContent className="hidden sm:flex gap-4" justify="center">
           <NavbarContent className="hidden sm:flex gap-3">
             <NavbarItem>
-              <Link color="foreground" href="#">
+              <Link to="#" className="text-inherit">
                 ABOUT
               </Link>
             </NavbarItem>
             <NavbarItem isActive>
-              <Link href="#" aria-current="page" color="secondary">
+              <Link to="#" className="text-secondary">
                 BLOG
               </Link>
             </NavbarItem>
             <NavbarItem>
-              <Link color="foreground" href="#">
+              <Link to="#" className="text-inherit">
                 CONTACT
               </Link>
             </NavbarItem>
@@ -89,7 +90,7 @@ const Header = () => {
         <NavbarMenu>
           {menuItems.map((item) => (
             <NavbarMenuItem key={item.name}>
-              <Link className="w-full" to={item.path} size="lg">
+              <Link className="w-full" to={item.path}>
                 {item.name}
               </Link>
             </NavbarMenuItem>
@@ -97,25 +98,23 @@ const Header = () => {
         </NavbarMenu>
 
         <NavbarContent as="div" className="items-center" justify="end">
-          <Dropdown placement="bottom-end">
-            <Link to="/cart">
-              <Badge
-                content={cartItems?.length}
-                isInvisible={isInvisible}
-                shape="circle"
-                color="danger"
+          <Link to="/cart">
+            <Badge
+              content={cartItems?.length}
+              isInvisible={isInvisible}
+              shape="circle"
+              color="danger"
+            >
+              <Button
+                radius="full"
+                isIconOnly
+                aria-label="Cart"
+                variant="light"
               >
-                <Button
-                  radius="full"
-                  isIconOnly
-                  aria-label="more than 99 notifications"
-                  variant="light"
-                >
-                  <FiShoppingCart size={24} />
-                </Button>
-              </Badge>
-            </Link>
-          </Dropdown>
+                <FiShoppingCart size={24} />
+              </Button>
+            </Badge>
+          </Link>
           <Dropdown placement="bottom-end">
             <DropdownTrigger>
               <Avatar
@@ -124,15 +123,15 @@ const Header = () => {
                 className="transition-transform"
                 color="default"
                 size="sm"
-                src={user?.avatar ? user?.avatar?.url : avatar}
+                src={user?.avatar ? user?.avatar.url : avatar}
               />
             </DropdownTrigger>
             <DropdownMenu aria-label="Profile Actions" variant="flat">
               <DropdownItem className="h-14 gap-2" key="user">
                 {user ? (
                   <>
-                    <p className="font-semibold">{!isLoading && user?.name}</p>
-                    <p className="font-semibold">{user?.email}</p>
+                    <p className="font-semibold">{!isLoading && user.name}</p>
+                    <p className="font-semibold">{user.email}</p>
                   </>
                 ) : (
                   <>
@@ -145,15 +144,11 @@ const Header = () => {
                 key="profile"
                 startContent={<i className="fa-solid fa-user-gear"></i>}
               >
-                <Link to="/me/profile" className="justify-between">
-                  個人資料管理
-                </Link>
+                <Link to="/me/profile">個人資料管理</Link>
               </DropdownItem>
               <DropdownItem
                 key="orders"
-                startContent={
-                  <i className="fa-solid fa-money-check-dollar"></i>
-                }
+                startContent={<i className="fa-solid fa-money-check-dollar"></i>}
               >
                 <Link to="/me/orders">訂單管理</Link>
               </DropdownItem>
@@ -168,23 +163,17 @@ const Header = () => {
                 </DropdownItem>
               )}
               {user ? (
-                !isLoading && (
-                  <DropdownItem
-                    key="logout"
-                    startContent={<i className="fa-solid fa-gauge-high"></i>}
-                    color="danger"
-                  >
-                    <Link to="/" onClick={logoutHandler}>
-                      登 出
-                    </Link>
-                  </DropdownItem>
-                )
+                <DropdownItem
+                  key="logout"
+                  startContent={<i className="fa-solid fa-gauge-high"></i>}
+                  color="danger"
+                >
+                  <span onClick={logoutHandler}>登 出</span>
+                </DropdownItem>
               ) : (
                 <DropdownItem
                   key="login"
-                  startContent={
-                    <i className="fa-solid fa-arrow-right-from-bracket"></i>
-                  }
+                  startContent={<i className="fa-solid fa-arrow-right-from-bracket"></i>}
                   color="success"
                 >
                   <Link to="/login">登入</Link>
