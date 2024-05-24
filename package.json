@@ -27,7 +27,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.2.3",
     "nodemailer": "^6.9.11",
-    "stripe": "^15.1.0"
+    "stripe": "^15.5.0"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
