@@ -25,7 +25,7 @@
     "express-rate-limit": "^7.2.0",
     "firebase": "^10.11.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.2.3",
+    "mongoose": "^8.3.4",
     "nodemailer": "^6.9.11",
     "stripe": "^15.1.0"
   },
